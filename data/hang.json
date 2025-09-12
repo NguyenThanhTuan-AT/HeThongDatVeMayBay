@@ -1,0 +1,82 @@
+[
+  {
+    "maHang": "VNA",
+    "tenHang": "Vietnam Airlines",
+    "danhSachMayBay": [
+      "MB001",
+      "MB002"
+    ]
+  },
+  {
+    "maHang": "VJA",
+    "tenHang": "Vietjet Air",
+    "danhSachMayBay": [
+      "MB003",
+      "MB004"
+    ]
+  },
+  {
+    "maHang": "BAV",
+    "tenHang": "Bamboo Airways",
+    "danhSachMayBay": [
+      "MB005",
+      "MB006"
+    ]
+  },
+  {
+    "maHang": "PAL",
+    "tenHang": "Pacific Airlines",
+    "danhSachMayBay": [
+      "MB007",
+      "MB008"
+    ]
+  },
+  {
+    "maHang": "QH",
+    "tenHang": "Vietravel Airlines",
+    "danhSachMayBay": [
+      "MB009",
+      "MB010"
+    ]
+  },
+  {
+    "maHang": "VN",
+    "tenHang": "VASCO",
+    "danhSachMayBay": [
+      "MB011",
+      "MB012"
+    ]
+  },
+  {
+    "maHang": "BL",
+    "tenHang": "Jetstar Pacific",
+    "danhSachMayBay": [
+      "MB013",
+      "MB014"
+    ]
+  },
+  {
+    "maHang": "VJ",
+    "tenHang": "Jetstar",
+    "danhSachMayBay": [
+      "MB015",
+      "MB016"
+    ]
+  },
+  {
+    "maHang": "AK",
+    "tenHang": "AirAsia",
+    "danhSachMayBay": [
+      "MB017",
+      "MB018"
+    ]
+  },
+  {
+    "maHang": "SG",
+    "tenHang": "Siam Air",
+    "danhSachMayBay": [
+      "MB019",
+      "MB020"
+    ]
+  }
+]
