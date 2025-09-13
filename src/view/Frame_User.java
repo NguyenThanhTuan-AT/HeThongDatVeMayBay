@@ -140,6 +140,21 @@ public class Frame_User extends javax.swing.JFrame {
             new DangNhapFrame().setVisible(true);
         });
 
+        // Sự kiện cho nút Đổi mật khẩu
+        panelHeader.getjB_doiMatKhau().addActionListener(e -> {
+            // Tạo và hiển thị Frame đổi mật khẩu
+            // Truyền vào đối tượng quanLy và taiKhoan hiện tại
+            ThayDoiMatKhauFrame doiMKFrame = new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap);
+            doiMKFrame.setVisible(true);
+        });
+
+        // Sự kiện cho nút Sửa thông tin
+        panelHeader.getjB_suaThongTin().addActionListener(e -> {
+            // Tạo và hiển thị Frame sửa thông tin
+            ThayDoiThongTinFrame doiTTFrame = new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap);
+            doiTTFrame.setVisible(true);
+        });
+
         // Sự kiện trên panel tìm kiếm
         panelTimKiem.getjB_timKiem().addActionListener(e -> {
             timKiemChuyenBay();
@@ -182,19 +197,42 @@ public class Frame_User extends javax.swing.JFrame {
             datVe();
         });
 
-        // Sự kiện cho nút Đổi mật khẩu
-        panelHeader.getjB_doiMatKhau().addActionListener(e -> {
-            // Tạo và hiển thị Frame đổi mật khẩu
-            // Truyền vào đối tượng quanLy và taiKhoan hiện tại
-            ThayDoiMatKhauFrame doiMKFrame = new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap);
-            doiMKFrame.setVisible(true);
+        // Sự kiện trên panel Vé của tôi
+        panelVeCuaToi.getJTable().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (panelVeCuaToi.getJTable().getSelectedRow() != -1) {
+                    // Nếu có vé được chọn, bật các nút chức năng
+                    panelVeCuaToi.getjB_suaVe().setEnabled(true);
+                    panelVeCuaToi.getjB_xoaVe().setEnabled(true);
+                }
+            }
         });
 
-        // Sự kiện cho nút Sửa thông tin
-        panelHeader.getjB_suaThongTin().addActionListener(e -> {
-            // Tạo và hiển thị Frame sửa thông tin
-            ThayDoiThongTinFrame doiTTFrame = new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap);
-            doiTTFrame.setVisible(true);
+        panelVeCuaToi.getjB_xoaVe().addActionListener(e -> {
+            int selectedRow = panelVeCuaToi.getJTable().getSelectedRow();
+            if (selectedRow != -1) {
+                String maVe = panelVeCuaToi.getJTable().getValueAt(selectedRow, 0).toString();
+
+                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa vé '" + maVe + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+
+                if (choice == JOptionPane.YES_OPTION) {
+                    quanLy.xoaVe(maVe);
+                    JOptionPane.showMessageDialog(this, "Xóa vé thành công!");
+                    hienThiVeCuaToi(); // Cập nhật lại bảng
+                }
+            }
+        });
+
+        panelVeCuaToi.getjB_suaVe().addActionListener(e -> {
+            int selectedRow = panelVeCuaToi.getJTable().getSelectedRow();
+            if (selectedRow != -1) {
+                String maVe = panelVeCuaToi.getJTable().getValueAt(selectedRow, 0).toString();
+                VeMayBay veCanSua = quanLy.timVe(maVe);
+                if (veCanSua != null) {
+                    SuaVeFrame suaVeFrame = new SuaVeFrame(quanLy, veCanSua, this);
+                    suaVeFrame.setVisible(true);
+                }
+            }
         });
     }
 
@@ -260,7 +298,7 @@ public class Frame_User extends javax.swing.JFrame {
         }
     }
 
-    private void hienThiVeCuaToi() {
+    public void hienThiVeCuaToi() {
         panelVeCuaToi.loadDataToTable(quanLy, taiKhoanDangNhap.getCccd());
     }
 }
