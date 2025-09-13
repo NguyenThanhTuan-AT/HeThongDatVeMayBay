@@ -19,6 +19,49 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
         jT_tenDangNhap.setText(taiKhoanHienTai.getTenDangNhap());
         jT_tenDangNhap.setEditable(false);
 
+        // Nút hiển thị mật khẩu
+        jRadioButton_mkHienTai.addActionListener(evt -> {
+            if (jRadioButton_mkHienTai.isSelected()) {
+                jPasswordField_mkHienTai.setEchoChar((char) 0); // Hiện mật khẩu
+            } else {
+                jPasswordField_mkHienTai.setEchoChar('*'); // Ẩn mật khẩu
+            }
+        });
+        jRadioButton_mkMoi.addActionListener(evt -> {
+            if (jRadioButton_mkMoi.isSelected()) {
+                jPasswordField_mkMoi.setEchoChar((char) 0);
+            } else {
+                jPasswordField_mkMoi.setEchoChar('*');
+            }
+        });
+        jRadioButton_xacThucMK.addActionListener(evt -> {
+            if (jRadioButton_xacThucMK.isSelected()) {
+                jPasswordField_XacThucMK.setEchoChar((char) 0);
+            } else {
+                jPasswordField_XacThucMK.setEchoChar('*');
+            }
+        });
+
+        // Ấn Enter
+        jPasswordField_mkHienTai.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField_mkMoi.requestFocusInWindow();
+            }
+        });
+        jPasswordField_mkMoi.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField_XacThucMK.requestFocusInWindow();
+            }
+        });
+        jPasswordField_XacThucMK.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                luuMatKhau();
+            }
+        });
+
         this.setLocationRelativeTo(null);
     }
 
@@ -178,6 +221,11 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_HuyMouseClicked
 
     private void jB_LuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_LuuMouseClicked
+        luuMatKhau();
+    }//GEN-LAST:event_jB_LuuMouseClicked
+
+    //Lưu mật khẩu
+    private void luuMatKhau() {
         String matKhauHienTai = new String(jPasswordField_mkHienTai.getPassword());
         String matKhauMoi = new String(jPasswordField_mkMoi.getPassword());
         String xacThucMatKhau = new String(jPasswordField_XacThucMK.getPassword());
@@ -186,24 +234,20 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         if (matKhauMoi.length() < 6) {
             JOptionPane.showMessageDialog(this, "Mật khẩu mới phải có ít nhất 6 ký tự.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         if (!matKhauMoi.equals(xacThucMatKhau)) {
             JOptionPane.showMessageDialog(this, "Mật khẩu xác thực không khớp.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         // Cập nhật mật khẩu mới và lưu vào file
         taiKhoanHienTai.setMatKhau(matKhauMoi);
         quanLy.suaTaiKhoan(taiKhoanHienTai);
-
         JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công!");
         this.dispose();
-    }//GEN-LAST:event_jB_LuuMouseClicked
+    }
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
     }//GEN-LAST:event_formMouseClicked

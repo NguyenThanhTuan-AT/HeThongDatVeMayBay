@@ -5,12 +5,17 @@
         <group>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelVeCuaToi_User.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/DangNhapFrame.java</file>
-            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/Frame_User.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelVeMayBay_Admin.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelHeader_Admin.java</file>
-            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelHangHangKhong_Admin.java</file>
-            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/main/Main.java</file>
-            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/SuaVeFrame.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/TrangChu_AdminFrame.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/Frame_Admin.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/ThayDoiMatKhauFrame.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelHanhKhach_Admin.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/Frame_User.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelHangHangKhong_Admin.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/SuaVeFrame.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/main/Main.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelChuyenBay_Admin.java</file>
         </group>
     </open-files>
 </project-private>

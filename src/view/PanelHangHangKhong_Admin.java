@@ -23,6 +23,23 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
                 }
             }
         });
+
+        jT_maHang.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_tenHang.requestFocusInWindow();
+            }
+        });
+        jT_tenHang.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (jB_them.isEnabled()) {
+                    jB_them.doClick();
+                } else {
+                    jB_sua.doClick();
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")

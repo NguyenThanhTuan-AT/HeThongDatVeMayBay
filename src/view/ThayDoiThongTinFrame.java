@@ -25,6 +25,18 @@ public class ThayDoiThongTinFrame extends javax.swing.JFrame {
         jT_tenDangNhap.setEditable(false);
         jT_CCCD.setEditable(false);
 
+        jT_hoTen.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_CCCD.requestFocusInWindow();
+            }
+        });
+        jT_CCCD.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_capNhatActionPerformed(evt);
+            }
+        });
         this.setLocationRelativeTo(null);
     }
 

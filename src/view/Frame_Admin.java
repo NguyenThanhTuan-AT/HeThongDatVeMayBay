@@ -51,7 +51,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             .addGroup(headerWrapperPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
         headerWrapperPanelLayout.setVerticalGroup(
             headerWrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -62,7 +62,7 @@ public class Frame_Admin extends javax.swing.JFrame {
 
         getContentPane().add(headerWrapperPanel, java.awt.BorderLayout.PAGE_START);
 
-        mainContentPanel.setLayout(new java.awt.GridBagLayout());
+        mainContentPanel.setLayout(new java.awt.CardLayout());
         getContentPane().add(mainContentPanel, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -110,37 +110,27 @@ public class Frame_Admin extends javax.swing.JFrame {
             panelChuyenBay.loadSoHieuMayBay(quanLy);
             panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
             cardLayout.show(mainContentPanel, "quanLyChuyenBay");
-            pack();
-            setLocationRelativeTo(null);
         });
 
         panelHeader.getjB_qlHang().addActionListener(e -> {
             panelHangHangKhong.loadDataToTable(quanLy);
             cardLayout.show(mainContentPanel, "quanLyHangHangKhong");
-            pack();
-            setLocationRelativeTo(null);
         });
 
         panelHeader.getjB_qlMayBay().addActionListener(e -> {
             panelMayBay.loadMaHang(quanLy);
             panelMayBay.loadDataToTable(quanLy);
             cardLayout.show(mainContentPanel, "quanLyMayBay");
-            pack();
-            setLocationRelativeTo(null);
         });
 
         panelHeader.getjB_qlTaiKhoan().addActionListener(e -> {
             panelTaiKhoan.loadDataToTable(quanLy);
             cardLayout.show(mainContentPanel, "quanLyTaiKhoan");
-            pack();
-            setLocationRelativeTo(null);
         });
 
         panelHeader.getjB_thongKe().addActionListener(e -> {
             panelThongKe.loadComboBoxes(quanLy);
             cardLayout.show(mainContentPanel, "thongKe");
-            pack();
-            setLocationRelativeTo(null);
         });
 
         panelHeader.getjB_dangXuat().addActionListener(e -> {

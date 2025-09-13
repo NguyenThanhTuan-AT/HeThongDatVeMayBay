@@ -38,7 +38,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
         jPasswordField_matKhau.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jB_dangNhapActionPerformed(evt);
             }
         });
     }
@@ -54,7 +54,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jT_tenDangNhap = new javax.swing.JTextField();
         jPasswordField_matKhau = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        jB_dangNhap = new javax.swing.JButton();
         jRadioButton_matKhau = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
         jB_dangKy = new javax.swing.JButton();
@@ -94,10 +94,10 @@ public class DangNhapFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Đăng nhập");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jB_dangNhap.setText("Đăng nhập");
+        jB_dangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jB_dangNhapActionPerformed(evt);
             }
         });
 
@@ -138,7 +138,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
                             .addComponent(jB_dangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(196, 196, 196)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jB_dangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(44, 44, 44)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -172,7 +172,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jL_thongbaoLoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jB_dangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,7 +189,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
     private void jRadioButton_matKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_matKhauActionPerformed
     }//GEN-LAST:event_jRadioButton_matKhauActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jB_dangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_dangNhapActionPerformed
         String tenDangNhap = jT_tenDangNhap.getText();
         String matKhau = new String(jPasswordField_matKhau.getPassword());
 
@@ -222,16 +222,20 @@ public class DangNhapFrame extends javax.swing.JFrame {
             }
 
         } else {
-            jL_thongbaoLoi.setVisible(true);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng thử lại.",
+                    "Đăng nhập thất bại",
+                    JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jB_dangNhapActionPerformed
 
     private void jT_tenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_tenDangNhapActionPerformed
     }//GEN-LAST:event_jT_tenDangNhapActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_dangKy;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jB_dangNhap;
     private java.awt.Label jL_thongbaoLoi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

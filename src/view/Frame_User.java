@@ -126,14 +126,10 @@ public class Frame_User extends javax.swing.JFrame {
         // Sự kiện trên header
         panelHeader.getJbTrangChu().addActionListener(e -> {
             cardLayout.show(mainContentPanel, "timKiem");
-            pack();
-            setLocationRelativeTo(null);
         });
         panelHeader.getJbVeCuaToi().addActionListener(e -> {
             hienThiVeCuaToi();
             cardLayout.show(mainContentPanel, "veCuaToi");
-            pack();
-            setLocationRelativeTo(null);
         });
         panelHeader.getJbDangXuat().addActionListener(e -> {
             this.dispose();
@@ -159,15 +155,11 @@ public class Frame_User extends javax.swing.JFrame {
         panelTimKiem.getjB_timKiem().addActionListener(e -> {
             timKiemChuyenBay();
             cardLayout.show(mainContentPanel, "ketQuaTimKiem");
-            pack();
-            setLocationRelativeTo(null);
         });
 
         // Sự kiện trên panel kết quả tìm kiếm
         panelKetQuaTimKiem.getJbQuayLai().addActionListener(e -> {
             cardLayout.show(mainContentPanel, "timKiem");
-            pack();
-            setLocationRelativeTo(null);
         });
         panelKetQuaTimKiem.getJbChonCB().addActionListener(e -> {
             int selectedRow = panelKetQuaTimKiem.getJTable_KetQua().getSelectedRow();

@@ -27,6 +27,7 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_dsVe = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
         jB_suaVe = new javax.swing.JButton();
         jB_xoaVe = new javax.swing.JButton();
 
@@ -40,8 +41,7 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 390;
+        gridBagConstraints.ipadx = 380;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(jLabel2, gridBagConstraints);
@@ -108,23 +108,19 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 544;
+        gridBagConstraints.ipadx = 534;
         gridBagConstraints.ipady = 338;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(jScrollPane2, gridBagConstraints);
 
+        jPanel2.setLayout(null);
+
         jB_suaVe.setText("Sửa vé ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 167, 0, 0);
-        jPanel1.add(jB_suaVe, gridBagConstraints);
+        jPanel2.add(jB_suaVe);
+        jB_suaVe.setBounds(200, 5, 72, 23);
 
         jB_xoaVe.setText("Xoá vé");
         jB_xoaVe.addActionListener(new java.awt.event.ActionListener() {
@@ -132,18 +128,20 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
                 jB_xoaVeActionPerformed(evt);
             }
         });
+        jPanel2.add(jB_xoaVe);
+        jB_xoaVe.setBounds(277, 5, 72, 23);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 12;
+        gridBagConstraints.ipadx = 549;
+        gridBagConstraints.ipady = 33;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 64, 0, 0);
-        jPanel1.add(jB_xoaVe, gridBagConstraints);
+        jPanel1.add(jPanel2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 175;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(jPanel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
@@ -189,6 +187,7 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
     private javax.swing.JButton jB_xoaVe;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable_dsVe;
     // End of variables declaration//GEN-END:variables
