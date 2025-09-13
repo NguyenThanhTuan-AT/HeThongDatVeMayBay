@@ -25,6 +25,22 @@ public class DangNhapFrame extends javax.swing.JFrame {
                 jPasswordField_matKhau.setEchoChar('*'); // Ẩn mật khẩu
             }
         });
+
+        // Xử lý Enter cho ô Tên đăng nhập
+        jT_tenDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField_matKhau.requestFocusInWindow();
+            }
+        });
+
+        // Xử lý Enter cho ô Mật khẩu
+        jPasswordField_matKhau.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
