@@ -34,7 +34,6 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jL_hoTen = new javax.swing.JLabel();
         jT_hoTen = new javax.swing.JTextField();
@@ -51,61 +50,76 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_dsHanhKhach = new javax.swing.JTable();
 
-        setLayout(new java.awt.GridBagLayout());
+        setLayout(new java.awt.BorderLayout());
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jL_hoTen.setText("Họ tên");
+        jL_hoTen.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_hoTen.setText("Họ tên : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 1;
-        gridBagConstraints.ipady = 10;
+        gridBagConstraints.ipadx = 2;
+        gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 126, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(2, 122, 0, 0);
         jPanel2.add(jL_hoTen, gridBagConstraints);
+
+        jT_hoTen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jT_hoTen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_hoTenActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 138;
-        gridBagConstraints.ipady = 8;
+        gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 129);
+        gridBagConstraints.insets = new java.awt.Insets(2, 6, 0, 0);
         jPanel2.add(jT_hoTen, gridBagConstraints);
 
-        jL_soCCCD.setText("Số CCCD");
+        jL_soCCCD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_soCCCD.setText("Số CCCD : ");
+        jL_soCCCD.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 8;
-        gridBagConstraints.ipady = 14;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 27;
+        gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 126, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(7, 86, 0, 0);
         jPanel2.add(jL_soCCCD, gridBagConstraints);
 
-        jT_soCCCD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jT_soCCCD.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jT_soCCCD.setPreferredSize(new java.awt.Dimension(64, 26));
+        jT_soCCCD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_soCCCDActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 120;
-        gridBagConstraints.ipady = 8;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 138;
+        gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 129);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         jPanel2.add(jT_soCCCD, gridBagConstraints);
 
-        jL_maVe.setText("Mã vé");
+        jL_maVe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_maVe.setText(" Mã vé : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 5;
-        gridBagConstraints.ipady = 10;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 126, 6, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 104, 0, 0);
         jPanel2.add(jL_maVe, gridBagConstraints);
 
         jComboBox_maVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -113,13 +127,13 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 106;
-        gridBagConstraints.ipady = 4;
+        gridBagConstraints.ipadx = 130;
+        gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 6, 0, 0);
         jPanel2.add(jComboBox_maVe, gridBagConstraints);
 
-        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel3.setLayout(new java.awt.GridLayout());
 
         jB_them.setText("Thêm");
         jB_them.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +152,29 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         jB_lamMoi.setText("Làm mới");
         jPanel3.add(jB_lamMoi);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 218;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 6, 0, 0);
+        jPanel2.add(jPanel3, gridBagConstraints);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel1.setText("Danh sách hành khách");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 37;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 23, 0, 0);
+        jPanel2.add(jLabel1, gridBagConstraints);
+
+        add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         jTable_dsHanhKhach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -199,42 +235,20 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(jTable_dsHanhKhach);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane3)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 15, 0);
-        add(jPanel1, gridBagConstraints);
+        add(jScrollPane3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_themActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jB_themActionPerformed
+
+    private void jT_hoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_hoTenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jT_hoTenActionPerformed
+
+    private void jT_soCCCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_soCCCDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jT_soCCCDActionPerformed
 
     public JButton getjB_lamMoi() {
         return jB_lamMoi;
@@ -335,7 +349,6 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
     private javax.swing.JLabel jL_maVe;
     private javax.swing.JLabel jL_soCCCD;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;

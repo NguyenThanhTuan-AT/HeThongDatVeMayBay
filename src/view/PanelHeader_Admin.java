@@ -89,7 +89,7 @@ public class PanelHeader_Admin extends javax.swing.JPanel {
                 .addComponent(jB_doiMatKhau)
                 .addGap(0, 0, 0)
                 .addComponent(jB_dangXuat))
-            .addComponent(jPanel_chucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel_chucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
         );
         jPanel_HeaderLayout.setVerticalGroup(
             jPanel_HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,16 +101,18 @@ public class PanelHeader_Admin extends javax.swing.JPanel {
                     .addComponent(jB_dangXuat)
                     .addComponent(jB_doiMatKhau)
                     .addComponent(jB_suaThongTin))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(jPanel_chucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipadx = 144;
+        gridBagConstraints.ipady = 15;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         add(jPanel_Header, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
