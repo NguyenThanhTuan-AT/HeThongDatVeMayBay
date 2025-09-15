@@ -140,14 +140,14 @@ public class Frame_User extends javax.swing.JFrame {
         panelHeader.getjB_doiMatKhau().addActionListener(e -> {
             // Tạo và hiển thị Frame đổi mật khẩu
             // Truyền vào đối tượng quanLy và taiKhoan hiện tại
-            ThayDoiMatKhauFrame doiMKFrame = new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap);
+            ThayDoiMatKhauFrame doiMKFrame = new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap, this);
             doiMKFrame.setVisible(true);
         });
 
         // Sự kiện cho nút Sửa thông tin
         panelHeader.getjB_suaThongTin().addActionListener(e -> {
             // Tạo và hiển thị Frame sửa thông tin
-            ThayDoiThongTinFrame doiTTFrame = new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap);
+            ThayDoiThongTinFrame doiTTFrame = new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap, this);
             doiTTFrame.setVisible(true);
         });
 

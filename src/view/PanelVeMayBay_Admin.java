@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.ChuyenBay;
+import model.HanhKhach;
 import model.QuanLyChung;
 import model.VeMayBay;
 
@@ -56,7 +56,6 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -68,13 +67,13 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jComboBox_soHieuCB = new javax.swing.JComboBox<>();
         jL_maVe = new javax.swing.JLabel();
         jL_giaVe = new javax.swing.JLabel();
-        jL_hienThiGia = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jT_giaVe = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -139,99 +138,23 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
 
         add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setLayout(new java.awt.GridBagLayout());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 11;
-        gridBagConstraints.ipadx = 86;
-        gridBagConstraints.ipady = 13;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel2.add(jT_maVe, gridBagConstraints);
-
         jL_hangVe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_hangVe.setText("Hạng vé : ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 33;
-        gridBagConstraints.ipady = 19;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 145, 0, 0);
-        jPanel2.add(jL_hangVe, gridBagConstraints);
 
         jComboBox_hangVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phổ thông", "Thương gia", " " }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 11;
-        gridBagConstraints.ipadx = 55;
-        gridBagConstraints.ipady = 13;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel2.add(jComboBox_hangVe, gridBagConstraints);
 
         jL_chuyenBay.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_chuyenBay.setText("Chuyến bay : ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 15;
-        gridBagConstraints.ipady = 19;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 145, 0, 0);
-        jPanel2.add(jL_chuyenBay, gridBagConstraints);
 
         jComboBox_soHieuCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.ipadx = 78;
-        gridBagConstraints.ipady = 13;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel2.add(jComboBox_soHieuCB, gridBagConstraints);
 
         jL_maVe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_maVe.setText("Mã vé : ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 42;
-        gridBagConstraints.ipady = 19;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 148, 0, 0);
-        jPanel2.add(jL_maVe, gridBagConstraints);
 
         jL_giaVe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_giaVe.setText("Giá vé : ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 19;
-        gridBagConstraints.ipady = 19;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 187, 0, 0);
-        jPanel2.add(jL_giaVe, gridBagConstraints);
 
-        jL_hienThiGia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jL_hienThiGia.setText("0");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 12;
-        gridBagConstraints.ipadx = 144;
-        gridBagConstraints.ipady = 19;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel2.add(jL_hienThiGia, gridBagConstraints);
-
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton2.setText("Thêm");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -250,25 +173,63 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jButton4.setText("Làm mới");
         jPanel3.add(jButton4);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 21;
-        gridBagConstraints.ipadx = 247;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel2.add(jPanel3, gridBagConstraints);
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel1.setText("Danh sách vé máy bay");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipady = 14;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 47, 0, 0);
-        jPanel2.add(jLabel1, gridBagConstraints);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(148, 148, 148)
+                .addComponent(jL_maVe, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jT_maVe, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(jL_hangVe, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jComboBox_hangVe, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel1))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jL_giaVe, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jT_giaVe))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jL_chuyenBay, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jComboBox_soHieuCB, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jL_maVe, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jT_maVe, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jL_hangVe, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_hangVe, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jL_chuyenBay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_soHieuCB, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jL_giaVe, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jT_giaVe))
+                .addGap(9, 9, 9)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
@@ -309,30 +270,69 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         return jComboBox_soHieuCB;
     }
 
-    public JLabel getjL_hienThiGia() {
-        return jL_hienThiGia;
+    public JTextField getjT_giaVe() {
+        return jT_giaVe;
     }
 
     public JTable getjTable() {
         return jTable1;
     }
 
+    private void capNhatGiaVe() {
+        if (this.quanLy == null) {
+            return; // Đảm bảo quanLy đã được gán
+        }
+
+        String soHieuCB = (String) jComboBox_soHieuCB.getSelectedItem();
+        String hangVeStr = (String) jComboBox_hangVe.getSelectedItem();
+        ChuyenBay cb = quanLy.timChuyenBay(soHieuCB);
+
+        if (cb != null && hangVeStr != null) {
+            double gia = 0;
+            if (hangVeStr.equals("Phổ thông")) {
+                gia = cb.getGiaPhoThong();
+            } else if (hangVeStr.equals("Thương gia")) {
+                gia = cb.getGiaThuongGia();
+            }
+            // Cập nhật vào JTextField mới
+            jT_giaVe.setText(String.format("%.0f", gia));
+        } else {
+            jT_giaVe.setText("");
+        }
+    }
+
     // Phương thức nạp dữ liệu vào bảng
     public void loadDataToTable(QuanLyChung quanLy) {
-        tableModel.setRowCount(0);
+        this.quanLy = quanLy; // Gán đối tượng quanLy
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        // Cập nhật lại các cột cho đúng
+        model.setColumnIdentifiers(new String[]{
+            "Mã vé", "Số hiệu CB", "Hạng vé", "Giá vé", "CCCD Hành khách", "Họ tên Hành khách"
+        });
+
         for (VeMayBay ve : quanLy.getDanhSachVe()) {
             ChuyenBay cb = quanLy.timChuyenBay(ve.getSoHieuChuyenBay());
+            HanhKhach hk = quanLy.timHanhKhach(ve.getCccdHanhKhach());
+
             double giaVe = 0;
             if (cb != null) {
                 giaVe = (ve.getHangVe() == VeMayBay.HangVe.THUONG_GIA) ? cb.getGiaThuongGia() : cb.getGiaPhoThong();
             }
+
+            String cccd = (hk != null) ? hk.getCccd() : "Không rõ";
+            String hoTen = (hk != null) ? hk.getHoTen() : "Không rõ";
+
             Object[] row = new Object[]{
                 ve.getMaVe(),
                 ve.getSoHieuChuyenBay(),
                 ve.getHangVe().toString(),
-                String.format("%,.0f VNĐ", giaVe)
+                String.format("%,.0f VNĐ", giaVe),
+                cccd,
+                hoTen
             };
-            tableModel.addRow(row);
+            model.addRow(row);
         }
     }
 
@@ -342,31 +342,6 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
                 .map(ChuyenBay::getSoHieuChuyenBay).collect(Collectors.toList());
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(soHieuChuyenBayList.toArray(new String[0]));
         jComboBox_soHieuCB.setModel(model);
-    }
-
-    // Phương thức cập nhật giá vé hiển thị
-    private void capNhatGiaVe() {
-        // Đảm bảo đối tượng quanLy đã được truyền vào trước khi sử dụng
-        if (this.quanLy == null) {
-            return;
-        }
-
-        String soHieuCB = (String) jComboBox_soHieuCB.getSelectedItem();
-        String hangVe = (String) jComboBox_hangVe.getSelectedItem();
-
-        ChuyenBay cb = this.quanLy.timChuyenBay(soHieuCB);
-
-        if (cb != null && hangVe != null) {
-            double gia = 0;
-            if (hangVe.equals("Phổ thông")) {
-                gia = cb.getGiaPhoThong();
-            } else if (hangVe.equals("Thương gia")) {
-                gia = cb.getGiaThuongGia();
-            }
-            jL_hienThiGia.setText(String.format("%,.0f VNĐ", gia));
-        } else {
-            jL_hienThiGia.setText("0 VNĐ");
-        }
     }
 
     // Phương thức lấy dữ liệu từ các trường nhập liệu
@@ -380,8 +355,8 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
             return null;
         }
 
-        VeMayBay.HangVe hangVe = VeMayBay.HangVe.valueOf(hangVeStr.equals("Phổ thông") ? "PHO_THONG" : "THUONG_GIA");
-        return new VeMayBay(maVe, soHieuCB, hangVe, null); // CCCD sẽ được gán sau
+        VeMayBay.HangVe hangVe = hangVeStr.equals("Phổ thông") ? VeMayBay.HangVe.PHO_THONG : VeMayBay.HangVe.THUONG_GIA;
+        return new VeMayBay(maVe, soHieuCB, hangVe, null); // CCCD tạm thời để null khi admin thêm vé
     }
 
     // Phương thức xóa các trường nhập liệu
@@ -389,7 +364,7 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jT_maVe.setText("");
         jComboBox_soHieuCB.setSelectedIndex(-1);
         jComboBox_hangVe.setSelectedIndex(0);
-        jL_hienThiGia.setText("0 VNĐ");
+        jT_giaVe.setText("");
         jT_maVe.setEnabled(true);
         getjB_them().setEnabled(true);
         getjB_sua().setEnabled(false);
@@ -405,7 +380,8 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         String hangVeStr = model.getValueAt(rowIndex, 2).toString();
         jComboBox_hangVe.setSelectedItem(hangVeStr.equals("PHO_THONG") ? "Phổ thông" : "Thương gia");
 
-        capNhatGiaVe();
+        String giaVeStr = model.getValueAt(rowIndex, 3).toString().replace(" VNĐ", "").replace(",", "");
+        jT_giaVe.setText(giaVeStr);
 
         jT_maVe.setEnabled(false);
         getjB_them().setEnabled(false);
@@ -423,12 +399,12 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
     private javax.swing.JLabel jL_chuyenBay;
     private javax.swing.JLabel jL_giaVe;
     private javax.swing.JLabel jL_hangVe;
-    private javax.swing.JLabel jL_hienThiGia;
     private javax.swing.JLabel jL_maVe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jT_giaVe;
     private javax.swing.JTextField jT_maVe;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

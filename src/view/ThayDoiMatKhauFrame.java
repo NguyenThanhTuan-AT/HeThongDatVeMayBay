@@ -9,7 +9,7 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
     private QuanLyChung quanLy;
     private TaiKhoan taiKhoanHienTai;
 
-    public ThayDoiMatKhauFrame(QuanLyChung quanLy, TaiKhoan taiKhoan) {
+    public ThayDoiMatKhauFrame(QuanLyChung quanLy, TaiKhoan taiKhoan, java.awt.Frame parent) {
         this.quanLy = quanLy;
         this.taiKhoanHienTai = taiKhoan;
         initComponents();
@@ -62,7 +62,7 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
             }
         });
 
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(parent);
     }
 
     @SuppressWarnings("unchecked")
@@ -97,13 +97,15 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Đổi Mật Khẩu");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.ipadx = 452;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 21, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
         jL_mkHienTai.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -111,11 +113,10 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 20;
         gridBagConstraints.ipady = 15;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 80, 0, 0);
         getContentPane().add(jL_mkHienTai, gridBagConstraints);
 
         jL_mkMoi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -123,10 +124,10 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 19;
+        gridBagConstraints.ipadx = 39;
         gridBagConstraints.ipady = 15;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 80, 0, 0);
         getContentPane().add(jL_mkMoi, gridBagConstraints);
 
         jPasswordField_mkMoi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,13 +136,13 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 166;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         getContentPane().add(jPasswordField_mkMoi, gridBagConstraints);
 
         jL_XacThucMK.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -149,11 +150,10 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 15;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 80, 0, 0);
         getContentPane().add(jL_XacThucMK, gridBagConstraints);
 
         jPasswordField_XacThucMK.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,13 +162,13 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 166;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         getContentPane().add(jPasswordField_XacThucMK, gridBagConstraints);
 
         jB_Luu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -181,11 +181,11 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 19;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 92, 29, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 172, 0, 0);
         getContentPane().add(jB_Luu, gridBagConstraints);
 
         jB_Huy.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -196,13 +196,12 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 13;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 52, 29, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 52, 0, 0);
         getContentPane().add(jB_Huy, gridBagConstraints);
 
         jL_tenDangNhap.setText("Tên đăng nhập");
@@ -210,52 +209,59 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 80, 0, 0);
         getContentPane().add(jL_tenDangNhap, gridBagConstraints);
 
         jT_tenDangNhap.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 166;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 0, 0, 0);
         getContentPane().add(jT_tenDangNhap, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         getContentPane().add(jRadioButton_mkHienTai, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         getContentPane().add(jRadioButton_mkMoi, gridBagConstraints);
+
+        jRadioButton_xacThucMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_xacThucMKActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 6;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         getContentPane().add(jRadioButton_xacThucMK, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 166;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         getContentPane().add(jPasswordField_mkHienTai, gridBagConstraints);
 
         pack();
@@ -303,6 +309,10 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
 
     private void jPasswordField_XacThucMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField_XacThucMKMouseClicked
     }//GEN-LAST:event_jPasswordField_XacThucMKMouseClicked
+
+    private void jRadioButton_xacThucMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_xacThucMKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton_xacThucMKActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Huy;
