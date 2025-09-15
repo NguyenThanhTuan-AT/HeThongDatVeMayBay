@@ -59,10 +59,10 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 2;
+        gridBagConstraints.ipadx = 20;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 122, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(2, 124, 0, 0);
         jPanel2.add(jL_hoTen, gridBagConstraints);
 
         jT_hoTen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -78,7 +78,7 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 138;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel2.add(jT_hoTen, gridBagConstraints);
 
         jL_soCCCD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -87,10 +87,11 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 27;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 9;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 86, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(7, 124, 0, 0);
         jPanel2.add(jL_soCCCD, gridBagConstraints);
 
         jT_soCCCD.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -104,11 +105,10 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 138;
-        gridBagConstraints.ipady = 20;
+        gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel2.add(jT_soCCCD, gridBagConstraints);
 
         jL_maVe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -119,7 +119,7 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 21;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 104, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 124, 0, 0);
         jPanel2.add(jL_maVe, gridBagConstraints);
 
         jComboBox_maVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -130,10 +130,10 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 130;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jComboBox_maVe, gridBagConstraints);
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jB_them.setText("Thêm");
         jB_them.addActionListener(new java.awt.event.ActionListener() {

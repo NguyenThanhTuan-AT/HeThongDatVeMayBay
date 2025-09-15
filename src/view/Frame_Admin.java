@@ -51,7 +51,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             .addGroup(headerWrapperPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         headerWrapperPanelLayout.setVerticalGroup(
             headerWrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

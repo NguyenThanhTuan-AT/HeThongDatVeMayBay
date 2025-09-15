@@ -23,28 +23,14 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_dsVe = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jB_suaVe = new javax.swing.JButton();
         jB_xoaVe = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridBagLayout());
-
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Danh sách vé của tôi");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 380;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(jLabel2, gridBagConstraints);
+        setLayout(new java.awt.BorderLayout());
 
         jTable_dsVe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -105,22 +91,28 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable_dsVe);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 534;
-        gridBagConstraints.ipady = 338;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel1.add(jScrollPane2, gridBagConstraints);
+        add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setLayout(null);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Danh sách vé của tôi");
+        add(jLabel2, java.awt.BorderLayout.PAGE_START);
+
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jB_suaVe.setText("Sửa vé ");
-        jPanel2.add(jB_suaVe);
-        jB_suaVe.setBounds(200, 5, 72, 23);
+        jB_suaVe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_suaVeActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 23;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 174, 0, 0);
+        jPanel2.add(jB_suaVe, gridBagConstraints);
 
         jB_xoaVe.setText("Xoá vé");
         jB_xoaVe.addActionListener(new java.awt.event.ActionListener() {
@@ -128,27 +120,24 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
                 jB_xoaVeActionPerformed(evt);
             }
         });
-        jPanel2.add(jB_xoaVe);
-        jB_xoaVe.setBounds(277, 5, 72, 23);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 549;
-        gridBagConstraints.ipady = 33;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(jPanel2, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 23;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        add(jPanel1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 12, 0, 174);
+        jPanel2.add(jB_xoaVe, gridBagConstraints);
+
+        add(jPanel2, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_xoaVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_xoaVeActionPerformed
 
     }//GEN-LAST:event_jB_xoaVeActionPerformed
+
+    private void jB_suaVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_suaVeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jB_suaVeActionPerformed
 
     public JTable getJTable() {
         return jTable_dsVe;
@@ -186,7 +175,6 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
     private javax.swing.JButton jB_suaVe;
     private javax.swing.JButton jB_xoaVe;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable_dsVe;

@@ -156,7 +156,7 @@ public class PanelMayBay_Admin extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 6, 0, 0);
         jPanel2.add(jComboBox_maHang, gridBagConstraints);
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jB_them.setText("Thêm");
         jB_them.addActionListener(new java.awt.event.ActionListener() {

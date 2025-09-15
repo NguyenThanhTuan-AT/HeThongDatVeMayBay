@@ -67,19 +67,18 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
 
         jL_maHang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_maHang.setText(" Mã hãng : ");
-        jL_maHang.setPreferredSize(new java.awt.Dimension(59, 16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 15;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 207, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 149, 0, 0);
         jPanel2.add(jL_maHang, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 116;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -90,22 +89,22 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 12;
+        gridBagConstraints.ipadx = 15;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 207, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 149, 0, 0);
         jPanel2.add(jL_tenHang, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 116;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jT_tenHang, gridBagConstraints);
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jB_them.setText("Thêm");
         jPanel3.add(jB_them);
@@ -129,9 +128,9 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 355;
+        gridBagConstraints.ipadx = 246;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 1, 0, 0);
         jPanel2.add(jPanel3, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
@@ -140,10 +139,11 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 11;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 23, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 24, 0, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
