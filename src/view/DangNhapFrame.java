@@ -10,6 +10,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
 
     public DangNhapFrame() {
         initComponents();
+
         this.quanLy = new QuanLyChung(); // Khởi tạo đối tượng quản lý
 
         jL_thongbaoLoi.setVisible(false);
@@ -26,19 +27,24 @@ public class DangNhapFrame extends javax.swing.JFrame {
             }
         });
 
-        // Xử lý Enter cho ô Tên đăng nhập
+        // Xử lý Enter
         jT_tenDangNhap.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField_matKhau.requestFocusInWindow();
             }
         });
-
-        // Xử lý Enter cho ô Mật khẩu
         jPasswordField_matKhau.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_dangNhapActionPerformed(evt);
+            }
+        });
+        //Nút đăng ký
+        jB_dangKy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DangKyFrame dangKyFrame = new DangKyFrame(DangNhapFrame.this, true, quanLy);
+                dangKyFrame.setVisible(true);
             }
         });
     }
@@ -85,12 +91,6 @@ public class DangNhapFrame extends javax.swing.JFrame {
         jT_tenDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jT_tenDangNhapActionPerformed(evt);
-            }
-        });
-
-        jPasswordField_matKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField_matKhauActionPerformed(evt);
             }
         });
 
@@ -182,9 +182,6 @@ public class DangNhapFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jPasswordField_matKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_matKhauActionPerformed
-    }//GEN-LAST:event_jPasswordField_matKhauActionPerformed
 
     private void jRadioButton_matKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_matKhauActionPerformed
     }//GEN-LAST:event_jRadioButton_matKhauActionPerformed

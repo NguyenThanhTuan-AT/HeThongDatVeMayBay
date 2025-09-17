@@ -65,7 +65,8 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 124, 0, 0);
         jPanel2.add(jL_hoTen, gridBagConstraints);
 
-        jT_hoTen.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jT_hoTen.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jT_hoTen.setPreferredSize(new java.awt.Dimension(70, 20));
         jT_hoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jT_hoTenActionPerformed(evt);
@@ -95,7 +96,7 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         jPanel2.add(jL_soCCCD, gridBagConstraints);
 
         jT_soCCCD.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jT_soCCCD.setPreferredSize(new java.awt.Dimension(64, 26));
+        jT_soCCCD.setPreferredSize(new java.awt.Dimension(70, 20));
         jT_soCCCD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jT_soCCCDActionPerformed(evt);
@@ -123,6 +124,7 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         jPanel2.add(jL_maVe, gridBagConstraints);
 
         jComboBox_maVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_maVe.setPreferredSize(new java.awt.Dimension(77, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;

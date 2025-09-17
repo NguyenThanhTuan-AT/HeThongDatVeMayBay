@@ -20,24 +20,14 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
         jT_tenDangNhap.setEditable(false);
 
         // Nút hiển thị mật khẩu
-        jRadioButton_mkHienTai.addActionListener(evt -> {
-            if (jRadioButton_mkHienTai.isSelected()) {
+        jRadioButton_matKhau.addActionListener(evt -> {
+            if (jRadioButton_matKhau.isSelected()) {
                 jPasswordField_mkHienTai.setEchoChar((char) 0); // Hiện mật khẩu
-            } else {
-                jPasswordField_mkHienTai.setEchoChar('*'); // Ẩn mật khẩu
-            }
-        });
-        jRadioButton_mkMoi.addActionListener(evt -> {
-            if (jRadioButton_mkMoi.isSelected()) {
                 jPasswordField_mkMoi.setEchoChar((char) 0);
-            } else {
-                jPasswordField_mkMoi.setEchoChar('*');
-            }
-        });
-        jRadioButton_xacThucMK.addActionListener(evt -> {
-            if (jRadioButton_xacThucMK.isSelected()) {
                 jPasswordField_XacThucMK.setEchoChar((char) 0);
             } else {
+                jPasswordField_mkHienTai.setEchoChar('*'); // Ẩn mật khẩu
+                jPasswordField_mkMoi.setEchoChar('*');
                 jPasswordField_XacThucMK.setEchoChar('*');
             }
         });
@@ -68,7 +58,6 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jRadioButton1 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
@@ -81,9 +70,7 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
         jB_Huy = new javax.swing.JButton();
         jL_tenDangNhap = new javax.swing.JLabel();
         jT_tenDangNhap = new javax.swing.JTextField();
-        jRadioButton_mkHienTai = new javax.swing.JRadioButton();
-        jRadioButton_mkMoi = new javax.swing.JRadioButton();
-        jRadioButton_xacThucMK = new javax.swing.JRadioButton();
+        jRadioButton_matKhau = new javax.swing.JRadioButton();
         jPasswordField_mkHienTai = new javax.swing.JPasswordField();
 
         jRadioButton1.setText("jRadioButton1");
@@ -94,82 +81,31 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
                 formMouseClicked(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Đổi Mật Khẩu");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.ipadx = 452;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        getContentPane().add(jLabel1, gridBagConstraints);
 
         jL_mkHienTai.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jL_mkHienTai.setText("Mật khẩu hiện tại");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 20;
-        gridBagConstraints.ipady = 15;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 80, 0, 0);
-        getContentPane().add(jL_mkHienTai, gridBagConstraints);
 
         jL_mkMoi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jL_mkMoi.setText("Mật khẩu mới");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 39;
-        gridBagConstraints.ipady = 15;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 80, 0, 0);
-        getContentPane().add(jL_mkMoi, gridBagConstraints);
 
         jPasswordField_mkMoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPasswordField_mkMoiMouseClicked(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 166;
-        gridBagConstraints.ipady = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
-        getContentPane().add(jPasswordField_mkMoi, gridBagConstraints);
 
         jL_XacThucMK.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jL_XacThucMK.setText("Xác thực mật khẩu");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 15;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 80, 0, 0);
-        getContentPane().add(jL_XacThucMK, gridBagConstraints);
 
         jPasswordField_XacThucMK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPasswordField_XacThucMKMouseClicked(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 166;
-        gridBagConstraints.ipady = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
-        getContentPane().add(jPasswordField_XacThucMK, gridBagConstraints);
 
         jB_Luu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jB_Luu.setText("Lưu");
@@ -178,15 +114,6 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
                 jB_LuuMouseClicked(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 19;
-        gridBagConstraints.ipady = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 172, 0, 0);
-        getContentPane().add(jB_Luu, gridBagConstraints);
 
         jB_Huy.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jB_Huy.setText("Hủy");
@@ -195,74 +122,73 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
                 jB_HuyMouseClicked(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 13;
-        gridBagConstraints.ipady = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 52, 0, 0);
-        getContentPane().add(jB_Huy, gridBagConstraints);
 
         jL_tenDangNhap.setText("Tên đăng nhập");
         jL_tenDangNhap.setToolTipText("");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 31;
-        gridBagConstraints.ipady = 14;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 80, 0, 0);
-        getContentPane().add(jL_tenDangNhap, gridBagConstraints);
 
         jT_tenDangNhap.setEditable(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 166;
-        gridBagConstraints.ipady = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 0, 0, 0);
-        getContentPane().add(jT_tenDangNhap, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
-        getContentPane().add(jRadioButton_mkHienTai, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
-        getContentPane().add(jRadioButton_mkMoi, gridBagConstraints);
 
-        jRadioButton_xacThucMK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton_xacThucMKActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 6;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
-        getContentPane().add(jRadioButton_xacThucMK, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 166;
-        gridBagConstraints.ipady = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
-        getContentPane().add(jPasswordField_mkHienTai, gridBagConstraints);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jL_tenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jT_tenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jL_mkHienTai, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jPasswordField_mkHienTai, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jL_mkMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jPasswordField_mkMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButton_matKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jL_XacThucMK, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jPasswordField_XacThucMK, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jB_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jB_Huy, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jL_tenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jT_tenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jL_mkHienTai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField_mkHienTai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jL_mkMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField_mkMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButton_matKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jL_XacThucMK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField_XacThucMK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jB_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB_Huy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -310,10 +236,6 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
     private void jPasswordField_XacThucMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField_XacThucMKMouseClicked
     }//GEN-LAST:event_jPasswordField_XacThucMKMouseClicked
 
-    private void jRadioButton_xacThucMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_xacThucMKActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton_xacThucMKActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Huy;
     private javax.swing.JButton jB_Luu;
@@ -326,9 +248,7 @@ public class ThayDoiMatKhauFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField_mkHienTai;
     private javax.swing.JPasswordField jPasswordField_mkMoi;
     private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton_mkHienTai;
-    private javax.swing.JRadioButton jRadioButton_mkMoi;
-    private javax.swing.JRadioButton jRadioButton_xacThucMK;
+    private javax.swing.JRadioButton jRadioButton_matKhau;
     private javax.swing.JTextField jT_tenDangNhap;
     // End of variables declaration//GEN-END:variables
 }

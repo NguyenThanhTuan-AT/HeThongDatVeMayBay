@@ -125,6 +125,8 @@ public class PanelMayBay_Admin extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 111, 0, 0);
         jPanel2.add(jL_soHieuMB, gridBagConstraints);
+
+        jT_soHieuMB.setPreferredSize(new java.awt.Dimension(70, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -147,6 +149,7 @@ public class PanelMayBay_Admin extends javax.swing.JPanel {
         jPanel2.add(jL_maHang, gridBagConstraints);
 
         jComboBox_maHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_maHang.setPreferredSize(new java.awt.Dimension(70, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;

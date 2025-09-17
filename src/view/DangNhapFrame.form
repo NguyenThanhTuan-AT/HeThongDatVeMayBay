@@ -146,9 +146,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordField_matKhau">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPasswordField_matKhauActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jB_dangNhap">
       <Properties>

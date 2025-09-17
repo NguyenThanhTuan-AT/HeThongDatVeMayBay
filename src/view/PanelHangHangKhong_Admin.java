@@ -75,6 +75,8 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 149, 0, 0);
         jPanel2.add(jL_maHang, gridBagConstraints);
+
+        jT_maHang.setPreferredSize(new java.awt.Dimension(70, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -94,6 +96,8 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 149, 0, 0);
         jPanel2.add(jL_tenHang, gridBagConstraints);
+
+        jT_tenHang.setPreferredSize(new java.awt.Dimension(70, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;

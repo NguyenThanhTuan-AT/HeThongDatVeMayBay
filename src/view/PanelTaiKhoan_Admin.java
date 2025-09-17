@@ -25,6 +25,13 @@ public class PanelTaiKhoan_Admin extends javax.swing.JPanel {
                 }
             }
         });
+        jRadioButton_matKhau.addActionListener(evt -> {
+            if (jRadioButton_matKhau.isSelected()) {
+                jPasswordField_matKhau.setEchoChar((char) 0);
+            } else {
+                jPasswordField_matKhau.setEchoChar('*');
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -37,7 +44,7 @@ public class PanelTaiKhoan_Admin extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jT_dangNhap = new javax.swing.JTextField();
         jPasswordField_matKhau = new javax.swing.JPasswordField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton_matKhau = new javax.swing.JRadioButton();
         jL_loaiTaiKhoan = new javax.swing.JLabel();
         jL_tenDangNhap = new javax.swing.JLabel();
         jL_matKhau = new javax.swing.JLabel();
@@ -114,6 +121,7 @@ public class PanelTaiKhoan_Admin extends javax.swing.JPanel {
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
+        jT_dangNhap.setPreferredSize(new java.awt.Dimension(65, 22));
         jT_dangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jT_dangNhapActionPerformed(evt);
@@ -128,6 +136,8 @@ public class PanelTaiKhoan_Admin extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         jPanel2.add(jT_dangNhap, gridBagConstraints);
+
+        jPasswordField_matKhau.setPreferredSize(new java.awt.Dimension(65, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -137,9 +147,9 @@ public class PanelTaiKhoan_Admin extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(6, 4, 0, 0);
         jPanel2.add(jPasswordField_matKhau, gridBagConstraints);
 
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButton_matKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jRadioButton_matKhauActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -149,7 +159,7 @@ public class PanelTaiKhoan_Admin extends javax.swing.JPanel {
         gridBagConstraints.ipady = 15;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 5, 0, 0);
-        jPanel2.add(jRadioButton1, gridBagConstraints);
+        jPanel2.add(jRadioButton_matKhau, gridBagConstraints);
 
         jL_loaiTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_loaiTaiKhoan.setText("Loại tài khoản : ");
@@ -257,9 +267,9 @@ public class PanelTaiKhoan_Admin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void jRadioButton_matKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_matKhauActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_jRadioButton_matKhauActionPerformed
 
     public JButton getjB_lamMoi() {
         return jB_lamMoi;
@@ -351,7 +361,7 @@ public class PanelTaiKhoan_Admin extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField_matKhau;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton_matKhau;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jT_dangNhap;
     private javax.swing.JTable jTable_dsTaiKhoan;

@@ -8,6 +8,7 @@ import model.HangHangKhong;
 import model.MayBay;
 import model.QuanLyChung;
 import model.TaiKhoan;
+import model.VeMayBay;
 
 public class Frame_Admin extends javax.swing.JFrame {
 
@@ -178,10 +179,16 @@ public class Frame_Admin extends javax.swing.JFrame {
         panelHangHangKhong.getjB_them().addActionListener(e -> {
             HangHangKhong hhk = panelHangHangKhong.getDataFromFields();
             if (hhk != null) {
-                quanLy.themHang(hhk);
-                panelHangHangKhong.loadDataToTable(quanLy);
-                JOptionPane.showMessageDialog(this, "Thêm hãng hàng không thành công!");
-                panelHangHangKhong.clearFields();
+                // KIỂM TRA THÊM: Mã hãng đã tồn tại hay chưa
+                if (quanLy.timHang(hhk.getMaHang()) != null) {
+                    JOptionPane.showMessageDialog(this, "Mã hãng '" + hhk.getMaHang() + "' đã tồn tại. Vui lòng nhập mã khác.", "Lỗi trùng lặp", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Chỉ thêm khi mã hãng chưa tồn tại
+                    quanLy.themHang(hhk);
+                    panelHangHangKhong.loadDataToTable(quanLy);
+                    JOptionPane.showMessageDialog(this, "Thêm hãng thành công!");
+                    panelHangHangKhong.clearFields();
+                }
             }
         });
         panelHangHangKhong.getjB_sua().addActionListener(e -> {
@@ -189,7 +196,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             if (hhk != null) {
                 quanLy.suaHang(hhk);
                 panelHangHangKhong.loadDataToTable(quanLy);
-                JOptionPane.showMessageDialog(this, "Sửa hãng hàng không thành công!");
+                JOptionPane.showMessageDialog(this, "Sửa hãng thành công!");
                 panelHangHangKhong.clearFields();
             }
         });
@@ -200,7 +207,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaHang(maHang);
                     panelHangHangKhong.loadDataToTable(quanLy);
-                    JOptionPane.showMessageDialog(this, "Xóa hãng hàng không thành công!");
+                    JOptionPane.showMessageDialog(this, "Xóa hãng thành công!");
                     panelHangHangKhong.clearFields();
                 }
             }
@@ -294,8 +301,62 @@ public class Frame_Admin extends javax.swing.JFrame {
 
     //Panel Vé máy bay
     private void setupVeMayBayEvents() {
+        // Sự kiện cho nút Sửa
+        panelVeMayBay.getjB_sua().addActionListener(e -> {
+            VeMayBay veSua = panelVeMayBay.getDataFromFields();
+            if (veSua == null) {
+                return;
+            }
+
+            try {
+                // Lấy giá mới từ JTextField
+                double giaMoi = Double.parseDouble(panelVeMayBay.getjT_giaVe().getText());
+
+                // Cập nhật thông tin vé (chủ yếu là hạng vé)
+                quanLy.suaVe(veSua);
+
+                // Cập nhật giá của Chuyến bay tương ứng
+                ChuyenBay cb = quanLy.timChuyenBay(veSua.getSoHieuChuyenBay());
+                if (cb != null) {
+                    if (veSua.getHangVe() == VeMayBay.HangVe.PHO_THONG) {
+                        cb.setGiaPhoThong(giaMoi);
+                    } else {
+                        cb.setGiaThuongGia(giaMoi);
+                    }
+                    quanLy.suaChuyenBay(cb); // Lưu thay đổi giá của chuyến bay
+                }
+
+                JOptionPane.showMessageDialog(this, "Cập nhật vé và giá chuyến bay thành công!");
+                panelVeMayBay.loadDataToTable(quanLy);
+                panelVeMayBay.clearFields();
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Giá vé phải là một con số.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        // Sự kiện cho nút Xóa
+        panelVeMayBay.getjB_xoa().addActionListener(e -> {
+            String maVe = panelVeMayBay.getjT_maVe().getText();
+            if (maVe != null && !maVe.isEmpty()) {
+                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa vé '" + maVe + "' không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    quanLy.xoaVe(maVe);
+                    JOptionPane.showMessageDialog(this, "Xóa vé thành công!");
+                    panelVeMayBay.loadDataToTable(quanLy);
+                    panelVeMayBay.clearFields();
+                }
+            }
+        });
+
+        // Sự kiện cho nút Làm mới
         panelVeMayBay.getjB_lamMoi().addActionListener(e -> {
             panelVeMayBay.clearFields();
+        });
+
+        // Sự kiện cho nút Thêm (chỉ thông báo)
+        panelVeMayBay.getjB_them().addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Chức năng Thêm vé chỉ nên thực hiện khi có thông tin Hành khách. Vui lòng đặt vé từ giao diện User.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         });
     }
 
@@ -310,6 +371,7 @@ public class Frame_Admin extends javax.swing.JFrame {
     private void setupThongKeEvents() {
         panelThongKe.getjB_thongKe().addActionListener(e -> {
             panelThongKe.thongKeDoanhThu(quanLy);
+            JOptionPane.showMessageDialog(this, "Đã làm mới danh sách hành khách!");
         });
     }
 
