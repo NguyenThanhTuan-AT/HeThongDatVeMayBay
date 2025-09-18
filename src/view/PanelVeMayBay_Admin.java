@@ -103,6 +103,12 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jL_timKiem = new javax.swing.JLabel();
         jComboBox_tieuChi = new javax.swing.JComboBox<>();
         jT_timKiem = new javax.swing.JTextField();
+        jPanel_South = new javax.swing.JPanel();
+        jB_dau = new javax.swing.JButton();
+        jB_truoc = new javax.swing.JButton();
+        jL_trang = new javax.swing.JLabel();
+        jB_sau = new javax.swing.JButton();
+        jB_cuoi = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -346,6 +352,75 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jPanel2.add(jT_timKiem, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
+
+        jPanel_South.setLayout(new java.awt.GridBagLayout());
+
+        jB_dau.setText("|<");
+        jB_dau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_dauActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = -2;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 150, 5, 0);
+        jPanel_South.add(jB_dau, gridBagConstraints);
+
+        jB_truoc.setText("<");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 27;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        jPanel_South.add(jB_truoc, gridBagConstraints);
+
+        jL_trang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jL_trang.setText("Trang 1 / X");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 37;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel_South.add(jL_trang, gridBagConstraints);
+
+        jB_sau.setText(">");
+        jB_sau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_sauActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 27;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        jPanel_South.add(jB_sau, gridBagConstraints);
+
+        jB_cuoi.setText(">|");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = -2;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 141);
+        jPanel_South.add(jB_cuoi, gridBagConstraints);
+
+        add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -356,6 +431,14 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_tieuChiActionPerformed
+
+    private void jB_dauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_dauActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jB_dauActionPerformed
+
+    private void jB_sauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_sauActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jB_sauActionPerformed
 
     public void setQuanLy(QuanLyChung quanLy) {
         this.quanLy = quanLy;
@@ -533,6 +616,10 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB_cuoi;
+    private javax.swing.JButton jB_dau;
+    private javax.swing.JButton jB_sau;
+    private javax.swing.JButton jB_truoc;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -545,9 +632,11 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
     private javax.swing.JLabel jL_hangVe;
     private javax.swing.JLabel jL_maVe;
     private javax.swing.JLabel jL_timKiem;
+    private javax.swing.JLabel jL_trang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel_South;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jT_giaVe;
     private javax.swing.JTextField jT_maVe;

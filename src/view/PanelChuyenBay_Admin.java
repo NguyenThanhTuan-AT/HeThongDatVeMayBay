@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,11 +14,9 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import model.ChuyenBay;
 import model.MayBay;
 import model.QuanLyChung;
@@ -25,31 +24,62 @@ import model.QuanLyChung;
 public class PanelChuyenBay_Admin extends javax.swing.JPanel {
 
     private DefaultTableModel tableModel;
-    private TableRowSorter<DefaultTableModel> sorter;
+
+    private QuanLyChung quanLy;
+
+    // Biến cho phân trang và tìm kiếm
+    private int currentPage = 1;
+    private final int ITEMS_PER_PAGE = 20;
+    private List<ChuyenBay> filteredList;
 
     public PanelChuyenBay_Admin() {
         initComponents();
-        tableModel = (DefaultTableModel) jTable_dsVeMayBay.getModel();
-        ((java.awt.BorderLayout) this.getLayout()).setVgap(0);
+        this.tableModel = (DefaultTableModel) jTable_dsVeMayBay.getModel();
+        this.filteredList = new ArrayList<>();
 
-        sorter = new TableRowSorter<>(tableModel);
-        jTable_dsVeMayBay.setRowSorter(sorter);
-
+        // Gắn sự kiện cho ô tìm kiếm
         jT_timKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                filterTable();
+                currentPage = 1;
+                updateTableAndPagination();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                filterTable();
+                currentPage = 1;
+                updateTableAndPagination();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                filterTable();
+                currentPage = 1;
+                updateTableAndPagination();
             }
+        });
+
+        // Gắn sự kiện cho các nút phân trang
+        jB_dau.addActionListener(e -> {
+            currentPage = 1;
+            updateTableAndPagination();
+        });
+        jB_truoc.addActionListener(e -> {
+            if (currentPage > 1) {
+                currentPage--;
+                updateTableAndPagination();
+            }
+        });
+        jB_sau.addActionListener(e -> {
+            int totalPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateTableAndPagination();
+            }
+        });
+        jB_cuoi.addActionListener(e -> {
+            int totalPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
+            currentPage = totalPages > 0 ? totalPages : 1;
+            updateTableAndPagination();
         });
 
         // Thêm sự kiện click chuột vào bảng để tự động điền dữ liệu
@@ -102,6 +132,12 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         jL_timKiem = new javax.swing.JLabel();
         jComboBox_tieuChi = new javax.swing.JComboBox<>();
         jT_timKiem = new javax.swing.JTextField();
+        jPanel_South = new javax.swing.JPanel();
+        jB_dau = new javax.swing.JButton();
+        jB_truoc = new javax.swing.JButton();
+        jL_trang = new javax.swing.JLabel();
+        jB_sau = new javax.swing.JButton();
+        jB_cuoi = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -214,23 +250,12 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         jL_giaTG.setText("Giá : ");
 
         jComboBox_soHieuCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_soHieuCB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_soHieuCBActionPerformed(evt);
-            }
-        });
 
         jDateChooser1.setPreferredSize(new java.awt.Dimension(88, 30));
 
         jT_soHieuCB.setPreferredSize(new java.awt.Dimension(64, 30));
 
         jT_diemDi.setPreferredSize(new java.awt.Dimension(64, 30));
-
-        jT_diemDen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jT_diemDenActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -323,11 +348,6 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jB_them.setText("Thêm");
-        jB_them.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_themActionPerformed(evt);
-            }
-        });
         jPanel3.add(jB_them);
 
         jB_sua.setText("Sửa");
@@ -337,11 +357,6 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         jPanel3.add(jB_lamMoi);
 
         jB_xoa.setText("Xoá");
-        jB_xoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_xoaActionPerformed(evt);
-            }
-        });
         jPanel3.add(jB_xoa);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -397,23 +412,66 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         jPanel1.add(jT_timKiem, gridBagConstraints);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jPanel_South.setLayout(new java.awt.GridBagLayout());
+
+        jB_dau.setText("|<");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = -2;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 150, 5, 0);
+        jPanel_South.add(jB_dau, gridBagConstraints);
+
+        jB_truoc.setText("<");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 27;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        jPanel_South.add(jB_truoc, gridBagConstraints);
+
+        jL_trang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jL_trang.setText("Trang 1 / X");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 37;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel_South.add(jL_trang, gridBagConstraints);
+
+        jB_sau.setText(">");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 27;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        jPanel_South.add(jB_sau, gridBagConstraints);
+
+        jB_cuoi.setText(">|");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = -2;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 141);
+        jPanel_South.add(jB_cuoi, gridBagConstraints);
+
+        add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox_soHieuCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_soHieuCBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_soHieuCBActionPerformed
-
-    private void jB_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_xoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_xoaActionPerformed
-
-    private void jT_diemDenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_diemDenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jT_diemDenActionPerformed
-
-    private void jB_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_themActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_themActionPerformed
 
     public JButton getjB_them() {
         return jB_them;
@@ -580,44 +638,83 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         jComboBox_soHieuCB.setModel(model);
     }
 
-    private void filterTable() {
-        String text = jT_timKiem.getText();
-        String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
-
-        if (text.trim().length() == 0) {
-            sorter.setRowFilter(null);
-        } else {
-            int columnIndex = -1;
-            switch (tieuChi) {
-                case "Số hiệu CB":
-                    columnIndex = 0;
-                    break;
-                case "Số hiệu MB":
-                    columnIndex = 1;
-                    break;
-                case "Điểm đi":
-                    columnIndex = 2;
-                    break;
-                case "Điểm đến":
-                    columnIndex = 3;
-                    break;
-                default: // Trường hợp "Tất cả"
-                    columnIndex = -1;
-                    break;
-            }
-
-            if (columnIndex == -1) {
-                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-            } else {
-                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, columnIndex));
-            }
+    private void updateTableAndPagination() {
+        if (this.quanLy == null) {
+            return; // Tránh lỗi khi quanLy chưa được gán
         }
+        // Lọc dữ liệu
+        String tuKhoa = jT_timKiem.getText().toLowerCase().trim();
+        List<ChuyenBay> danhSachGoc = this.quanLy.getDanhSachChuyenBay();
+
+        if (tuKhoa.isEmpty()) {
+            filteredList = new ArrayList<>(danhSachGoc);
+        } else {
+            // Logic tìm kiếm với ComboBox
+            String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
+            filteredList = danhSachGoc.stream().filter(cb -> {
+                switch (tieuChi) {
+                    case "Số hiệu CB":
+                        return cb.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa);
+                    case "Số hiệu MB":
+                        return cb.getSoHieuMayBay().toLowerCase().contains(tuKhoa);
+                    case "Điểm đi":
+                        return cb.getDiemDi().toLowerCase().contains(tuKhoa);
+                    case "Điểm đến":
+                        return cb.getDiemDen().toLowerCase().contains(tuKhoa);
+                    default:
+                        return cb.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa)
+                                || cb.getSoHieuMayBay().toLowerCase().contains(tuKhoa)
+                                || cb.getDiemDi().toLowerCase().contains(tuKhoa)
+                                || cb.getDiemDen().toLowerCase().contains(tuKhoa);
+                }
+            }).collect(Collectors.toList());
+        }
+
+        // Tính toán phân trang
+        int totalItems = filteredList.size();
+        int totalPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
+        totalPages = totalPages > 0 ? totalPages : 1;
+        if (currentPage > totalPages) {
+            currentPage = totalPages;
+        }
+
+        int startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+        List<ChuyenBay> pagedList = filteredList.subList(startIndex, endIndex);
+
+        // Hiển thị lên bảng và cập nhật giao diện
+        tableModel.setRowCount(0);
+        for (ChuyenBay cb : pagedList) {
+            tableModel.addRow(new Object[]{
+                cb.getSoHieuChuyenBay(), cb.getSoHieuMayBay(), cb.getDiemDi(),
+                cb.getDiemDen(), cb.getThoiGianDi(), cb.getThoiGianDen(),
+                cb.getSoPhoThong(), cb.getSoThuongGia(), cb.getGiaPhoThong(),
+                cb.getGiaThuongGia(), cb.getSoVeDaBan(), cb.tongSoCho() - cb.getSoVeDaBan()
+            });
+        }
+
+        jL_trang.setText("Trang " + currentPage + " / " + totalPages);
+        jB_dau.setEnabled(currentPage > 1);
+        jB_truoc.setEnabled(currentPage > 1);
+        jB_sau.setEnabled(currentPage < totalPages);
+        jB_cuoi.setEnabled(currentPage < totalPages);
+    }
+
+    public void loadData(QuanLyChung quanLy) {
+        this.quanLy = quanLy;
+        this.currentPage = 1;
+        jT_timKiem.setText("");
+        updateTableAndPagination();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB_cuoi;
+    private javax.swing.JButton jB_dau;
     private javax.swing.JButton jB_lamMoi;
+    private javax.swing.JButton jB_sau;
     private javax.swing.JButton jB_sua;
     private javax.swing.JButton jB_them;
+    private javax.swing.JButton jB_truoc;
     private javax.swing.JButton jB_xoa;
     private javax.swing.JComboBox<String> jComboBox_soHieuCB;
     private javax.swing.JComboBox<String> jComboBox_tieuChi;
@@ -634,10 +731,12 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
     private java.awt.Label jL_thoiGianDen;
     private java.awt.Label jL_thoiGianDi;
     private javax.swing.JLabel jL_timKiem;
+    private javax.swing.JLabel jL_trang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel_South;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jT_diemDen;
     private javax.swing.JTextField jT_diemDi;
