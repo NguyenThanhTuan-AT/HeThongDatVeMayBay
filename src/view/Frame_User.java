@@ -246,28 +246,27 @@ public class Frame_User extends javax.swing.JFrame {
                 .filter(cb -> cb.getThoiGianDi().toLocalDate().equals(ngayDi))
                 .collect(Collectors.toList());
 
-        if (ketQuaTimKiem.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy chuyến bay nào phù hợp.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        // Cập nhật thông tin tìm kiếm trên panel kết quả
-        panelKetQuaTimKiem.getjL_diaDiem().setText(diemDi + " -> " + diemDen);
-        panelKetQuaTimKiem.getjL_thoiGian().setText("Ngày: " + ngayDi.toString());
-
         // Hiển thị kết quả lên bảng
         DefaultTableModel model = (DefaultTableModel) panelKetQuaTimKiem.getJTable_KetQua().getModel();
         model.setRowCount(0); // Xóa dữ liệu cũ
 
-        for (ChuyenBay cb : ketQuaTimKiem) {
-            Object[] row = new Object[]{
-                cb.getSoHieuChuyenBay(),
-                quanLy.timMayBay(cb.getSoHieuMayBay()).getMaHang(),
-                cb.getThoiGianDi().toLocalTime(),
-                cb.getThoiGianDen().toLocalTime(),
-                String.format("%,.0f VNĐ", cb.getGiaPhoThong()),
-                String.format("%,.0f VNĐ", cb.getGiaThuongGia())
-            };
-            model.addRow(row);
+        // Cập nhật thông tin tìm kiếm trên panel kết quả
+        panelKetQuaTimKiem.getjL_diaDiem().setText(diemDi + " -> " + diemDen);
+        panelKetQuaTimKiem.getjL_thoiGian().setText("Ngày: " + ngayDi.toString());
+        if (ketQuaTimKiem.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy chuyến bay nào phù hợp.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            for (ChuyenBay cb : ketQuaTimKiem) {
+                Object[] row = new Object[]{
+                    cb.getSoHieuChuyenBay(),
+                    quanLy.timMayBay(cb.getSoHieuMayBay()).getMaHang(),
+                    cb.getThoiGianDi().toLocalTime(),
+                    cb.getThoiGianDen().toLocalTime(),
+                    String.format("%,.0f VNĐ", cb.getGiaPhoThong()),
+                    String.format("%,.0f VNĐ", cb.getGiaThuongGia())
+                };
+                model.addRow(row);
+            }
         }
     }
 

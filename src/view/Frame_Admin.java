@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.CardLayout;
-import java.util.List;
 import javax.swing.JOptionPane;
 import model.ChuyenBay;
 import model.HangHangKhong;
@@ -9,6 +8,7 @@ import model.MayBay;
 import model.QuanLyChung;
 import model.TaiKhoan;
 import model.VeMayBay;
+import util.TableDataConverter;
 
 public class Frame_Admin extends javax.swing.JFrame {
 
@@ -100,7 +100,7 @@ public class Frame_Admin extends javax.swing.JFrame {
         // Hiển thị màn hình quản lý chuyến bay đầu tiên
         cardLayout.show(mainContentPanel, "quanLyChuyenBay");
         panelChuyenBay.loadSoHieuMayBay(quanLy);
-        panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+        panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
         // Gắn các sự kiện cho các nút trên header và các panel con
         setupHeaderEvents();
         setupChuyenBayEvents();
@@ -116,7 +116,7 @@ public class Frame_Admin extends javax.swing.JFrame {
     private void setupHeaderEvents() {
         panelHeader.getjB_qlChuyenBay().addActionListener(e -> {
             panelChuyenBay.loadSoHieuMayBay(quanLy);
-            panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+            panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
             cardLayout.show(mainContentPanel, "quanLyChuyenBay");
         });
 
@@ -164,6 +164,7 @@ public class Frame_Admin extends javax.swing.JFrame {
         // Sự kiện cho nút Quản lý Hành khách
         panelHeader.getjB_qlHanhKhach().addActionListener(e -> {
             panelHanhKhach.loadDataToTable(quanLy);
+            panelHanhKhach.loadMaVeToComboBox(quanLy);
             cardLayout.show(mainContentPanel, "quanLyHanhKhach");
         });
         // Sự kiện cho nút Quản lý Vé
@@ -186,6 +187,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                     // Chỉ thêm khi mã hãng chưa tồn tại
                     quanLy.themHang(hhk);
                     panelHangHangKhong.loadDataToTable(quanLy);
+                    panelMayBay.loadMaHang(quanLy);
                     JOptionPane.showMessageDialog(this, "Thêm hãng thành công!");
                     panelHangHangKhong.clearFields();
                 }
@@ -203,10 +205,23 @@ public class Frame_Admin extends javax.swing.JFrame {
         panelHangHangKhong.getjB_xoa().addActionListener(e -> {
             String maHang = panelHangHangKhong.getjT_maHang().getText();
             if (maHang != null && !maHang.isEmpty()) {
-                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa hãng '" + maHang + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                // Kiểm tra ràng buộc trước khi xóa
+                boolean hangCoMayBay = quanLy.getDanhSachMayBay().stream().anyMatch(mb -> mb.getMaHang().equals(maHang));
+
+                if (hangCoMayBay) {
+                    JOptionPane.showMessageDialog(this,
+                            "Không thể xóa hãng '" + maHang + "' vì vẫn còn máy bay thuộc hãng này.\n"
+                            + "Vui lòng xóa hoặc di chuyển các máy bay liên quan trước.",
+                            "Lỗi ràng buộc dữ liệu",
+                            JOptionPane.ERROR_MESSAGE);
+                    return; // Dừng hành động xóa
+                }
+
+                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa hãng '" + maHang + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaHang(maHang);
                     panelHangHangKhong.loadDataToTable(quanLy);
+                    panelMayBay.loadMaHang(quanLy);
                     JOptionPane.showMessageDialog(this, "Xóa hãng thành công!");
                     panelHangHangKhong.clearFields();
                 }
@@ -224,6 +239,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             if (mb != null) {
                 quanLy.themMayBay(mb);
                 panelMayBay.loadDataToTable(quanLy);
+                panelChuyenBay.loadSoHieuMayBay(quanLy);
                 JOptionPane.showMessageDialog(this, "Thêm máy bay thành công!");
                 panelMayBay.clearFields();
             }
@@ -240,10 +256,22 @@ public class Frame_Admin extends javax.swing.JFrame {
         panelMayBay.getjB_xoa().addActionListener(e -> {
             String soHieu = panelMayBay.getjT_soHieuMB().getText();
             if (soHieu != null && !soHieu.isEmpty()) {
+
+                boolean mayBayCoChuyenBay = quanLy.getDanhSachChuyenBay().stream().anyMatch(cb -> cb.getSoHieuMayBay().equals(soHieu));
+                if (mayBayCoChuyenBay) {
+                    JOptionPane.showMessageDialog(this,
+                            "Không thể xóa máy bay '" + soHieu + "' vì vẫn còn chuyến bay thuộc máy bay này.\n"
+                            + "Vui lòng xóa hoặc di chuyển các chuyến bay liên quan trước.",
+                            "Lỗi ràng buộc dữ liệu",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa máy bay '" + soHieu + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaMayBay(soHieu);
                     panelMayBay.loadDataToTable(quanLy);
+                    panelChuyenBay.loadSoHieuMayBay(quanLy);
+                    panelChuyenBay.loadSoHieuMayBay(quanLy); // Cập nhật combobox
                     JOptionPane.showMessageDialog(this, "Xóa máy bay thành công!");
                     panelMayBay.clearFields();
                 }
@@ -260,7 +288,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             ChuyenBay cb = panelChuyenBay.getDataFromFields();
             if (cb != null) {
                 quanLy.themChuyenBay(cb);
-                panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+                panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
                 JOptionPane.showMessageDialog(this, "Thêm chuyến bay thành công!");
                 panelChuyenBay.clearFields();
             }
@@ -269,7 +297,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             ChuyenBay cb = panelChuyenBay.getDataFromFields();
             if (cb != null) {
                 quanLy.suaChuyenBay(cb);
-                panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+                panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
                 JOptionPane.showMessageDialog(this, "Sửa chuyến bay thành công!");
                 panelChuyenBay.clearFields();
             }
@@ -288,7 +316,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 // Chỉ thực hiện xóa nếu người dùng chọn "Yes"
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaChuyenBay(soHieu);
-                    panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+                    panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
                     JOptionPane.showMessageDialog(this, "Xóa chuyến bay thành công!");
                     panelChuyenBay.clearFields();
                 }
@@ -362,8 +390,51 @@ public class Frame_Admin extends javax.swing.JFrame {
 
     //Panel Hanh khach
     private void setupHanhKhachEvents() {
+        // Sự kiện cho nút Thêm
+//        panelHanhKhach.getjB_them().addActionListener(e -> {
+//            HanhKhach hk = panelHanhKhach.getDataFromFields();
+//            if (hk != null) {
+//                if (quanLy.timHanhKhach(hk.getCccd()) != null) {
+//                    JOptionPane.showMessageDialog(this, "CCCD đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+//                } else {
+//                    quanLy.themHanhKhach(hk);
+//                    panelHanhKhach.loadDataToTable(quanLy); // Cập nhật lại bảng
+//                    JOptionPane.showMessageDialog(this, "Thêm hành khách thành công!");
+//                    panelHanhKhach.clearFields();
+//                }
+//            }
+//        });
+//
+//        // Sự kiện cho nút Sửa
+//        panelHanhKhach.getjB_sua().addActionListener(e -> {
+//            HanhKhach hk = panelHanhKhach.getDataFromFields();
+//            if (hk != null) {
+//                quanLy.suaHanhKhach(hk);
+//                panelHanhKhach.loadDataToTable(quanLy);
+//                JOptionPane.showMessageDialog(this, "Sửa thông tin hành khách thành công!");
+//                panelHanhKhach.clearFields();
+//            }
+//        });
+//
+//        // Sự kiện cho nút Xóa
+//        panelHanhKhach.getjB_xoa().addActionListener(e -> {
+//            String cccd = panelHanhKhach.getjT_soCCCD().getText();
+//            if (!cccd.isEmpty()) {
+//                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa hành khách này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+//                if (choice == JOptionPane.YES_OPTION) {
+//                    quanLy.xoaHanhKhach(cccd);
+//                    panelHanhKhach.loadDataToTable(quanLy);
+//                    JOptionPane.showMessageDialog(this, "Xóa hành khách thành công!");
+//                    panelHanhKhach.clearFields();
+//                }
+//            }
+//        });
+
+        // Sự kiện cho nút Làm mới
         panelHanhKhach.getjB_lamMoi().addActionListener(e -> {
+            panelHanhKhach.loadDataToTable(quanLy);
             panelHanhKhach.clearFields();
+            JOptionPane.showMessageDialog(this, "Đã làm mới danh sách hành khách!");
         });
     }
 
@@ -412,25 +483,24 @@ public class Frame_Admin extends javax.swing.JFrame {
         });
     }
 
-    private Object[][] chuyenBayToArray(List<ChuyenBay> list) {
-        Object[][] data = new Object[list.size()][12];
-        for (int i = 0; i < list.size(); i++) {
-            ChuyenBay cb = list.get(i);
-            int soVeDaBan = cb.getSoVeDaBan();
-            int soVeConLai = cb.tongSoCho() - soVeDaBan;
-            data[i][0] = cb.getSoHieuChuyenBay();
-            data[i][1] = cb.getSoHieuMayBay();
-            data[i][2] = cb.getDiemDi();
-            data[i][3] = cb.getDiemDen();
-            data[i][4] = cb.getThoiGianDi();
-            data[i][5] = cb.getThoiGianDen();
-            data[i][6] = cb.getSoPhoThong();
-            data[i][7] = cb.getSoThuongGia();
-            data[i][8] = cb.getGiaPhoThong();
-            data[i][9] = cb.getGiaThuongGia();
-            data[i][10] = soVeDaBan;
-            data[i][11] = soVeConLai;
-        }
-        return data;
-    }
+//    private Object[][] chuyenBayToArray(List<ChuyenBay> list) {
+//        Object[][] data = new Object[list.size()][12];
+//        for (int i = 0; i < list.size(); i++) {
+//            ChuyenBay cb = list.get(i);
+//            int soVeDaBan = cb.getSoVeDaBan();
+//            int soVeConLai = cb.tongSoCho() - soVeDaBan;
+//            data[i][0] = cb.getSoHieuChuyenBay();
+//            data[i][1] = cb.getSoHieuMayBay();
+//            data[i][2] = cb.getDiemDi();
+//            data[i][3] = cb.getDiemDen();
+//            data[i][4] = cb.getThoiGianDi();
+//            data[i][5] = cb.getThoiGianDen();
+//            data[i][6] = cb.getSoPhoThong();
+//            data[i][7] = cb.getSoThuongGia();
+//            data[i][8] = cb.getGiaPhoThong();
+//            data[i][9] = cb.getGiaThuongGia();
+//            data[i][10] = soVeDaBan;
+//            data[i][11] = soVeConLai;
+//        }
+//        return data;
 }

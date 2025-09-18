@@ -6,14 +6,43 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.HangHangKhong;
 import model.QuanLyChung;
 
-public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
+public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
+
+    private TableRowSorter<DefaultTableModel> sorter;
+    private DefaultTableModel tableModel;
 
     public PanelHangHangKhong_Admin() {
         initComponents();
+
+        this.tableModel = (DefaultTableModel) jTable_dsHangHangKhong.getModel();
+
+        sorter = new TableRowSorter<>(tableModel);
+        jTable_dsHangHangKhong.setRowSorter(sorter);
+
+        jT_timKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterTable();
+            }
+        });
         jTable_dsHangHangKhong.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -58,6 +87,9 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         jB_xoa = new javax.swing.JButton();
         jB_lamMoi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jL_timKiem = new javax.swing.JLabel();
+        jComboBox_tieuChi = new javax.swing.JComboBox<>();
+        jT_timKiem = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_dsHangHangKhong = new javax.swing.JTable();
 
@@ -70,6 +102,7 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 15;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -78,9 +111,9 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
 
         jT_maHang.setPreferredSize(new java.awt.Dimension(70, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 116;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -91,6 +124,7 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 15;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -99,9 +133,9 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
 
         jT_tenHang.setPreferredSize(new java.awt.Dimension(70, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 116;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -131,7 +165,7 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 13;
         gridBagConstraints.ipadx = 246;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 1, 0, 0);
@@ -142,13 +176,44 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 11;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 24, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 24, 0, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
+
+        jL_timKiem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_timKiem.setText("Tìm kiếm theo : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 32;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 73, 0, 0);
+        jPanel2.add(jL_timKiem, gridBagConstraints);
+
+        jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Tên hãng", "Mã hãng" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel2.add(jComboBox_tieuChi, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.ipadx = 86;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel2.add(jT_timKiem, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -208,7 +273,15 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
             new String [] {
                 "Mã hãng", "Tên hãng", "Số lượng máy bay"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTable_dsHangHangKhong);
 
         add(jScrollPane3, java.awt.BorderLayout.CENTER);
@@ -247,6 +320,7 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
     }
 
     // Phương thức nạp dữ liệu vào bảng
+    @Override
     public void loadDataToTable(QuanLyChung quanLy) {
         DefaultTableModel model = (DefaultTableModel) jTable_dsHangHangKhong.getModel();
         model.setRowCount(0);
@@ -257,6 +331,7 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
     }
 
     // Phương thức lấy dữ liệu từ các trường nhập liệu
+    @Override
     public HangHangKhong getDataFromFields() {
         String maHang = jT_maHang.getText();
         String tenHang = jT_tenHang.getText();
@@ -268,6 +343,7 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
     }
 
     // Phương thức xóa các trường nhập liệu
+    @Override
     public void clearFields() {
         jT_maHang.setText("");
         jT_tenHang.setText("");
@@ -278,14 +354,37 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
     }
 
     // Phương thức điền dữ liệu vào các trường khi chọn hàng trên bảng
-    public void fillFieldsFromTable(int rowIndex) {
+    @Override
+    public void fillFieldsFromTable(int modelRowIndex) {
         DefaultTableModel model = (DefaultTableModel) jTable_dsHangHangKhong.getModel();
-        jT_maHang.setText(model.getValueAt(rowIndex, 0).toString());
-        jT_tenHang.setText(model.getValueAt(rowIndex, 1).toString());
+        jT_maHang.setText(model.getValueAt(modelRowIndex, 0).toString());
+        jT_tenHang.setText(model.getValueAt(modelRowIndex, 1).toString());
         jT_maHang.setEnabled(false);
         jB_them.setEnabled(false);
         jB_sua.setEnabled(true);
         jB_xoa.setEnabled(true);
+    }
+
+    private void filterTable() {
+        String text = jT_timKiem.getText();
+        String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
+
+        if (text.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            int columnIndex = -1;
+            if ("Mã hãng".equals(tieuChi)) {
+                columnIndex = 0;
+            } else if ("Tên hãng".equals(tieuChi)) {
+                columnIndex = 1;
+            }
+
+            if (columnIndex == -1) {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+            } else {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, columnIndex));
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -293,14 +392,17 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
     private javax.swing.JButton jB_sua;
     private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_xoa;
+    private javax.swing.JComboBox<String> jComboBox_tieuChi;
     private javax.swing.JLabel jL_maHang;
     private javax.swing.JLabel jL_tenHang;
+    private javax.swing.JLabel jL_timKiem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jT_maHang;
     private javax.swing.JTextField jT_tenHang;
+    private javax.swing.JTextField jT_timKiem;
     private javax.swing.JTable jTable_dsHangHangKhong;
     // End of variables declaration//GEN-END:variables
 }

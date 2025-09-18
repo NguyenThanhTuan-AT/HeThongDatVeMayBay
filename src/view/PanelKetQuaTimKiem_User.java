@@ -126,8 +126,10 @@ public class PanelKetQuaTimKiem_User extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 22, 0, 0);
         jPanel2.add(jB_quayLai, gridBagConstraints);
 
+        jL_diaDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jL_diaDiem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jL_thoiGian.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jL_thoiGian.setText("Ngày: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -145,7 +147,7 @@ public class PanelKetQuaTimKiem_User extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jL_diaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jL_thoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jL_thoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();

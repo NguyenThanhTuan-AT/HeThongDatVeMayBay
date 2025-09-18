@@ -2,21 +2,50 @@ package view;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.HanhKhach;
 import model.QuanLyChung;
+import model.VeMayBay;
 
 public class PanelHanhKhach_Admin extends javax.swing.JPanel {
 
     private DefaultTableModel tableModel; // Khai báo biến tableModel tại đây
+    private TableRowSorter<DefaultTableModel> sorter;
 
     public PanelHanhKhach_Admin() {
         initComponents();
+
+        DefaultTableModel model = (DefaultTableModel) jTable_dsHanhKhach.getModel();
+        sorter = new TableRowSorter<>(model);
+        jTable_dsHanhKhach.setRowSorter(sorter);
+        jT_timKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterTable();
+            }
+        });
         tableModel = (DefaultTableModel) jTable_dsHanhKhach.getModel();
         jTable_dsHanhKhach.addMouseListener(new MouseAdapter() {
             @Override
@@ -27,6 +56,13 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
                 }
             }
         });
+        jT_hoTen.setEditable(false);
+        jT_soCCCD.setEditable(false);
+
+        jB_them.setEnabled(false);
+        jB_sua.setEnabled(false);
+        jB_xoa.setEnabled(false);
+        jB_them.setToolTipText("Hành khách được tạo tự động khi người dùng đăng ký tài khoản mới.");
     }
 
     @SuppressWarnings("unchecked")
@@ -47,6 +83,9 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         jB_xoa = new javax.swing.JButton();
         jB_lamMoi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jL_timKiem = new javax.swing.JLabel();
+        jComboBox_tieuChi = new javax.swing.JComboBox<>();
+        jT_timKiem = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_dsHanhKhach = new javax.swing.JTable();
 
@@ -59,6 +98,7 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 20;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -75,9 +115,9 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 138;
-        gridBagConstraints.ipady = 13;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.ipadx = 150;
+        gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel2.add(jT_hoTen, gridBagConstraints);
@@ -87,12 +127,12 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         jL_soCCCD.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 9;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 124, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 124, 0, 0);
         jPanel2.add(jL_soCCCD, gridBagConstraints);
 
         jT_soCCCD.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -104,19 +144,20 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 138;
-        gridBagConstraints.ipady = 13;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.ipadx = 150;
+        gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jT_soCCCD, gridBagConstraints);
 
         jL_maVe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_maVe.setText(" Mã vé : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 21;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -125,12 +166,17 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
 
         jComboBox_maVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_maVe.setPreferredSize(new java.awt.Dimension(77, 20));
+        jComboBox_maVe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_maVeActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 130;
-        gridBagConstraints.ipady = 13;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.ipadx = 140;
+        gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jComboBox_maVe, gridBagConstraints);
@@ -156,11 +202,11 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 19;
         gridBagConstraints.ipadx = 218;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 6, 0, 0);
         jPanel2.add(jPanel3, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
@@ -168,13 +214,45 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 37;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 23, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 106, 0, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
+
+        jL_timKiem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_timKiem.setText("Tìm kiếm theo : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 32;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 106, 0, 0);
+        jPanel2.add(jL_timKiem, gridBagConstraints);
+
+        jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Họ tên", "CCCD" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 28;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel2.add(jComboBox_tieuChi, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.ipadx = 86;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel2.add(jT_timKiem, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -234,15 +312,19 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
             new String [] {
                 "CCCD", "Họ tên", "Mã vé", "Chuyến bay"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTable_dsHanhKhach);
 
         add(jScrollPane3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jB_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_themActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_themActionPerformed
 
     private void jT_hoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_hoTenActionPerformed
         // TODO add your handling code here:
@@ -252,22 +334,29 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jT_soCCCDActionPerformed
 
+    private void jB_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_themActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jB_themActionPerformed
+
+    private void jComboBox_maVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_maVeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_maVeActionPerformed
+
     public JButton getjB_lamMoi() {
         return jB_lamMoi;
     }
 
-    public JButton getjB_sua() {
-        return jB_sua;
-    }
-
-    public JButton getjB_them() {
-        return jB_them;
-    }
-
-    public JButton getjB_xoa() {
-        return jB_xoa;
-    }
-
+////    public JButton getjB_sua() {
+//        return jB_sua;
+//    }
+//
+//    public JButton getjB_them() {
+//        return jB_them;
+//    }
+//
+//    public JButton getjB_xoa() {
+//        return jB_xoa;
+//    }
     public JComboBox<String> getjComboBox_maVe() {
         return jComboBox_maVe;
     }
@@ -282,6 +371,15 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
 
     public JTable getjTable_dsHanhKhach() {
         return jTable_dsHanhKhach;
+    }
+
+    public void loadMaVeToComboBox(QuanLyChung quanLy) {
+        List<String> maVeList = quanLy.getDanhSachVe().stream()
+                .map(VeMayBay::getMaVe)
+                .collect(Collectors.toList());
+
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(maVeList.toArray(new String[0]));
+        jComboBox_maVe.setModel(model);
     }
 
     // Phương thức nạp dữ liệu vào bảng
@@ -313,9 +411,9 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
         getjT_soCCCD().setText("");
         getjT_hoTen().setText("");
         getjT_soCCCD().setEnabled(true);
-        getjB_them().setEnabled(true);
-        getjB_sua().setEnabled(false);
-        getjB_xoa().setEnabled(false);
+//        getjB_them().setEnabled(true);
+//        getjB_sua().setEnabled(false);
+//        getjB_xoa().setEnabled(false);
     }
 
     // Phương thức lấy dữ liệu từ các trường nhập liệu
@@ -332,14 +430,32 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
     }
 
     // Phương thức điền dữ liệu vào các trường khi chọn hàng trên bảng
-    public void fillFieldsFromTable(int rowIndex) {
+    public void fillFieldsFromTable(int modelRowIndex) {
         DefaultTableModel model = (DefaultTableModel) jTable_dsHanhKhach.getModel();
-        getjT_soCCCD().setText(model.getValueAt(rowIndex, 0).toString());
-        getjT_hoTen().setText(model.getValueAt(rowIndex, 1).toString());
-        getjT_soCCCD().setEnabled(false); // Không cho phép sửa CCCD (là khóa chính)
-        getjB_them().setEnabled(false);
-        getjB_sua().setEnabled(true);
-        getjB_xoa().setEnabled(true);
+        getjT_soCCCD().setText(model.getValueAt(modelRowIndex, 0).toString());
+        getjT_hoTen().setText(model.getValueAt(modelRowIndex, 1).toString());
+    }
+
+    private void filterTable() {
+        String text = jT_timKiem.getText();
+        String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
+
+        if (text.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            int columnIndex = -1;
+            if ("CCCD".equals(tieuChi)) {
+                columnIndex = 0;
+            } else if ("Họ tên".equals(tieuChi)) {
+                columnIndex = 1;
+            }
+
+            if (columnIndex == -1) {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+            } else {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, columnIndex));
+            }
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_lamMoi;
@@ -347,15 +463,18 @@ public class PanelHanhKhach_Admin extends javax.swing.JPanel {
     private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_xoa;
     private javax.swing.JComboBox<String> jComboBox_maVe;
+    private javax.swing.JComboBox<String> jComboBox_tieuChi;
     private javax.swing.JLabel jL_hoTen;
     private javax.swing.JLabel jL_maVe;
     private javax.swing.JLabel jL_soCCCD;
+    private javax.swing.JLabel jL_timKiem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jT_hoTen;
     private javax.swing.JTextField jT_soCCCD;
+    private javax.swing.JTextField jT_timKiem;
     private javax.swing.JTable jTable_dsHanhKhach;
     // End of variables declaration//GEN-END:variables
 }

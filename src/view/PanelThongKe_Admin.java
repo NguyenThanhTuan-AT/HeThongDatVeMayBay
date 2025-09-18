@@ -95,7 +95,15 @@ public class PanelThongKe_Admin extends javax.swing.JPanel {
             new String [] {
                 "Hãng", "Doanh thu"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTable1);
 
         add(jScrollPane3, java.awt.BorderLayout.CENTER);

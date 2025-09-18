@@ -12,7 +12,11 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.ChuyenBay;
 import model.HanhKhach;
 import model.QuanLyChung;
@@ -22,15 +26,36 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
 
     private DefaultTableModel tableModel;
     private QuanLyChung quanLy;
+    private TableRowSorter<DefaultTableModel> sorter;
 
     public PanelVeMayBay_Admin() {
         initComponents();
-        tableModel = (DefaultTableModel) jTable1.getModel();
+        tableModel = (DefaultTableModel) jTable_dsVeMayBay.getModel();
 
-        jTable1.addMouseListener(new MouseAdapter() {
+        sorter = new TableRowSorter<>(tableModel);
+        jTable_dsVeMayBay.setRowSorter(sorter);
+
+        jT_timKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterTable();
+            }
+        });
+
+        jTable_dsVeMayBay.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int selectedRow = jTable1.getSelectedRow();
+                int selectedRow = jTable_dsVeMayBay.getSelectedRow();
                 if (selectedRow != -1) {
                     fillFieldsFromTable(selectedRow);
                 }
@@ -59,7 +84,7 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_dsVeMayBay = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jT_maVe = new javax.swing.JTextField();
         jL_hangVe = new javax.swing.JLabel();
@@ -75,10 +100,13 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jT_giaVe = new javax.swing.JTextField();
+        jL_timKiem = new javax.swing.JLabel();
+        jComboBox_tieuChi = new javax.swing.JComboBox<>();
+        jT_timKiem = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_dsVeMayBay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -134,8 +162,16 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
             new String [] {
                 "Mã vé", "Số hiệu chuyến bay", "Hạng vé", "Giá vé"
             }
-        ));
-        jScrollPane3.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable_dsVeMayBay);
 
         add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
@@ -143,10 +179,10 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
 
         jT_maVe.setPreferredSize(new java.awt.Dimension(69, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 86;
+        gridBagConstraints.ipadx = 96;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(jT_maVe, gridBagConstraints);
@@ -166,10 +202,10 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jComboBox_hangVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phổ thông", "Thương gia", " " }));
         jComboBox_hangVe.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 55;
+        gridBagConstraints.ipadx = 65;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
@@ -189,12 +225,11 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
 
         jComboBox_soHieuCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_soHieuCB.setMinimumSize(new java.awt.Dimension(200, 22));
-        jComboBox_soHieuCB.setPreferredSize(new java.awt.Dimension(77, 22));
+        jComboBox_soHieuCB.setPreferredSize(new java.awt.Dimension(165, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 78;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
@@ -246,7 +281,7 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridwidth = 15;
         gridBagConstraints.ipadx = 247;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(9, 0, 0, 0);
@@ -257,22 +292,58 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 47, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(9, 47, 0, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
 
         jT_giaVe.setPreferredSize(new java.awt.Dimension(69, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 86;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 96;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jT_giaVe, gridBagConstraints);
+
+        jL_timKiem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_timKiem.setText("Tìm kiếm theo : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipadx = 32;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 80, 0, 0);
+        jPanel2.add(jL_timKiem, gridBagConstraints);
+
+        jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã vé", "Số hiệu chuyến bay", "CCCD hành khách" }));
+        jComboBox_tieuChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_tieuChiActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = -36;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        jPanel2.add(jComboBox_tieuChi, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.ipadx = 86;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        jPanel2.add(jT_timKiem, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
@@ -280,6 +351,11 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox_tieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_tieuChiActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_tieuChiActionPerformed
 
     public void setQuanLy(QuanLyChung quanLy) {
         this.quanLy = quanLy;
@@ -318,7 +394,7 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
     }
 
     public JTable getjTable() {
-        return jTable1;
+        return jTable_dsVeMayBay;
     }
 
     private void capNhatGiaVe() {
@@ -347,7 +423,7 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
     // Phương thức nạp dữ liệu vào bảng
     public void loadDataToTable(QuanLyChung quanLy) {
         this.quanLy = quanLy; // Gán đối tượng quanLy
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable_dsVeMayBay.getModel();
         model.setRowCount(0);
 
         // Cập nhật lại các cột cho đúng
@@ -415,21 +491,45 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
     }
 
     // Phương thức điền dữ liệu vào các trường khi chọn hàng trên bảng
-    public void fillFieldsFromTable(int rowIndex) {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        jT_maVe.setText(model.getValueAt(rowIndex, 0).toString());
-        jComboBox_soHieuCB.setSelectedItem(model.getValueAt(rowIndex, 1).toString());
+    public void fillFieldsFromTable(int modelRowIndex) {
+        DefaultTableModel model = (DefaultTableModel) jTable_dsVeMayBay.getModel();
+        jT_maVe.setText(model.getValueAt(modelRowIndex, 0).toString());
+        jComboBox_soHieuCB.setSelectedItem(model.getValueAt(modelRowIndex, 1).toString());
 
-        String hangVeStr = model.getValueAt(rowIndex, 2).toString();
+        String hangVeStr = model.getValueAt(modelRowIndex, 2).toString();
         jComboBox_hangVe.setSelectedItem(hangVeStr.equals("PHO_THONG") ? "Phổ thông" : "Thương gia");
 
-        String giaVeStr = model.getValueAt(rowIndex, 3).toString().replace(" VNĐ", "").replace(",", "");
+        String giaVeStr = model.getValueAt(modelRowIndex, 3).toString().replace(" VNĐ", "").replace(",", "");
         jT_giaVe.setText(giaVeStr);
 
         jT_maVe.setEnabled(false);
         getjB_them().setEnabled(false);
         getjB_sua().setEnabled(true);
         getjB_xoa().setEnabled(true);
+    }
+
+    private void filterTable() {
+        String text = jT_timKiem.getText();
+        String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
+
+        if (text.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            int columnIndex = -1;
+            if ("Mã vé".equals(tieuChi)) {
+                columnIndex = 0;
+            } else if ("Số hiệu CB".equals(tieuChi)) {
+                columnIndex = 1;
+            } else if ("CCCD Hành khách".equals(tieuChi)) {
+                columnIndex = 4; // Cột CCCD có chỉ số 4
+            }
+
+            if (columnIndex == -1) {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+            } else {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, columnIndex));
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -439,16 +539,19 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox_hangVe;
     private javax.swing.JComboBox<String> jComboBox_soHieuCB;
+    private javax.swing.JComboBox<String> jComboBox_tieuChi;
     private javax.swing.JLabel jL_chuyenBay;
     private javax.swing.JLabel jL_giaVe;
     private javax.swing.JLabel jL_hangVe;
     private javax.swing.JLabel jL_maVe;
+    private javax.swing.JLabel jL_timKiem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jT_giaVe;
     private javax.swing.JTextField jT_maVe;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jT_timKiem;
+    private javax.swing.JTable jTable_dsVeMayBay;
     // End of variables declaration//GEN-END:variables
 }

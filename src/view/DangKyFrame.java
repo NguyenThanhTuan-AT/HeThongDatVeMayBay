@@ -295,6 +295,10 @@ public class DangKyFrame extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Số CCCD này đã được đăng ký cho một tài khoản khác.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (!cccd.matches("\\d{12}")) { // Kiểm tra CCCD phải có đúng 12 chữ số
+            JOptionPane.showMessageDialog(this, "Số CCCD không hợp lệ. Phải là 12 chữ số.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (quanLy.timTaiKhoan(tenDN) != null) {
             JOptionPane.showMessageDialog(this, "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;

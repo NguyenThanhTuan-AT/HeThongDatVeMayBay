@@ -88,7 +88,15 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
             new String [] {
                 "Mã vé", "Số hiệu CB", "Hạng vé", "Ngày đi", "Giá vé"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable_dsVe);
 
         add(jScrollPane2, java.awt.BorderLayout.CENTER);
