@@ -28,7 +28,6 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
 
     public PanelHanhKhach_Admin() {
         initComponents();
-
         this.tableModel = (DefaultTableModel) jTable_dsHanhKhach.getModel();
         this.filteredList = new ArrayList<>();
 
@@ -83,11 +82,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
             public void mouseClicked(MouseEvent e) {
                 int selectedRowOnView = jTable_dsHanhKhach.getSelectedRow();
                 if (selectedRowOnView != -1) {
-                    int actualIndex = (currentPage - 1) * ITEMS_PER_PAGE + selectedRowOnView;
-                    if (actualIndex < filteredList.size()) {
-                        HanhKhach selectedHanhKhach = filteredList.get(actualIndex);
-                        fillFieldsFromObject(selectedHanhKhach);
-                    }
+                    fillFieldsFromTable(selectedRowOnView);
                 }
             }
         });
@@ -451,6 +446,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
 
         // Hiển thị
         tableModel.setRowCount(0);
+        tableModel.setColumnIdentifiers(new String[]{"CCCD", "Họ tên", "Danh sách vé"});
         for (HanhKhach hk : pagedList) {
             String danhSachVe = String.join(", ", hk.getDanhSachMaVe());
             tableModel.addRow(new Object[]{hk.getCccd(), hk.getHoTen(), danhSachVe});
@@ -471,26 +467,30 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
             jT_timKiem.setText("");
         }
         updateTableAndPagination();
-
-        // Cập nhật lại ComboBox mã vé (nếu cần)
-        // loadMaVeToComboBox(quanLy);
     }
 
-    // Điền dữ liệu từ đối tượng vào form
-    public void fillFieldsFromObject(HanhKhach hk) {
-        jT_soCCCD.setText(hk.getCccd());
-        jT_hoTen.setText(hk.getHoTen());
-
-        // Hiển thị vé của hành khách này lên ComboBox
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(hk.getDanhSachMaVe().toArray(new String[0]));
-        jComboBox_maVe.setModel(model);
+    @Override
+    public void fillFieldsFromTable(int viewIndex) {
+        int actualIndex = (currentPage - 1) * ITEMS_PER_PAGE + viewIndex;
+        if (actualIndex < filteredList.size()) {
+            HanhKhach hk = filteredList.get(actualIndex);
+            jT_soCCCD.setText(hk.getCccd());
+            jT_hoTen.setText(hk.getHoTen());
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(hk.getDanhSachMaVe().toArray(new String[0]));
+            jComboBox_maVe.setModel(model);
+        }
     }
 
     @Override
     public void clearFields() {
         jT_soCCCD.setText("");
         jT_hoTen.setText("");
-        jComboBox_maVe.setModel(new DefaultComboBoxModel<>()); // Xóa combobox
+        jComboBox_maVe.setModel(new DefaultComboBoxModel<>());
+    }
+
+    @Override
+    public HanhKhach getDataFromFields() {
+        return null;
     }
 
     public JButton getjB_lamMoi() {

@@ -87,7 +87,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
                     // Lấy đúng đối tượng tài khoản
                     if (actualIndex < filteredList.size()) {
                         TaiKhoan selectedAccount = filteredList.get(actualIndex);
-                        fillFieldsFromObject(selectedAccount); // Gọi phương thức mới
+                        fillFieldsFromTable(selectedRowOnView); // Gọi phương thức mới
                     }
                 }
             }
@@ -442,6 +442,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
     }
 
     // Phương thức lấy dữ liệu từ các trường nhập liệu
+    @Override
     public TaiKhoan getDataFromFields() {
         String tenDangNhap = jT_dangNhap.getText();
         String matKhau = new String(jPasswordField_matKhau.getPassword());
@@ -454,6 +455,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
     }
 
     // Phương thức xóa các trường nhập liệu
+    @Override
     public void clearFields() {
         getjT_dangNhap().setText("");
         getjPasswordField_matKhau().setText("");
@@ -464,28 +466,8 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         getjB_xoa().setEnabled(false);
     }
 
-    // Phương thức điền dữ liệu vào các trường khi chọn hàng trên bảng
-    public void fillFieldsFromObject(TaiKhoan tk) {
-        getjT_dangNhap().setText(tk.getTenDangNhap());
-        getjPasswordField_matKhau().setText(tk.getMatKhau());
-
-        // Cần tìm đúng item trong combobox để set
-        String loaiTK = tk.getLoaiTaiKhoan().toString();
-        for (int i = 0; i < getjComboBox1().getItemCount(); i++) {
-            if (getjComboBox1().getItemAt(i).toString().equalsIgnoreCase(loaiTK)) {
-                getjComboBox1().setSelectedIndex(i);
-                break;
-            }
-        }
-
-        getjT_dangNhap().setEnabled(false);
-        getjB_them().setEnabled(false);
-        getjB_sua().setEnabled(true);
-        getjB_xoa().setEnabled(true);
-    }
-
     @Override
-    // Phương thức nạp dữ liệu vào bảng
+// Phương thức nạp dữ liệu vào bảng
     public void loadDataToTable(QuanLyChung quanLy) {
         this.quanLy = quanLy;
         this.currentPage = 1;
@@ -547,6 +529,30 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         jB_truoc.setEnabled(currentPage > 1);
         jB_sau.setEnabled(currentPage < totalPages);
         jB_cuoi.setEnabled(currentPage < totalPages);
+    }
+
+    @Override
+    public void fillFieldsFromTable(int viewIndex) {
+        int actualIndex = (currentPage - 1) * ITEMS_PER_PAGE + viewIndex;
+        if (actualIndex < filteredList.size()) {
+            TaiKhoan tk = filteredList.get(actualIndex);
+
+            getjT_dangNhap().setText(tk.getTenDangNhap());
+            getjPasswordField_matKhau().setText(tk.getMatKhau());
+
+            String loaiTK = tk.getLoaiTaiKhoan().toString();
+            for (int i = 0; i < getjComboBox1().getItemCount(); i++) {
+                if (getjComboBox1().getItemAt(i).toString().equalsIgnoreCase(loaiTK)) {
+                    getjComboBox1().setSelectedIndex(i);
+                    break;
+                }
+            }
+
+            getjT_dangNhap().setEnabled(false);
+            getjB_them().setEnabled(false);
+            getjB_sua().setEnabled(true);
+            getjB_xoa().setEnabled(true);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

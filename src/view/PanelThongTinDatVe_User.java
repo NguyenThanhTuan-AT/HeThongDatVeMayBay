@@ -12,6 +12,7 @@ public class PanelThongTinDatVe_User extends javax.swing.JPanel {
 
     public PanelThongTinDatVe_User() {
         initComponents();
+        jComboBox_hangVe.addActionListener(e -> capNhatGiaVe());
     }
 
     @SuppressWarnings("unchecked")

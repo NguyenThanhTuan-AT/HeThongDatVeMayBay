@@ -40,7 +40,8 @@ public class Frame_User extends javax.swing.JFrame {
 
         panelHeader.getjL_xinChao().setText("Xin chào, " + taiKhoanDangNhap.getHoTen());
 
-        pack();
+//        pack();
+        setSize(800, 700);
         this.setLocationRelativeTo(null);
     }
 

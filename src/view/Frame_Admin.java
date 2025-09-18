@@ -8,7 +8,6 @@ import model.MayBay;
 import model.QuanLyChung;
 import model.TaiKhoan;
 import model.VeMayBay;
-import util.TableDataConverter;
 
 public class Frame_Admin extends javax.swing.JFrame {
 
@@ -32,7 +31,8 @@ public class Frame_Admin extends javax.swing.JFrame {
         headerWrapperPanel.setBorder(null);
         mainContentPanel.setBorder(null);
         setupAllPanelsAndEvents();
-        pack();
+//        pack();
+        setSize(1000, 700);
         this.setLocationRelativeTo(null);
     }
 
@@ -80,14 +80,14 @@ public class Frame_Admin extends javax.swing.JFrame {
         mainContentPanel.setLayout(cardLayout);
 
         // Khởi tạo các panel chức năng
-        panelChuyenBay = new view.PanelChuyenBay_Admin();
-        panelHangHangKhong = new view.PanelHangHangKhong_Admin();
-        panelMayBay = new view.PanelMayBay_Admin();
-        panelTaiKhoan = new view.PanelTaiKhoan_Admin();
-        panelThongKe = new view.PanelThongKe_Admin();
-        panelVeMayBay = new view.PanelVeMayBay_Admin();
-        panelHanhKhach = new view.PanelHanhKhach_Admin();
-        panelVeMayBay.setQuanLy(this.quanLy);
+        panelChuyenBay = new PanelChuyenBay_Admin();
+        panelHangHangKhong = new PanelHangHangKhong_Admin();
+        panelMayBay = new PanelMayBay_Admin();
+        panelTaiKhoan = new PanelTaiKhoan_Admin();
+        panelThongKe = new PanelThongKe_Admin();
+        panelVeMayBay = new PanelVeMayBay_Admin();
+        panelHanhKhach = new PanelHanhKhach_Admin();
+
         // Thêm các panel chức năng vào CardLayout
         mainContentPanel.add(panelChuyenBay, "quanLyChuyenBay");
         mainContentPanel.add(panelHangHangKhong, "quanLyHangHangKhong");
@@ -97,11 +97,7 @@ public class Frame_Admin extends javax.swing.JFrame {
         mainContentPanel.add(panelHanhKhach, "quanLyHanhKhach");
         mainContentPanel.add(panelVeMayBay, "quanLyVe");
 
-        // Hiển thị màn hình quản lý chuyến bay đầu tiên
-        cardLayout.show(mainContentPanel, "quanLyChuyenBay");
-        panelChuyenBay.loadSoHieuMayBay(quanLy);
-        panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
-        // Gắn các sự kiện cho các nút trên header và các panel con
+        // Gắn các sự kiện
         setupHeaderEvents();
         setupChuyenBayEvents();
         setupHangHangKhongEvents();
@@ -110,13 +106,16 @@ public class Frame_Admin extends javax.swing.JFrame {
         setupThongKeEvents();
         setupHanhKhachEvents();
         setupVeMayBayEvents();
+
+        // Hiển thị màn hình quản lý chuyến bay đầu tiên
+        cardLayout.show(mainContentPanel, "quanLyChuyenBay");
+        panelChuyenBay.loadDataToTable(quanLy); // Nạp dữ liệu lần đầu
     }
 
     //Panel Header
     private void setupHeaderEvents() {
         panelHeader.getjB_qlChuyenBay().addActionListener(e -> {
-            panelChuyenBay.loadSoHieuMayBay(quanLy);
-            panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+            panelChuyenBay.loadDataToTable(quanLy);
             cardLayout.show(mainContentPanel, "quanLyChuyenBay");
         });
 
@@ -126,7 +125,6 @@ public class Frame_Admin extends javax.swing.JFrame {
         });
 
         panelHeader.getjB_qlMayBay().addActionListener(e -> {
-            panelMayBay.loadMaHang(quanLy);
             panelMayBay.loadDataToTable(quanLy);
             cardLayout.show(mainContentPanel, "quanLyMayBay");
         });
@@ -134,6 +132,16 @@ public class Frame_Admin extends javax.swing.JFrame {
         panelHeader.getjB_qlTaiKhoan().addActionListener(e -> {
             panelTaiKhoan.loadDataToTable(quanLy);
             cardLayout.show(mainContentPanel, "quanLyTaiKhoan");
+        });
+
+        panelHeader.getjB_qlHanhKhach().addActionListener(e -> {
+            panelHanhKhach.loadDataToTable(quanLy);
+            cardLayout.show(mainContentPanel, "quanLyHanhKhach");
+        });
+
+        panelHeader.getjB_qlVe().addActionListener(e -> {
+            panelVeMayBay.loadDataToTable(quanLy);
+            cardLayout.show(mainContentPanel, "quanLyVe");
         });
 
         panelHeader.getjB_thongKe().addActionListener(e -> {
@@ -146,32 +154,12 @@ public class Frame_Admin extends javax.swing.JFrame {
             new DangNhapFrame().setVisible(true);
         });
 
-        // Sự kpanelHeader_Admin1 Đổi mật khẩu
         panelHeader.getjB_doiMatKhau().addActionListener(e -> {
-            // Tạo và hiển thị Frame đổi mật khẩu
-            // Truyền vào đối tượng quanLy và taiKhoan hiện tại
-            ThayDoiMatKhauFrame doiMKFrame = new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap, this);
-            doiMKFrame.setVisible(true);
+            new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap, this).setVisible(true);
         });
 
-        // Sự kiện cho nút Sửa thông tin
         panelHeader.getjB_suaThongTin().addActionListener(e -> {
-            // Tạo và hiển thị Frame sửa thông tin
-            ThayDoiThongTinFrame doiTTFrame = new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap, this);
-            doiTTFrame.setVisible(true);
-        });
-
-        // Sự kiện cho nút Quản lý Hành khách
-        panelHeader.getjB_qlHanhKhach().addActionListener(e -> {
-            panelHanhKhach.loadDataToTable(quanLy);
-            panelHanhKhach.loadMaVeToComboBox(quanLy);
-            cardLayout.show(mainContentPanel, "quanLyHanhKhach");
-        });
-        // Sự kiện cho nút Quản lý Vé
-        panelHeader.getjB_qlVe().addActionListener(e -> {
-            panelVeMayBay.loadSoHieuChuyenBay(quanLy); // Nạp danh sách chuyến bay vào combobox
-            panelVeMayBay.loadDataToTable(quanLy); // Nạp dữ liệu vé vào bảng
-            cardLayout.show(mainContentPanel, "quanLyVe");
+            new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap, this).setVisible(true);
         });
     }
 
@@ -288,7 +276,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             ChuyenBay cb = panelChuyenBay.getDataFromFields();
             if (cb != null) {
                 quanLy.themChuyenBay(cb);
-                panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+                panelChuyenBay.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Thêm chuyến bay thành công!");
                 panelChuyenBay.clearFields();
             }
@@ -297,7 +285,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             ChuyenBay cb = panelChuyenBay.getDataFromFields();
             if (cb != null) {
                 quanLy.suaChuyenBay(cb);
-                panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+                panelChuyenBay.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Sửa chuyến bay thành công!");
                 panelChuyenBay.clearFields();
             }
@@ -316,7 +304,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 // Chỉ thực hiện xóa nếu người dùng chọn "Yes"
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaChuyenBay(soHieu);
-                    panelChuyenBay.loadDataToTable(TableDataConverter.chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+                    panelChuyenBay.loadDataToTable(quanLy);
                     JOptionPane.showMessageDialog(this, "Xóa chuyến bay thành công!");
                     panelChuyenBay.clearFields();
                 }

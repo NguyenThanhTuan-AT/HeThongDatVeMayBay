@@ -84,11 +84,7 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
             public void mouseClicked(MouseEvent e) {
                 int selectedRowOnView = jTable_dsMayBay.getSelectedRow();
                 if (selectedRowOnView != -1) {
-                    int actualIndex = (currentPage - 1) * ITEMS_PER_PAGE + selectedRowOnView;
-                    if (actualIndex < filteredList.size()) {
-                        MayBay selectedMayBay = filteredList.get(actualIndex);
-                        fillFieldsFromObject(selectedMayBay);
-                    }
+                    fillFieldsFromTable(selectedRowOnView);
                 }
             }
         });
@@ -374,7 +370,6 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
         if (this.quanLy == null) {
             return;
         }
-
         // Lọc dữ liệu
         String tuKhoa = jT_timKiem.getText().toLowerCase().trim();
         String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
@@ -429,26 +424,25 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
     public void loadDataToTable(QuanLyChung quanLy) {
         this.quanLy = quanLy;
         this.currentPage = 1;
+        loadMaHang(quanLy); // Cập nhật danh sách hãng
         if (jT_timKiem != null) {
             jT_timKiem.setText("");
         }
         updateTableAndPagination();
     }
 
-    // Phương thức điền dữ liệu từ đối tượng (thay cho fillFieldsFromTable(int))
-    public void fillFieldsFromObject(MayBay mb) {
-        jT_soHieuMB.setText(mb.getSoHieuMayBay());
-        jComboBox_maHang.setSelectedItem(mb.getMaHang());
-        jT_soHieuMB.setEnabled(false);
-        jB_them.setEnabled(false);
-        jB_sua.setEnabled(true);
-        jB_xoa.setEnabled(true);
-    }
-
-    // Ghi đè phương thức của BaseAdminPanel nhưng không dùng đến
     @Override
-    public void fillFieldsFromTable(int rowIndex) {
-        // Có thể để trống vì chúng ta đã dùng fillFieldsFromObject
+    public void fillFieldsFromTable(int viewIndex) {
+        int actualIndex = (currentPage - 1) * ITEMS_PER_PAGE + viewIndex;
+        if (actualIndex < filteredList.size()) {
+            MayBay mb = filteredList.get(actualIndex);
+            jT_soHieuMB.setText(mb.getSoHieuMayBay());
+            jComboBox_maHang.setSelectedItem(mb.getMaHang());
+            jT_soHieuMB.setEnabled(false);
+            jB_them.setEnabled(false);
+            jB_sua.setEnabled(true);
+            jB_xoa.setEnabled(true);
+        }
     }
 
     // Các phương thức khác giữ nguyên

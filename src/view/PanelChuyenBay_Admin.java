@@ -21,13 +21,10 @@ import model.ChuyenBay;
 import model.MayBay;
 import model.QuanLyChung;
 
-public class PanelChuyenBay_Admin extends javax.swing.JPanel {
+public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
 
     private DefaultTableModel tableModel;
-
     private QuanLyChung quanLy;
-
-    // Biến cho phân trang và tìm kiếm
     private int currentPage = 1;
     private final int ITEMS_PER_PAGE = 20;
     private List<ChuyenBay> filteredList;
@@ -37,7 +34,8 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         this.tableModel = (DefaultTableModel) jTable_dsVeMayBay.getModel();
         this.filteredList = new ArrayList<>();
 
-        // Gắn sự kiện cho ô tìm kiếm
+        jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Tất cả", "Số hiệu CB", "Số hiệu MB", "Điểm đi", "Điểm đến"}));
+
         jT_timKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -58,7 +56,6 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
             }
         });
 
-        // Gắn sự kiện cho các nút phân trang
         jB_dau.addActionListener(e -> {
             currentPage = 1;
             updateTableAndPagination();
@@ -82,13 +79,12 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
             updateTableAndPagination();
         });
 
-        // Thêm sự kiện click chuột vào bảng để tự động điền dữ liệu
         jTable_dsVeMayBay.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int selectedRow = jTable_dsVeMayBay.getSelectedRow();
-                if (selectedRow != -1) {
-                    fillFieldsFromTable(selectedRow);
+                int selectedRowOnView = jTable_dsVeMayBay.getSelectedRow();
+                if (selectedRowOnView != -1) {
+                    fillFieldsFromTable(selectedRowOnView);
                 }
             }
         });
@@ -340,7 +336,7 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(jPanel2, gridBagConstraints);
@@ -362,7 +358,7 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 572;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
@@ -374,7 +370,6 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -386,26 +381,32 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 32;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 88, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 184, 0, 0);
         jPanel1.add(jL_timKiem, gridBagConstraints);
 
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Số hiệu chuyến bay", "Số hiệu máy bay", "Điểm đi", "Điểm đến" }));
+        jComboBox_tieuChi.setPreferredSize(new java.awt.Dimension(150, 22));
+        jComboBox_tieuChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_tieuChiActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = -36;
+        gridBagConstraints.ipadx = -65;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         jPanel1.add(jComboBox_tieuChi, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 86;
+        gridBagConstraints.ipadx = 135;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
@@ -473,6 +474,166 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox_tieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_tieuChiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_tieuChiActionPerformed
+
+    private void updateTableAndPagination() {
+        if (this.quanLy == null) {
+            return;
+        }
+        String tuKhoa = jT_timKiem.getText().toLowerCase().trim();
+        String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
+        List<ChuyenBay> danhSachGoc = this.quanLy.getDanhSachChuyenBay();
+
+        if (tuKhoa.isEmpty()) {
+            filteredList = new ArrayList<>(danhSachGoc);
+        } else {
+            filteredList = danhSachGoc.stream().filter(cb -> {
+                if (cb == null) {
+                    return false;
+                }
+                switch (tieuChi) {
+                    case "Số hiệu CB":
+                        return cb.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa);
+                    case "Số hiệu MB":
+                        return cb.getSoHieuMayBay().toLowerCase().contains(tuKhoa);
+                    case "Điểm đi":
+                        return cb.getDiemDi().toLowerCase().contains(tuKhoa);
+                    case "Điểm đến":
+                        return cb.getDiemDen().toLowerCase().contains(tuKhoa);
+                    default:
+                        return cb.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa) || cb.getSoHieuMayBay().toLowerCase().contains(tuKhoa) || cb.getDiemDi().toLowerCase().contains(tuKhoa) || cb.getDiemDen().toLowerCase().contains(tuKhoa);
+                }
+            }).collect(Collectors.toList());
+        }
+
+        int totalItems = filteredList.size();
+        int totalPages = Math.max(1, (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE));
+        if (currentPage > totalPages) {
+            currentPage = totalPages;
+        }
+
+        int startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+        List<ChuyenBay> pagedList = filteredList.subList(startIndex, endIndex);
+
+        tableModel.setRowCount(0);
+        for (ChuyenBay cb : pagedList) {
+            tableModel.addRow(new Object[]{cb.getSoHieuChuyenBay(), cb.getSoHieuMayBay(), cb.getDiemDi(), cb.getDiemDen(), cb.getThoiGianDi(), cb.getThoiGianDen(), cb.getSoPhoThong(), cb.getSoThuongGia(), cb.getGiaPhoThong(), cb.getGiaThuongGia(), cb.getSoVeDaBan(), cb.tongSoCho() - cb.getSoVeDaBan()});
+        }
+
+        jL_trang.setText("Trang " + currentPage + " / " + totalPages);
+        jB_dau.setEnabled(currentPage > 1);
+        jB_truoc.setEnabled(currentPage > 1);
+        jB_sau.setEnabled(currentPage < totalPages);
+        jB_cuoi.setEnabled(currentPage < totalPages);
+    }
+
+    @Override
+    public void loadDataToTable(QuanLyChung quanLy) {
+        this.quanLy = quanLy;
+        this.currentPage = 1;
+        loadSoHieuMayBay(quanLy);
+        if (jT_timKiem != null) {
+            jT_timKiem.setText("");
+        }
+        updateTableAndPagination();
+    }
+
+    @Override
+    public void fillFieldsFromTable(int viewIndex) {
+        int actualIndex = (currentPage - 1) * ITEMS_PER_PAGE + viewIndex;
+        if (actualIndex < filteredList.size()) {
+            ChuyenBay cb = filteredList.get(actualIndex);
+            getjT_soHieuCB().setText(cb.getSoHieuChuyenBay());
+            getjComboBox_soHieuMB().setSelectedItem(cb.getSoHieuMayBay());
+            getjT_diemDi().setText(cb.getDiemDi());
+            getjT_diemDen().setText(cb.getDiemDen());
+            getjDateChooser_tgDi().setDate(Date.from(cb.getThoiGianDi().atZone(ZoneId.systemDefault()).toInstant()));
+            getjDateChooser_tgDen().setDate(Date.from(cb.getThoiGianDen().atZone(ZoneId.systemDefault()).toInstant()));
+            getjT_soGhePT().setText(String.valueOf(cb.getSoPhoThong()));
+            getjT_soGheTG().setText(String.valueOf(cb.getSoThuongGia()));
+            getjT_giaPT().setText(String.valueOf(cb.getGiaPhoThong()));
+            getjT_giaTG().setText(String.valueOf(cb.getGiaThuongGia()));
+            getjT_soHieuCB().setEnabled(false);
+            getjB_them().setEnabled(false);
+            getjB_sua().setEnabled(true);
+            getjB_xoa().setEnabled(true);
+        }
+    }
+
+    public void loadSoHieuMayBay(QuanLyChung quanLy) {
+        List<String> soHieuMayBay = quanLy.getDanhSachMayBay().stream().map(MayBay::getSoHieuMayBay).collect(Collectors.toList());
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(soHieuMayBay.toArray(new String[0]));
+        jComboBox_soHieuCB.setModel(model);
+    }
+    // PHƯƠNG THỨC LẤY DỮ LIỆU TỪ CÁC TRƯỜNG NHẬP LIỆU
+
+    public ChuyenBay getDataFromFields() {
+        try {
+            String soHieuCB = getjT_soHieuCB().getText();
+            String soHieuMB = (String) getjComboBox_soHieuMB().getSelectedItem();
+            String diemDi = getjT_diemDi().getText();
+            String diemDen = getjT_diemDen().getText();
+
+            Date tgDiDate = getjDateChooser_tgDi().getDate();
+            Date tgDenDate = getjDateChooser_tgDen().getDate();
+
+            // Kiểm tra các trường bắt buộc
+            if (soHieuCB.isEmpty() || soHieuMB == null || diemDi.isEmpty() || diemDen.isEmpty() || tgDiDate == null || tgDenDate == null) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ các thông tin bắt buộc.", "Thiếu thông tin", JOptionPane.WARNING_MESSAGE);
+                return null;
+            }
+
+            LocalDateTime tgDi = tgDiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            LocalDateTime tgDen = tgDenDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+            // Tách riêng phần parse số để bắt lỗi chính xác
+            int soGhePT = Integer.parseInt(getjT_soGhePT().getText());
+            int soGheTG = Integer.parseInt(getjT_soGheTG().getText());
+            double giaPT = Double.parseDouble(getjT_giaPT().getText());
+            double giaTG = Double.parseDouble(getjT_giaTG().getText());
+
+            if (soGhePT <= 0 || soGheTG <= 0 || giaPT <= 0 || giaTG <= 0) {
+                JOptionPane.showMessageDialog(this, "Số ghế và giá vé phải là số dương.", "Lỗi dữ liệu", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+
+            if (tgDen.isBefore(tgDi)) {
+                JOptionPane.showMessageDialog(this, "Thời gian đến phải sau thời gian đi.", "Lỗi logic thời gian", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+            return new ChuyenBay(soHieuCB, soHieuMB, diemDi, diemDen, tgDi, tgDen, soGheTG, soGhePT, giaPT, giaTG);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số ghế và giá vé phải là các con số hợp lệ.", "Lỗi định dạng số", JOptionPane.ERROR_MESSAGE);
+            return null;
+        } catch (Exception e) { // Giữ lại để bắt các lỗi khác nếu có
+            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra. Vui lòng kiểm tra lại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+
+    // PHƯƠNG THỨC XÓA DỮ LIỆU TRÊN CÁC TRƯỜNG NHẬP LIỆU
+    public void clearFields() {
+        getjT_soHieuCB().setText("");
+        getjT_diemDi().setText("");
+        getjT_diemDen().setText("");
+        getjT_soGhePT().setText("");
+        getjT_soGheTG().setText("");
+        getjT_giaPT().setText("");
+        getjT_giaTG().setText("");
+        getjDateChooser_tgDi().setDate(null);
+        getjDateChooser_tgDen().setDate(null);
+        getjComboBox_soHieuMB().setSelectedIndex(-1);
+
+        getjT_soHieuCB().setEnabled(true);
+        getjB_them().setEnabled(true);
+        getjB_sua().setEnabled(false);
+        getjB_xoa().setEnabled(false);
+    }
+
     public JButton getjB_them() {
         return jB_them;
     }
@@ -531,180 +692,6 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
 
     public com.toedter.calendar.JDateChooser getjDateChooser_tgDen() {
         return jDateChooser3;
-    }
-
-    // PHƯƠNG THỨC NẠP DỮ LIỆU VÀO BẢNG
-    public void loadDataToTable(Object[][] data) {
-        DefaultTableModel tableModel = (DefaultTableModel) jTable_dsVeMayBay.getModel();
-        tableModel.setRowCount(0);
-        for (Object[] row : data) {
-            tableModel.addRow(row);
-        }
-    }
-
-    // PHƯƠNG THỨC XÓA DỮ LIỆU TRÊN CÁC TRƯỜNG NHẬP LIỆU
-    public void clearFields() {
-        getjT_soHieuCB().setText("");
-        getjT_diemDi().setText("");
-        getjT_diemDen().setText("");
-        getjT_soGhePT().setText("");
-        getjT_soGheTG().setText("");
-        getjT_giaPT().setText("");
-        getjT_giaTG().setText("");
-        getjDateChooser_tgDi().setDate(null);
-        getjDateChooser_tgDen().setDate(null);
-        getjComboBox_soHieuMB().setSelectedIndex(-1);
-
-        getjT_soHieuCB().setEnabled(true);
-        getjB_them().setEnabled(true);
-        getjB_sua().setEnabled(false);
-        getjB_xoa().setEnabled(false);
-    }
-
-    // PHƯƠNG THỨC LẤY DỮ LIỆU TỪ CÁC TRƯỜNG NHẬP LIỆU
-    public ChuyenBay getDataFromFields() {
-        try {
-            String soHieuCB = getjT_soHieuCB().getText();
-            String soHieuMB = (String) getjComboBox_soHieuMB().getSelectedItem();
-            String diemDi = getjT_diemDi().getText();
-            String diemDen = getjT_diemDen().getText();
-
-            Date tgDiDate = getjDateChooser_tgDi().getDate();
-            Date tgDenDate = getjDateChooser_tgDen().getDate();
-
-            // Kiểm tra các trường bắt buộc
-            if (soHieuCB.isEmpty() || soHieuMB == null || diemDi.isEmpty() || diemDen.isEmpty() || tgDiDate == null || tgDenDate == null) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ các thông tin bắt buộc.", "Thiếu thông tin", JOptionPane.WARNING_MESSAGE);
-                return null;
-            }
-
-            LocalDateTime tgDi = tgDiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            LocalDateTime tgDen = tgDenDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-
-            // Tách riêng phần parse số để bắt lỗi chính xác
-            int soGhePT = Integer.parseInt(getjT_soGhePT().getText());
-            int soGheTG = Integer.parseInt(getjT_soGheTG().getText());
-            double giaPT = Double.parseDouble(getjT_giaPT().getText());
-            double giaTG = Double.parseDouble(getjT_giaTG().getText());
-
-            if (soGhePT <= 0 || soGheTG <= 0 || giaPT <= 0 || giaTG <= 0) {
-                JOptionPane.showMessageDialog(this, "Số ghế và giá vé phải là số dương.", "Lỗi dữ liệu", JOptionPane.ERROR_MESSAGE);
-                return null;
-            }
-
-            if (tgDen.isBefore(tgDi)) {
-                JOptionPane.showMessageDialog(this, "Thời gian đến phải sau thời gian đi.", "Lỗi logic thời gian", JOptionPane.ERROR_MESSAGE);
-                return null;
-            }
-            return new ChuyenBay(soHieuCB, soHieuMB, diemDi, diemDen, tgDi, tgDen, soGheTG, soGhePT, giaPT, giaTG);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Số ghế và giá vé phải là các con số hợp lệ.", "Lỗi định dạng số", JOptionPane.ERROR_MESSAGE);
-            return null;
-        } catch (Exception e) { // Giữ lại để bắt các lỗi khác nếu có
-            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra. Vui lòng kiểm tra lại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-    }
-
-    // PHƯƠNG THỨC ĐIỀN DỮ LIỆU VÀO CÁC TRƯỜNG KHI CHỌN HÀNG TRÊN BẢNG
-    public void fillFieldsFromTable(int rowIndex) {
-        DefaultTableModel model = (DefaultTableModel) jTable_dsVeMayBay.getModel();
-        getjT_soHieuCB().setText(model.getValueAt(rowIndex, 0).toString());
-        getjComboBox_soHieuMB().setSelectedItem(model.getValueAt(rowIndex, 1).toString());
-        getjT_diemDi().setText(model.getValueAt(rowIndex, 2).toString());
-        getjT_diemDen().setText(model.getValueAt(rowIndex, 3).toString());
-
-        LocalDateTime tgDi = (LocalDateTime) model.getValueAt(rowIndex, 4);
-        LocalDateTime tgDen = (LocalDateTime) model.getValueAt(rowIndex, 5);
-        getjDateChooser_tgDi().setDate(Date.from(tgDi.atZone(ZoneId.systemDefault()).toInstant()));
-        getjDateChooser_tgDen().setDate(Date.from(tgDen.atZone(ZoneId.systemDefault()).toInstant()));
-
-        getjT_soGhePT().setText(model.getValueAt(rowIndex, 6).toString());
-        getjT_soGheTG().setText(model.getValueAt(rowIndex, 7).toString());
-        getjT_giaPT().setText(model.getValueAt(rowIndex, 8).toString());
-        getjT_giaTG().setText(model.getValueAt(rowIndex, 9).toString());
-
-        getjT_soHieuCB().setEnabled(false);
-        getjB_them().setEnabled(false);
-        getjB_sua().setEnabled(true);
-        getjB_xoa().setEnabled(true);
-    }
-
-    // PHƯƠNG THỨC NẠP SỐ HIỆU MÁY BAY VÀO JCOMBOBOX
-    public void loadSoHieuMayBay(QuanLyChung quanLy) {
-        List<String> soHieuMayBay = quanLy.getDanhSachMayBay().stream().map(MayBay::getSoHieuMayBay).collect(Collectors.toList());
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(soHieuMayBay.toArray(new String[0]));
-        jComboBox_soHieuCB.setModel(model);
-    }
-
-    private void updateTableAndPagination() {
-        if (this.quanLy == null) {
-            return; // Tránh lỗi khi quanLy chưa được gán
-        }
-        // Lọc dữ liệu
-        String tuKhoa = jT_timKiem.getText().toLowerCase().trim();
-        List<ChuyenBay> danhSachGoc = this.quanLy.getDanhSachChuyenBay();
-
-        if (tuKhoa.isEmpty()) {
-            filteredList = new ArrayList<>(danhSachGoc);
-        } else {
-            // Logic tìm kiếm với ComboBox
-            String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
-            filteredList = danhSachGoc.stream().filter(cb -> {
-                switch (tieuChi) {
-                    case "Số hiệu CB":
-                        return cb.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa);
-                    case "Số hiệu MB":
-                        return cb.getSoHieuMayBay().toLowerCase().contains(tuKhoa);
-                    case "Điểm đi":
-                        return cb.getDiemDi().toLowerCase().contains(tuKhoa);
-                    case "Điểm đến":
-                        return cb.getDiemDen().toLowerCase().contains(tuKhoa);
-                    default:
-                        return cb.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa)
-                                || cb.getSoHieuMayBay().toLowerCase().contains(tuKhoa)
-                                || cb.getDiemDi().toLowerCase().contains(tuKhoa)
-                                || cb.getDiemDen().toLowerCase().contains(tuKhoa);
-                }
-            }).collect(Collectors.toList());
-        }
-
-        // Tính toán phân trang
-        int totalItems = filteredList.size();
-        int totalPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
-        totalPages = totalPages > 0 ? totalPages : 1;
-        if (currentPage > totalPages) {
-            currentPage = totalPages;
-        }
-
-        int startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
-        List<ChuyenBay> pagedList = filteredList.subList(startIndex, endIndex);
-
-        // Hiển thị lên bảng và cập nhật giao diện
-        tableModel.setRowCount(0);
-        for (ChuyenBay cb : pagedList) {
-            tableModel.addRow(new Object[]{
-                cb.getSoHieuChuyenBay(), cb.getSoHieuMayBay(), cb.getDiemDi(),
-                cb.getDiemDen(), cb.getThoiGianDi(), cb.getThoiGianDen(),
-                cb.getSoPhoThong(), cb.getSoThuongGia(), cb.getGiaPhoThong(),
-                cb.getGiaThuongGia(), cb.getSoVeDaBan(), cb.tongSoCho() - cb.getSoVeDaBan()
-            });
-        }
-
-        jL_trang.setText("Trang " + currentPage + " / " + totalPages);
-        jB_dau.setEnabled(currentPage > 1);
-        jB_truoc.setEnabled(currentPage > 1);
-        jB_sau.setEnabled(currentPage < totalPages);
-        jB_cuoi.setEnabled(currentPage < totalPages);
-    }
-
-    public void loadData(QuanLyChung quanLy) {
-        this.quanLy = quanLy;
-        this.currentPage = 1;
-        jT_timKiem.setText("");
-        updateTableAndPagination();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -21,7 +21,6 @@ public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
 
     public PanelHangHangKhong_Admin() {
         initComponents();
-
         this.tableModel = (DefaultTableModel) jTable_dsHangHangKhong.getModel();
 
         sorter = new TableRowSorter<>(tableModel);
@@ -43,29 +42,14 @@ public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
                 filterTable();
             }
         });
+
         jTable_dsHangHangKhong.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int selectedRow = jTable_dsHangHangKhong.getSelectedRow();
                 if (selectedRow != -1) {
-                    fillFieldsFromTable(selectedRow);
-                }
-            }
-        });
-
-        jT_maHang.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jT_tenHang.requestFocusInWindow();
-            }
-        });
-        jT_tenHang.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (jB_them.isEnabled()) {
-                    jB_them.doClick();
-                } else {
-                    jB_sua.doClick();
+                    int modelRow = jTable_dsHangHangKhong.convertRowIndexToModel(selectedRow);
+                    fillFieldsFromTable(modelRow);
                 }
             }
         });
@@ -152,11 +136,6 @@ public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
 
         jB_xoa.setText("Xoá");
         jB_xoa.setToolTipText("");
-        jB_xoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_xoaActionPerformed(evt);
-            }
-        });
         jPanel3.add(jB_xoa);
 
         jB_lamMoi.setText("Làm mới");
@@ -209,7 +188,7 @@ public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.ipadx = 86;
+        gridBagConstraints.ipadx = 120;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
@@ -287,46 +266,15 @@ public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
         add(jScrollPane3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jB_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_xoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_xoaActionPerformed
-
-    public JButton getjB_lamMoi() {
-        return jB_lamMoi;
-    }
-
-    public JButton getjB_sua() {
-        return jB_sua;
-    }
-
-    public JButton getjB_them() {
-        return jB_them;
-    }
-
-    public JButton getjB_xoa() {
-        return jB_xoa;
-    }
-
-    public JTextField getjT_maHang() {
-        return jT_maHang;
-    }
-
-    public JTextField getjT_tenHang() {
-        return jT_tenHang;
-    }
-
-    public JTable getjTable_dsHangHangKhong() {
-        return jTable_dsHangHangKhong;
-    }
-
     // Phương thức nạp dữ liệu vào bảng
     @Override
     public void loadDataToTable(QuanLyChung quanLy) {
-        DefaultTableModel model = (DefaultTableModel) jTable_dsHangHangKhong.getModel();
-        model.setRowCount(0);
+        if (sorter != null) {
+            sorter.setRowFilter(null);
+        }
+        tableModel.setRowCount(0);
         for (HangHangKhong hhk : quanLy.getDanhSachHang()) {
-            Object[] row = new Object[]{hhk.getMaHang(), hhk.getTenHang(), hhk.getDanhSachMayBay().size()};
-            model.addRow(row);
+            tableModel.addRow(new Object[]{hhk.getMaHang(), hhk.getTenHang(), hhk.getDanhSachMayBay().size()});
         }
     }
 
@@ -356,9 +304,8 @@ public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
     // Phương thức điền dữ liệu vào các trường khi chọn hàng trên bảng
     @Override
     public void fillFieldsFromTable(int modelRowIndex) {
-        DefaultTableModel model = (DefaultTableModel) jTable_dsHangHangKhong.getModel();
-        jT_maHang.setText(model.getValueAt(modelRowIndex, 0).toString());
-        jT_tenHang.setText(model.getValueAt(modelRowIndex, 1).toString());
+        jT_maHang.setText(tableModel.getValueAt(modelRowIndex, 0).toString());
+        jT_tenHang.setText(tableModel.getValueAt(modelRowIndex, 1).toString());
         jT_maHang.setEnabled(false);
         jB_them.setEnabled(false);
         jB_sua.setEnabled(true);
@@ -368,7 +315,6 @@ public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
     private void filterTable() {
         String text = jT_timKiem.getText();
         String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
-
         if (text.trim().length() == 0) {
             sorter.setRowFilter(null);
         } else {
@@ -385,6 +331,34 @@ public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
                 sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, columnIndex));
             }
         }
+    }
+
+    public JButton getjB_lamMoi() {
+        return jB_lamMoi;
+    }
+
+    public JButton getjB_sua() {
+        return jB_sua;
+    }
+
+    public JButton getjB_them() {
+        return jB_them;
+    }
+
+    public JButton getjB_xoa() {
+        return jB_xoa;
+    }
+
+    public JTextField getjT_maHang() {
+        return jT_maHang;
+    }
+
+    public JTextField getjT_tenHang() {
+        return jT_tenHang;
+    }
+
+    public JTable getjTable_dsHangHangKhong() {
+        return jTable_dsHangHangKhong;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

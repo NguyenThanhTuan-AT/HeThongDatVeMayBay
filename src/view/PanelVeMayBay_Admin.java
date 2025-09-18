@@ -1,79 +1,88 @@
 package view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import model.ChuyenBay;
 import model.HanhKhach;
 import model.QuanLyChung;
 import model.VeMayBay;
 
-public class PanelVeMayBay_Admin extends javax.swing.JPanel {
+public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
 
     private DefaultTableModel tableModel;
     private QuanLyChung quanLy;
-    private TableRowSorter<DefaultTableModel> sorter;
+
+    private int currentPage = 1;
+    private final int ITEMS_PER_PAGE = 20;
+    private List<VeMayBay> filteredList;
 
     public PanelVeMayBay_Admin() {
         initComponents();
-        tableModel = (DefaultTableModel) jTable_dsVeMayBay.getModel();
+        this.tableModel = (DefaultTableModel) jTable_dsVeMayBay.getModel();
+        this.filteredList = new ArrayList<>();
 
-        sorter = new TableRowSorter<>(tableModel);
-        jTable_dsVeMayBay.setRowSorter(sorter);
+        jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Tất cả", "Mã vé", "Số hiệu CB", "CCCD Hành khách"}));
 
         jT_timKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                filterTable();
+                currentPage = 1;
+                updateTableAndPagination();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                filterTable();
+                currentPage = 1;
+                updateTableAndPagination();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                filterTable();
+                currentPage = 1;
+                updateTableAndPagination();
             }
+        });
+
+        jB_dau.addActionListener(e -> {
+            currentPage = 1;
+            updateTableAndPagination();
+        });
+        jB_truoc.addActionListener(e -> {
+            if (currentPage > 1) {
+                currentPage--;
+                updateTableAndPagination();
+            }
+        });
+        jB_sau.addActionListener(e -> {
+            int totalPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateTableAndPagination();
+            }
+        });
+        jB_cuoi.addActionListener(e -> {
+            int totalPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
+            currentPage = totalPages > 0 ? totalPages : 1;
+            updateTableAndPagination();
         });
 
         jTable_dsVeMayBay.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int selectedRow = jTable_dsVeMayBay.getSelectedRow();
-                if (selectedRow != -1) {
-                    fillFieldsFromTable(selectedRow);
+                int selectedRowOnView = jTable_dsVeMayBay.getSelectedRow();
+                if (selectedRowOnView != -1) {
+                    fillFieldsFromTable(selectedRowOnView);
                 }
-            }
-        });
-
-        jComboBox_hangVe.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                capNhatGiaVe();
-            }
-        });
-
-        // Thêm sự kiện lắng nghe cho ComboBox chuyến bay
-        jComboBox_soHieuCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                capNhatGiaVe();
             }
         });
     }
@@ -94,10 +103,10 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jL_maVe = new javax.swing.JLabel();
         jL_giaVe = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jB_them = new javax.swing.JButton();
+        jB_sua = new javax.swing.JButton();
+        jB_xoa = new javax.swing.JButton();
+        jB_lamMoi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jT_giaVe = new javax.swing.JTextField();
         jL_timKiem = new javax.swing.JLabel();
@@ -267,22 +276,17 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton2.setText("Thêm");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton2);
+        jB_them.setText("Thêm");
+        jPanel3.add(jB_them);
 
-        jButton1.setText("Sửa");
-        jPanel3.add(jButton1);
+        jB_sua.setText("Sửa");
+        jPanel3.add(jB_sua);
 
-        jButton3.setText("Xoá");
-        jPanel3.add(jButton3);
+        jB_xoa.setText("Xoá");
+        jPanel3.add(jB_xoa);
 
-        jButton4.setText("Làm mới");
-        jPanel3.add(jButton4);
+        jB_lamMoi.setText("Làm mới");
+        jPanel3.add(jB_lamMoi);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -327,11 +331,6 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jPanel2.add(jL_timKiem, gridBagConstraints);
 
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã vé", "Số hiệu chuyến bay", "CCCD hành khách" }));
-        jComboBox_tieuChi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_tieuChiActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -356,11 +355,6 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jPanel_South.setLayout(new java.awt.GridBagLayout());
 
         jB_dau.setText("|<");
-        jB_dau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_dauActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -394,11 +388,6 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         jPanel_South.add(jL_trang, gridBagConstraints);
 
         jB_sau.setText(">");
-        jB_sau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_sauActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -423,41 +412,108 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void updateTableAndPagination() {
+        if (this.quanLy == null) {
+            return;
+        }
+        String tuKhoa = jT_timKiem.getText().toLowerCase().trim();
+        String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
+        List<VeMayBay> danhSachGoc = this.quanLy.getDanhSachVe();
 
-    private void jComboBox_tieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_tieuChiActionPerformed
+        if (tuKhoa.isEmpty()) {
+            filteredList = new ArrayList<>(danhSachGoc);
+        } else {
+            filteredList = danhSachGoc.stream().filter(ve -> {
+                if (ve == null) {
+                    return false;
+                }
+                switch (tieuChi) {
+                    case "Mã vé":
+                        return ve.getMaVe() != null && ve.getMaVe().toLowerCase().contains(tuKhoa);
+                    case "Số hiệu CB":
+                        return ve.getSoHieuChuyenBay() != null && ve.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa);
+                    case "CCCD Hành khách":
+                        return ve.getCccdHanhKhach() != null && ve.getCccdHanhKhach().toLowerCase().contains(tuKhoa);
+                    default:
+                        return (ve.getMaVe() != null && ve.getMaVe().toLowerCase().contains(tuKhoa))
+                                || (ve.getSoHieuChuyenBay() != null && ve.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa))
+                                || (ve.getCccdHanhKhach() != null && ve.getCccdHanhKhach().toLowerCase().contains(tuKhoa));
+                }
+            }).collect(Collectors.toList());
+        }
 
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_tieuChiActionPerformed
+        int totalItems = filteredList.size();
+        int totalPages = Math.max(1, (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE));
+        if (currentPage > totalPages) {
+            currentPage = totalPages;
+        }
 
-    private void jB_dauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_dauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_dauActionPerformed
+        int startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+        List<VeMayBay> pagedList = filteredList.subList(startIndex, endIndex);
 
-    private void jB_sauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_sauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_sauActionPerformed
+        tableModel.setRowCount(0);
+        for (VeMayBay ve : pagedList) {
+            ChuyenBay cb = quanLy.timChuyenBay(ve.getSoHieuChuyenBay());
+            HanhKhach hk = quanLy.timHanhKhach(ve.getCccdHanhKhach());
+            double giaVe = (cb != null) ? (ve.getHangVe() == VeMayBay.HangVe.THUONG_GIA ? cb.getGiaThuongGia() : cb.getGiaPhoThong()) : 0;
+            tableModel.addRow(new Object[]{ve.getMaVe(), ve.getSoHieuChuyenBay(), ve.getHangVe(), String.format("%,.0f VNĐ", giaVe), ve.getCccdHanhKhach(), (hk != null ? hk.getHoTen() : "N/A")});
+        }
+
+        jL_trang.setText("Trang " + currentPage + " / " + totalPages);
+        jB_dau.setEnabled(currentPage > 1);
+        jB_truoc.setEnabled(currentPage > 1);
+        jB_sau.setEnabled(currentPage < totalPages);
+        jB_cuoi.setEnabled(currentPage < totalPages);
+    }
+
+    @Override
+    public void loadDataToTable(QuanLyChung quanLy) {
+        this.quanLy = quanLy;
+        this.currentPage = 1;
+        if (jT_timKiem != null) {
+            jT_timKiem.setText("");
+        }
+        updateTableAndPagination();
+    }
+
+    @Override
+    public void fillFieldsFromTable(int viewIndex) {
+        // Chức năng sửa vé ở panel này khá phức tạp, tạm thời chỉ hiển thị
+        int actualIndex = (currentPage - 1) * ITEMS_PER_PAGE + viewIndex;
+        if (actualIndex < filteredList.size()) {
+            VeMayBay ve = filteredList.get(actualIndex);
+            // Có thể điền thông tin vé ra các JTextField nếu bạn muốn
+        }
+    }
+
+    @Override
+    public VeMayBay getDataFromFields() {
+        return null;
+    }
+
+    @Override
+    public void clearFields() {
+    }
 
     public void setQuanLy(QuanLyChung quanLy) {
         this.quanLy = quanLy;
     }
 
     public JButton getjB_them() {
-        return jButton2;
+        return jB_them;
     }
 
     public JButton getjB_sua() {
-        return jButton1;
+        return jB_sua;
     }
 
     public JButton getjB_xoa() {
-        return jButton3;
+        return jB_xoa;
     }
 
     public JButton getjB_lamMoi() {
-        return jButton4;
+        return jB_lamMoi;
     }
 
     public JTextField getjT_maVe() {
@@ -480,150 +536,15 @@ public class PanelVeMayBay_Admin extends javax.swing.JPanel {
         return jTable_dsVeMayBay;
     }
 
-    private void capNhatGiaVe() {
-        if (this.quanLy == null) {
-            return; // Đảm bảo quanLy đã được gán
-        }
-
-        String soHieuCB = (String) jComboBox_soHieuCB.getSelectedItem();
-        String hangVeStr = (String) jComboBox_hangVe.getSelectedItem();
-        ChuyenBay cb = quanLy.timChuyenBay(soHieuCB);
-
-        if (cb != null && hangVeStr != null) {
-            double gia = 0;
-            if (hangVeStr.equals("Phổ thông")) {
-                gia = cb.getGiaPhoThong();
-            } else if (hangVeStr.equals("Thương gia")) {
-                gia = cb.getGiaThuongGia();
-            }
-            // Cập nhật vào JTextField mới
-            jT_giaVe.setText(String.format("%.0f", gia));
-        } else {
-            jT_giaVe.setText("");
-        }
-    }
-
-    // Phương thức nạp dữ liệu vào bảng
-    public void loadDataToTable(QuanLyChung quanLy) {
-        this.quanLy = quanLy; // Gán đối tượng quanLy
-        DefaultTableModel model = (DefaultTableModel) jTable_dsVeMayBay.getModel();
-        model.setRowCount(0);
-
-        // Cập nhật lại các cột cho đúng
-        model.setColumnIdentifiers(new String[]{
-            "Mã vé", "Số hiệu CB", "Hạng vé", "Giá vé", "CCCD Hành khách", "Họ tên Hành khách"
-        });
-
-        for (VeMayBay ve : quanLy.getDanhSachVe()) {
-            ChuyenBay cb = quanLy.timChuyenBay(ve.getSoHieuChuyenBay());
-            HanhKhach hk = quanLy.timHanhKhach(ve.getCccdHanhKhach());
-
-            double giaVe = 0;
-            if (cb != null) {
-                giaVe = (ve.getHangVe() == VeMayBay.HangVe.THUONG_GIA) ? cb.getGiaThuongGia() : cb.getGiaPhoThong();
-            }
-
-            String cccd = (hk != null) ? hk.getCccd() : "Không rõ";
-            String hoTen = (hk != null) ? hk.getHoTen() : "Không rõ";
-
-            Object[] row = new Object[]{
-                ve.getMaVe(),
-                ve.getSoHieuChuyenBay(),
-                ve.getHangVe().toString(),
-                String.format("%,.0f VNĐ", giaVe),
-                cccd,
-                hoTen
-            };
-            model.addRow(row);
-        }
-    }
-
-    // Phương thức nạp số hiệu chuyến bay vào JComboBox
-    public void loadSoHieuChuyenBay(QuanLyChung quanLy) {
-        List<String> soHieuChuyenBayList = quanLy.getDanhSachChuyenBay().stream()
-                .map(ChuyenBay::getSoHieuChuyenBay).collect(Collectors.toList());
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(soHieuChuyenBayList.toArray(new String[0]));
-        jComboBox_soHieuCB.setModel(model);
-    }
-
-    // Phương thức lấy dữ liệu từ các trường nhập liệu
-    public VeMayBay getDataFromFields() {
-        String maVe = jT_maVe.getText();
-        String soHieuCB = (String) jComboBox_soHieuCB.getSelectedItem();
-        String hangVeStr = (String) jComboBox_hangVe.getSelectedItem();
-
-        if (maVe.isEmpty() || soHieuCB == null || hangVeStr == null) {
-            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-
-        VeMayBay.HangVe hangVe = hangVeStr.equals("Phổ thông") ? VeMayBay.HangVe.PHO_THONG : VeMayBay.HangVe.THUONG_GIA;
-        return new VeMayBay(maVe, soHieuCB, hangVe, null); // CCCD tạm thời để null khi admin thêm vé
-    }
-
-    // Phương thức xóa các trường nhập liệu
-    public void clearFields() {
-        jT_maVe.setText("");
-        jComboBox_soHieuCB.setSelectedIndex(-1);
-        jComboBox_hangVe.setSelectedIndex(0);
-        jT_giaVe.setText("");
-        jT_maVe.setEnabled(true);
-        getjB_them().setEnabled(true);
-        getjB_sua().setEnabled(false);
-        getjB_xoa().setEnabled(false);
-    }
-
-    // Phương thức điền dữ liệu vào các trường khi chọn hàng trên bảng
-    public void fillFieldsFromTable(int modelRowIndex) {
-        DefaultTableModel model = (DefaultTableModel) jTable_dsVeMayBay.getModel();
-        jT_maVe.setText(model.getValueAt(modelRowIndex, 0).toString());
-        jComboBox_soHieuCB.setSelectedItem(model.getValueAt(modelRowIndex, 1).toString());
-
-        String hangVeStr = model.getValueAt(modelRowIndex, 2).toString();
-        jComboBox_hangVe.setSelectedItem(hangVeStr.equals("PHO_THONG") ? "Phổ thông" : "Thương gia");
-
-        String giaVeStr = model.getValueAt(modelRowIndex, 3).toString().replace(" VNĐ", "").replace(",", "");
-        jT_giaVe.setText(giaVeStr);
-
-        jT_maVe.setEnabled(false);
-        getjB_them().setEnabled(false);
-        getjB_sua().setEnabled(true);
-        getjB_xoa().setEnabled(true);
-    }
-
-    private void filterTable() {
-        String text = jT_timKiem.getText();
-        String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
-
-        if (text.trim().length() == 0) {
-            sorter.setRowFilter(null);
-        } else {
-            int columnIndex = -1;
-            if ("Mã vé".equals(tieuChi)) {
-                columnIndex = 0;
-            } else if ("Số hiệu CB".equals(tieuChi)) {
-                columnIndex = 1;
-            } else if ("CCCD Hành khách".equals(tieuChi)) {
-                columnIndex = 4; // Cột CCCD có chỉ số 4
-            }
-
-            if (columnIndex == -1) {
-                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-            } else {
-                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, columnIndex));
-            }
-        }
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_cuoi;
     private javax.swing.JButton jB_dau;
+    private javax.swing.JButton jB_lamMoi;
     private javax.swing.JButton jB_sau;
+    private javax.swing.JButton jB_sua;
+    private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_truoc;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jB_xoa;
     private javax.swing.JComboBox<String> jComboBox_hangVe;
     private javax.swing.JComboBox<String> jComboBox_soHieuCB;
     private javax.swing.JComboBox<String> jComboBox_tieuChi;
