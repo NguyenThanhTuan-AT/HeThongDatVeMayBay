@@ -20,6 +20,7 @@
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/BaseAdminPanel.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelTimKiem_User.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/util/TableDataConverter.java</file>
+            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/ThongTinVeFrame.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelHanhKhach_Admin.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelTaiKhoan_Admin.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/model/MayBay.java</file>
@@ -27,7 +28,6 @@
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/model/HanhKhach.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelHangHangKhong_Admin.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelMayBay_Admin.java</file>
-            <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/SuaVeFrame.java</file>
             <file>file:/D:/Code%20Java_NetBean/DoAn_final/src/view/PanelChuyenBay_Admin.java</file>
         </group>
     </open-files>

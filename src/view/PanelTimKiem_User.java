@@ -30,7 +30,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         jL_ngayDi = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jL_soGhe = new javax.swing.JLabel();
-        jSpinner_soGhe = new javax.swing.JSpinner();
+        jSpinner_soVe = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         jB_timKiem = new javax.swing.JButton();
 
@@ -120,7 +120,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         jPanel4.add(jDateChooser1, gridBagConstraints);
 
         jL_soGhe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jL_soGhe.setText("Số ghế :  ");
+        jL_soGhe.setText("Số lượng vé: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -131,7 +131,8 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 100, 40, 0);
         jPanel4.add(jL_soGhe, gridBagConstraints);
 
-        jSpinner_soGhe.setPreferredSize(new java.awt.Dimension(64, 35));
+        jSpinner_soVe.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jSpinner_soVe.setPreferredSize(new java.awt.Dimension(64, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -140,7 +141,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 6, 40, 0);
-        jPanel4.add(jSpinner_soGhe, gridBagConstraints);
+        jPanel4.add(jSpinner_soVe, gridBagConstraints);
 
         add(jPanel4, java.awt.BorderLayout.CENTER);
 
@@ -179,8 +180,8 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         return jDateChooser1;
     }
 
-    public JSpinner getjSpinner_soGhe() {
-        return jSpinner_soGhe;
+    public JSpinner getjSpinner_soVe() {
+        return jSpinner_soVe;
     }
 
     public JButton getjB_timKiem() {
@@ -215,7 +216,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         getjT_diemDi().setText("");
         getjT_diemDen().setText("");
         getjDateChooser1().setDate(null);
-        getjSpinner_soGhe().setValue(0);
+        getjSpinner_soVe().setValue(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -228,7 +229,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JSpinner jSpinner_soGhe;
+    private javax.swing.JSpinner jSpinner_soVe;
     private javax.swing.JTextField jT_diemDen;
     private javax.swing.JTextField jT_diemDi;
     // End of variables declaration//GEN-END:variables

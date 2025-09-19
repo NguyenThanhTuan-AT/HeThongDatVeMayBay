@@ -222,7 +222,7 @@ public class Frame_User extends javax.swing.JFrame {
                 String maVe = panelVeCuaToi.getJTable().getValueAt(selectedRow, 0).toString();
                 VeMayBay veCanSua = quanLy.timVe(maVe);
                 if (veCanSua != null) {
-                    SuaVeFrame suaVeFrame = new SuaVeFrame(quanLy, veCanSua, this);
+                    ThongTinVeFrame suaVeFrame = new ThongTinVeFrame(quanLy, veCanSua, this);
                     suaVeFrame.setVisible(true);
                 }
             }
@@ -233,6 +233,7 @@ public class Frame_User extends javax.swing.JFrame {
         String diemDi = panelTimKiem.getjT_diemDi().getText().trim();
         String diemDen = panelTimKiem.getjT_diemDen().getText().trim();
         java.util.Date date = panelTimKiem.getjDateChooser1().getDate();
+        int soVeCanMua = (int) panelTimKiem.getjSpinner_soVe().getValue();
 
         if (diemDi.isEmpty() || diemDen.isEmpty() || date == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ Điểm đi, Điểm đến và Ngày đi.", "Thiếu thông tin", JOptionPane.ERROR_MESSAGE);
@@ -245,6 +246,7 @@ public class Frame_User extends javax.swing.JFrame {
                 .filter(cb -> cb.getDiemDi().equalsIgnoreCase(diemDi))
                 .filter(cb -> cb.getDiemDen().equalsIgnoreCase(diemDen))
                 .filter(cb -> cb.getThoiGianDi().toLocalDate().equals(ngayDi))
+                .filter(cb -> (cb.tongSoCho() - cb.getSoVeDaBan()) >= soVeCanMua)
                 .collect(Collectors.toList());
 
         // Hiển thị kết quả lên bảng
@@ -263,6 +265,7 @@ public class Frame_User extends javax.swing.JFrame {
                     quanLy.timMayBay(cb.getSoHieuMayBay()).getMaHang(),
                     cb.getThoiGianDi().toLocalTime(),
                     cb.getThoiGianDen().toLocalTime(),
+                    cb.tongSoCho() - cb.getSoVeDaBan(),
                     String.format("%,.0f VNĐ", cb.getGiaPhoThong()),
                     String.format("%,.0f VNĐ", cb.getGiaThuongGia())
                 };
