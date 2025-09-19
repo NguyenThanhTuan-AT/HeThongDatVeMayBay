@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,27 +14,77 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import model.ChuyenBay;
 import model.MayBay;
 import model.QuanLyChung;
 
-public class PanelChuyenBay_Admin extends javax.swing.JPanel {
+public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
 
     private DefaultTableModel tableModel;
+    private QuanLyChung quanLy;
+    private int currentPage = 1;
+    private final int ITEMS_PER_PAGE = 20;
+    private List<ChuyenBay> filteredList;
 
     public PanelChuyenBay_Admin() {
         initComponents();
-        tableModel = (DefaultTableModel) jT_dsVeMayBay.getModel();
-        ((java.awt.BorderLayout) this.getLayout()).setVgap(0);
+        this.tableModel = (DefaultTableModel) jTable_dsVeMayBay.getModel();
+        this.filteredList = new ArrayList<>();
 
-        // Thêm sự kiện click chuột vào bảng để tự động điền dữ liệu
-        jT_dsVeMayBay.addMouseListener(new MouseAdapter() {
+        jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Tất cả", "Số hiệu CB", "Số hiệu MB", "Điểm đi", "Điểm đến"}));
+
+        jT_timKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                currentPage = 1;
+                updateTableAndPagination();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                currentPage = 1;
+                updateTableAndPagination();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                currentPage = 1;
+                updateTableAndPagination();
+            }
+        });
+
+        jB_dau.addActionListener(e -> {
+            currentPage = 1;
+            updateTableAndPagination();
+        });
+        jB_truoc.addActionListener(e -> {
+            if (currentPage > 1) {
+                currentPage--;
+                updateTableAndPagination();
+            }
+        });
+        jB_sau.addActionListener(e -> {
+            int totalPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateTableAndPagination();
+            }
+        });
+        jB_cuoi.addActionListener(e -> {
+            int totalPages = (int) Math.ceil((double) filteredList.size() / ITEMS_PER_PAGE);
+            currentPage = totalPages > 0 ? totalPages : 1;
+            updateTableAndPagination();
+        });
+
+        jTable_dsVeMayBay.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int selectedRow = jT_dsVeMayBay.getSelectedRow();
-                if (selectedRow != -1) {
-                    fillFieldsFromTable(selectedRow);
+                int selectedRowOnView = jTable_dsVeMayBay.getSelectedRow();
+                if (selectedRowOnView != -1) {
+                    fillFieldsFromTable(selectedRowOnView);
                 }
             }
         });
@@ -45,7 +96,7 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane3 = new javax.swing.JScrollPane();
-        jT_dsVeMayBay = new javax.swing.JTable();
+        jTable_dsVeMayBay = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jL_soHieuCB = new java.awt.Label();
@@ -71,13 +122,22 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jB_them = new javax.swing.JButton();
         jB_sua = new javax.swing.JButton();
-        jB_xoa = new javax.swing.JButton();
         jB_lamMoi = new javax.swing.JButton();
+        jB_xoa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jL_timKiem = new javax.swing.JLabel();
+        jComboBox_tieuChi = new javax.swing.JComboBox<>();
+        jT_timKiem = new javax.swing.JTextField();
+        jPanel_South = new javax.swing.JPanel();
+        jB_dau = new javax.swing.JButton();
+        jB_truoc = new javax.swing.JButton();
+        jL_trang = new javax.swing.JLabel();
+        jB_sau = new javax.swing.JButton();
+        jB_cuoi = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
-        jT_dsVeMayBay.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_dsVeMayBay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null},
@@ -142,7 +202,7 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jT_dsVeMayBay);
+        jScrollPane3.setViewportView(jTable_dsVeMayBay);
 
         add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
@@ -186,23 +246,12 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         jL_giaTG.setText("Giá : ");
 
         jComboBox_soHieuCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_soHieuCB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_soHieuCBActionPerformed(evt);
-            }
-        });
 
         jDateChooser1.setPreferredSize(new java.awt.Dimension(88, 30));
 
         jT_soHieuCB.setPreferredSize(new java.awt.Dimension(64, 30));
 
         jT_diemDi.setPreferredSize(new java.awt.Dimension(64, 30));
-
-        jT_diemDen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jT_diemDenActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -243,7 +292,6 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
                                 .addGap(0, 0, 0)
                                 .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
                                 .addComponent(jT_soHieuCB, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jL_diemDi, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,7 +301,7 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
                                 .addComponent(jL_thoiGianDi, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,11 +309,10 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jT_soHieuCB, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(jL_soHieuCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jL_diemDi, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jL_diemDi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jT_diemDi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jL_thoiGianDi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jL_thoiGianDi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jL_soHieuMB, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -289,39 +336,29 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(jPanel2, gridBagConstraints);
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jB_them.setText("Thêm");
-        jB_them.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_themActionPerformed(evt);
-            }
-        });
         jPanel3.add(jB_them);
 
         jB_sua.setText("Sửa");
         jPanel3.add(jB_sua);
 
-        jB_xoa.setText("Xoá");
-        jB_xoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_xoaActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jB_xoa);
-
         jB_lamMoi.setText("Làm mới");
         jPanel3.add(jB_lamMoi);
+
+        jB_xoa.setText("Xoá");
+        jPanel3.add(jB_xoa);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 572;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
@@ -332,31 +369,270 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 72, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 72, 0, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
+        jL_timKiem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_timKiem.setText("Tìm kiếm theo : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 32;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 184, 0, 0);
+        jPanel1.add(jL_timKiem, gridBagConstraints);
+
+        jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Số hiệu chuyến bay", "Số hiệu máy bay", "Điểm đi", "Điểm đến" }));
+        jComboBox_tieuChi.setPreferredSize(new java.awt.Dimension(150, 22));
+        jComboBox_tieuChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_tieuChiActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = -65;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        jPanel1.add(jComboBox_tieuChi, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 135;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        jPanel1.add(jT_timKiem, gridBagConstraints);
+
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jPanel_South.setLayout(new java.awt.GridBagLayout());
+
+        jB_dau.setText("|<");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = -2;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 150, 5, 0);
+        jPanel_South.add(jB_dau, gridBagConstraints);
+
+        jB_truoc.setText("<");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 27;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        jPanel_South.add(jB_truoc, gridBagConstraints);
+
+        jL_trang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jL_trang.setText("Trang 1 / X");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 37;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel_South.add(jL_trang, gridBagConstraints);
+
+        jB_sau.setText(">");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 27;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
+        jPanel_South.add(jB_sau, gridBagConstraints);
+
+        jB_cuoi.setText(">|");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = -2;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 141);
+        jPanel_South.add(jB_cuoi, gridBagConstraints);
+
+        add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox_soHieuCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_soHieuCBActionPerformed
+    private void jComboBox_tieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_tieuChiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_soHieuCBActionPerformed
+    }//GEN-LAST:event_jComboBox_tieuChiActionPerformed
 
-    private void jB_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_xoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_xoaActionPerformed
+    private void updateTableAndPagination() {
+        if (this.quanLy == null) {
+            return;
+        }
+        String tuKhoa = jT_timKiem.getText().toLowerCase().trim();
+        String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
+        List<ChuyenBay> danhSachGoc = this.quanLy.getDanhSachChuyenBay();
 
-    private void jT_diemDenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_diemDenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jT_diemDenActionPerformed
+        if (tuKhoa.isEmpty()) {
+            filteredList = new ArrayList<>(danhSachGoc);
+        } else {
+            filteredList = danhSachGoc.stream().filter(cb -> {
+                if (cb == null) {
+                    return false;
+                }
+                switch (tieuChi) {
+                    case "Số hiệu CB":
+                        return cb.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa);
+                    case "Số hiệu MB":
+                        return cb.getSoHieuMayBay().toLowerCase().contains(tuKhoa);
+                    case "Điểm đi":
+                        return cb.getDiemDi().toLowerCase().contains(tuKhoa);
+                    case "Điểm đến":
+                        return cb.getDiemDen().toLowerCase().contains(tuKhoa);
+                    default:
+                        return cb.getSoHieuChuyenBay().toLowerCase().contains(tuKhoa) || cb.getSoHieuMayBay().toLowerCase().contains(tuKhoa) || cb.getDiemDi().toLowerCase().contains(tuKhoa) || cb.getDiemDen().toLowerCase().contains(tuKhoa);
+                }
+            }).collect(Collectors.toList());
+        }
 
-    private void jB_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_themActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_themActionPerformed
+        int totalItems = filteredList.size();
+        int totalPages = Math.max(1, (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE));
+        if (currentPage > totalPages) {
+            currentPage = totalPages;
+        }
+
+        int startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+        List<ChuyenBay> pagedList = filteredList.subList(startIndex, endIndex);
+
+        tableModel.setRowCount(0);
+        for (ChuyenBay cb : pagedList) {
+            tableModel.addRow(new Object[]{cb.getSoHieuChuyenBay(), cb.getSoHieuMayBay(), cb.getDiemDi(), cb.getDiemDen(), cb.getThoiGianDi(), cb.getThoiGianDen(), cb.getSoPhoThong(), cb.getSoThuongGia(), cb.getGiaPhoThong(), cb.getGiaThuongGia(), cb.getSoVeDaBan(), cb.tongSoCho() - cb.getSoVeDaBan()});
+        }
+
+        jL_trang.setText("Trang " + currentPage + " / " + totalPages);
+        jB_dau.setEnabled(currentPage > 1);
+        jB_truoc.setEnabled(currentPage > 1);
+        jB_sau.setEnabled(currentPage < totalPages);
+        jB_cuoi.setEnabled(currentPage < totalPages);
+    }
+
+    @Override
+    public void loadDataToTable(QuanLyChung quanLy) {
+        this.quanLy = quanLy;
+        this.currentPage = 1;
+        loadSoHieuMayBay(quanLy);
+        if (jT_timKiem != null) {
+            jT_timKiem.setText("");
+        }
+        updateTableAndPagination();
+    }
+
+    @Override
+    public void fillFieldsFromTable(int viewIndex) {
+        int actualIndex = (currentPage - 1) * ITEMS_PER_PAGE + viewIndex;
+        if (actualIndex < filteredList.size()) {
+            ChuyenBay cb = filteredList.get(actualIndex);
+            getjT_soHieuCB().setText(cb.getSoHieuChuyenBay());
+            getjComboBox_soHieuMB().setSelectedItem(cb.getSoHieuMayBay());
+            getjT_diemDi().setText(cb.getDiemDi());
+            getjT_diemDen().setText(cb.getDiemDen());
+            getjDateChooser_tgDi().setDate(Date.from(cb.getThoiGianDi().atZone(ZoneId.systemDefault()).toInstant()));
+            getjDateChooser_tgDen().setDate(Date.from(cb.getThoiGianDen().atZone(ZoneId.systemDefault()).toInstant()));
+            getjT_soGhePT().setText(String.valueOf(cb.getSoPhoThong()));
+            getjT_soGheTG().setText(String.valueOf(cb.getSoThuongGia()));
+            getjT_giaPT().setText(String.valueOf(cb.getGiaPhoThong()));
+            getjT_giaTG().setText(String.valueOf(cb.getGiaThuongGia()));
+            getjT_soHieuCB().setEnabled(false);
+            getjB_them().setEnabled(false);
+            getjB_sua().setEnabled(true);
+            getjB_xoa().setEnabled(true);
+        }
+    }
+
+    public void loadSoHieuMayBay(QuanLyChung quanLy) {
+        List<String> soHieuMayBay = quanLy.getDanhSachMayBay().stream().map(MayBay::getSoHieuMayBay).collect(Collectors.toList());
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(soHieuMayBay.toArray(new String[0]));
+        jComboBox_soHieuCB.setModel(model);
+    }
+    // PHƯƠNG THỨC LẤY DỮ LIỆU TỪ CÁC TRƯỜNG NHẬP LIỆU
+
+    public ChuyenBay getDataFromFields() {
+        try {
+            String soHieuCB = getjT_soHieuCB().getText();
+            String soHieuMB = (String) getjComboBox_soHieuMB().getSelectedItem();
+            String diemDi = getjT_diemDi().getText();
+            String diemDen = getjT_diemDen().getText();
+
+            Date tgDiDate = getjDateChooser_tgDi().getDate();
+            Date tgDenDate = getjDateChooser_tgDen().getDate();
+
+            // Kiểm tra các trường bắt buộc
+            if (soHieuCB.isEmpty() || soHieuMB == null || diemDi.isEmpty() || diemDen.isEmpty() || tgDiDate == null || tgDenDate == null) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ các thông tin bắt buộc.", "Thiếu thông tin", JOptionPane.WARNING_MESSAGE);
+                return null;
+            }
+
+            LocalDateTime tgDi = tgDiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            LocalDateTime tgDen = tgDenDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+            // Tách riêng phần parse số để bắt lỗi chính xác
+            int soGhePT = Integer.parseInt(getjT_soGhePT().getText());
+            int soGheTG = Integer.parseInt(getjT_soGheTG().getText());
+            double giaPT = Double.parseDouble(getjT_giaPT().getText());
+            double giaTG = Double.parseDouble(getjT_giaTG().getText());
+
+            if (soGhePT <= 0 || soGheTG <= 0 || giaPT <= 0 || giaTG <= 0) {
+                JOptionPane.showMessageDialog(this, "Số ghế và giá vé phải là số dương.", "Lỗi dữ liệu", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+
+            if (tgDen.isBefore(tgDi)) {
+                JOptionPane.showMessageDialog(this, "Thời gian đến phải sau thời gian đi.", "Lỗi logic thời gian", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+            return new ChuyenBay(soHieuCB, soHieuMB, diemDi, diemDen, tgDi, tgDen, soGheTG, soGhePT, giaPT, giaTG);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số ghế và giá vé phải là các con số hợp lệ.", "Lỗi định dạng số", JOptionPane.ERROR_MESSAGE);
+            return null;
+        } catch (Exception e) { // Giữ lại để bắt các lỗi khác nếu có
+            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra. Vui lòng kiểm tra lại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+
+    // PHƯƠNG THỨC XÓA DỮ LIỆU TRÊN CÁC TRƯỜNG NHẬP LIỆU
+    public void clearFields() {
+        getjT_soHieuCB().setText("");
+        getjT_diemDi().setText("");
+        getjT_diemDen().setText("");
+        getjT_soGhePT().setText("");
+        getjT_soGheTG().setText("");
+        getjT_giaPT().setText("");
+        getjT_giaTG().setText("");
+        getjDateChooser_tgDi().setDate(null);
+        getjDateChooser_tgDen().setDate(null);
+        getjComboBox_soHieuMB().setSelectedIndex(-1);
+
+        getjT_soHieuCB().setEnabled(true);
+        getjB_them().setEnabled(true);
+        getjB_sua().setEnabled(false);
+        getjB_xoa().setEnabled(false);
+    }
 
     public JButton getjB_them() {
         return jB_them;
@@ -375,7 +651,7 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
     }
 
     public JTable getjTable_dsChuyenBay() {
-        return jT_dsVeMayBay;
+        return jTable_dsVeMayBay;
     }
 
     public JTextField getjT_soHieuCB() {
@@ -418,108 +694,17 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
         return jDateChooser3;
     }
 
-    // PHƯƠNG THỨC NẠP DỮ LIỆU VÀO BẢNG
-    public void loadDataToTable(Object[][] data) {
-        DefaultTableModel tableModel = (DefaultTableModel) jT_dsVeMayBay.getModel();
-        tableModel.setRowCount(0);
-        for (Object[] row : data) {
-            tableModel.addRow(row);
-        }
-    }
-
-    // PHƯƠNG THỨC XÓA DỮ LIỆU TRÊN CÁC TRƯỜNG NHẬP LIỆU
-    public void clearFields() {
-        getjT_soHieuCB().setText("");
-        getjT_diemDi().setText("");
-        getjT_diemDen().setText("");
-        getjT_soGhePT().setText("");
-        getjT_soGheTG().setText("");
-        getjT_giaPT().setText("");
-        getjT_giaTG().setText("");
-        getjDateChooser_tgDi().setDate(null);
-        getjDateChooser_tgDen().setDate(null);
-        getjComboBox_soHieuMB().setSelectedIndex(-1);
-
-        getjT_soHieuCB().setEnabled(true);
-        getjB_them().setEnabled(true);
-        getjB_sua().setEnabled(false);
-        getjB_xoa().setEnabled(false);
-    }
-
-    // PHƯƠNG THỨC LẤY DỮ LIỆU TỪ CÁC TRƯỜNG NHẬP LIỆU
-    public ChuyenBay getDataFromFields() {
-        try {
-            String soHieuCB = getjT_soHieuCB().getText();
-            String soHieuMB = (String) getjComboBox_soHieuMB().getSelectedItem();
-            String diemDi = getjT_diemDi().getText();
-            String diemDen = getjT_diemDen().getText();
-
-            Date tgDiDate = getjDateChooser_tgDi().getDate();
-            Date tgDenDate = getjDateChooser_tgDen().getDate();
-
-            // Kiểm tra các trường bắt buộc
-            if (soHieuCB.isEmpty() || soHieuMB == null || diemDi.isEmpty() || diemDen.isEmpty() || tgDiDate == null || tgDenDate == null) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ các thông tin bắt buộc.", "Thiếu thông tin", JOptionPane.WARNING_MESSAGE);
-                return null;
-            }
-
-            LocalDateTime tgDi = tgDiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            LocalDateTime tgDen = tgDenDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-
-            // Tách riêng phần parse số để bắt lỗi chính xác
-            int soGhePT = Integer.parseInt(getjT_soGhePT().getText());
-            int soGheTG = Integer.parseInt(getjT_soGheTG().getText());
-            double giaPT = Double.parseDouble(getjT_giaPT().getText());
-            double giaTG = Double.parseDouble(getjT_giaTG().getText());
-
-            return new ChuyenBay(soHieuCB, soHieuMB, diemDi, diemDen, tgDi, tgDen, soGheTG, soGhePT, giaPT, giaTG);
-
-        } catch (NumberFormatException e) { // <-- SỬA Ở ĐÂY: Bắt lỗi nhập sai định dạng số
-            JOptionPane.showMessageDialog(this, "Số ghế và giá vé phải là các con số hợp lệ.", "Lỗi định dạng số", JOptionPane.ERROR_MESSAGE);
-            return null;
-        } catch (Exception e) { // Giữ lại để bắt các lỗi khác nếu có
-            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra. Vui lòng kiểm tra lại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-    }
-
-    // PHƯƠNG THỨC ĐIỀN DỮ LIỆU VÀO CÁC TRƯỜNG KHI CHỌN HÀNG TRÊN BẢNG
-    public void fillFieldsFromTable(int rowIndex) {
-        DefaultTableModel model = (DefaultTableModel) jT_dsVeMayBay.getModel();
-        getjT_soHieuCB().setText(model.getValueAt(rowIndex, 0).toString());
-        getjComboBox_soHieuMB().setSelectedItem(model.getValueAt(rowIndex, 1).toString());
-        getjT_diemDi().setText(model.getValueAt(rowIndex, 2).toString());
-        getjT_diemDen().setText(model.getValueAt(rowIndex, 3).toString());
-
-        LocalDateTime tgDi = (LocalDateTime) model.getValueAt(rowIndex, 4);
-        LocalDateTime tgDen = (LocalDateTime) model.getValueAt(rowIndex, 5);
-        getjDateChooser_tgDi().setDate(Date.from(tgDi.atZone(ZoneId.systemDefault()).toInstant()));
-        getjDateChooser_tgDen().setDate(Date.from(tgDen.atZone(ZoneId.systemDefault()).toInstant()));
-
-        getjT_soGhePT().setText(model.getValueAt(rowIndex, 6).toString());
-        getjT_soGheTG().setText(model.getValueAt(rowIndex, 7).toString());
-        getjT_giaPT().setText(model.getValueAt(rowIndex, 8).toString());
-        getjT_giaTG().setText(model.getValueAt(rowIndex, 9).toString());
-
-        getjT_soHieuCB().setEnabled(false);
-        getjB_them().setEnabled(false);
-        getjB_sua().setEnabled(true);
-        getjB_xoa().setEnabled(true);
-    }
-
-    // PHƯƠNG THỨC NẠP SỐ HIỆU MÁY BAY VÀO JCOMBOBOX
-    public void loadSoHieuMayBay(QuanLyChung quanLy) {
-        List<String> soHieuMayBay = quanLy.getDanhSachMayBay().stream().map(MayBay::getSoHieuMayBay).collect(Collectors.toList());
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(soHieuMayBay.toArray(new String[0]));
-        jComboBox_soHieuCB.setModel(model);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB_cuoi;
+    private javax.swing.JButton jB_dau;
     private javax.swing.JButton jB_lamMoi;
+    private javax.swing.JButton jB_sau;
     private javax.swing.JButton jB_sua;
     private javax.swing.JButton jB_them;
+    private javax.swing.JButton jB_truoc;
     private javax.swing.JButton jB_xoa;
     private javax.swing.JComboBox<String> jComboBox_soHieuCB;
+    private javax.swing.JComboBox<String> jComboBox_tieuChi;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private java.awt.Label jL_diemDen;
@@ -532,18 +717,22 @@ public class PanelChuyenBay_Admin extends javax.swing.JPanel {
     private java.awt.Label jL_soHieuMB;
     private java.awt.Label jL_thoiGianDen;
     private java.awt.Label jL_thoiGianDi;
+    private javax.swing.JLabel jL_timKiem;
+    private javax.swing.JLabel jL_trang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel_South;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jT_diemDen;
     private javax.swing.JTextField jT_diemDi;
-    private javax.swing.JTable jT_dsVeMayBay;
     private javax.swing.JTextField jT_giaPT;
     private javax.swing.JTextField jT_giaTG;
     private javax.swing.JTextField jT_soGhePT;
     private javax.swing.JTextField jT_soGheTG;
     private javax.swing.JTextField jT_soHieuCB;
+    private javax.swing.JTextField jT_timKiem;
+    private javax.swing.JTable jTable_dsVeMayBay;
     // End of variables declaration//GEN-END:variables
 }

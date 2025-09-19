@@ -77,34 +77,7 @@ public class QuanLyChung {
         }
     }
 
-    private String taoMaVeMoi() {
-        this.lastVeId++;
-        return String.format("VE%03d", this.lastVeId);
-    }
-
-    // === QUẢN LÝ VÉ===
-    public VeMayBay datVe(String cccd, String soHieuChuyenBay, VeMayBay.HangVe hangVe) {
-        String maVeMoi = taoMaVeMoi();
-        VeMayBay veMoi = new VeMayBay(maVeMoi, soHieuChuyenBay, hangVe, cccd);
-
-        mapVe.put(maVeMoi, veMoi);
-        FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
-
-        ChuyenBay cb = timChuyenBay(soHieuChuyenBay);
-        if (cb != null) {
-            cb.themVe(veMoi);
-        }
-
-        HanhKhach hk = timHanhKhach(cccd);
-        if (hk != null) {
-
-            hk.themMaVe(maVeMoi);
-            FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
-        }
-
-        return veMoi;
-    }
-
+    // =============== QUẢN LÝ CHUYẾN BAY ===============
     public void themChuyenBay(ChuyenBay cb) {
         mapChuyenBay.put(cb.getSoHieuChuyenBay(), cb);
         FileIOUtil.ghiVaoFile("chuyenbay.json", new ArrayList<>(mapChuyenBay.values()));
@@ -171,6 +144,34 @@ public class QuanLyChung {
                 .collect(Collectors.toList());
     }
 
+    // ================= QUẢN LÝ VÉ ================
+    private String taoMaVeMoi() {
+        this.lastVeId++;
+        return String.format("VE%03d", this.lastVeId);
+    }
+
+    public VeMayBay datVe(String cccd, String soHieuChuyenBay, VeMayBay.HangVe hangVe) {
+        String maVeMoi = taoMaVeMoi();
+        VeMayBay veMoi = new VeMayBay(maVeMoi, soHieuChuyenBay, hangVe, cccd);
+
+        mapVe.put(maVeMoi, veMoi);
+        FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
+
+        ChuyenBay cb = timChuyenBay(soHieuChuyenBay);
+        if (cb != null) {
+            cb.themVe(veMoi);
+        }
+
+        HanhKhach hk = timHanhKhach(cccd);
+        if (hk != null) {
+
+            hk.themMaVe(maVeMoi);
+            FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
+        }
+
+        return veMoi;
+    }
+
     public void themVe(VeMayBay ve, HanhKhach hk) {
         ChuyenBay cb = timChuyenBay(ve.getSoHieuChuyenBay());
         if (cb != null && cb.conChoTrong(ve.getHangVe())) {
@@ -232,6 +233,7 @@ public class QuanLyChung {
                 .collect(Collectors.toList());
     }
 
+    // ================= QUẢN LÝ THỐNG KÊ =============
     public double thongKeDoanhThuTheoThang(int thang, int nam) {
         return mapVe.values().stream()
                 .filter(ve -> {
@@ -267,6 +269,7 @@ public class QuanLyChung {
                 .sum();
     }
 
+    // ================ QUẢN LÝ HÀNH KHÁCH =============
     public void themHanhKhach(HanhKhach hk) {
         mapHanhKhach.put(hk.getCccd(), hk);
         FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
@@ -342,6 +345,7 @@ public class QuanLyChung {
                 .collect(Collectors.toList());
     }
 
+    // ================ QUẢN LÝ HÃNG HÀNG KHÔNG =============
     public void themHang(HangHangKhong hhk) {
         mapHang.put(hhk.getMaHang(), hhk);
         FileIOUtil.ghiVaoFile("hang.json", new ArrayList<>(mapHang.values()));
@@ -364,6 +368,7 @@ public class QuanLyChung {
         return mapHang.get(maHang);
     }
 
+    // ================ QUẢN LÝ MÁY BAY =============
     public void themMayBay(MayBay mb) {
         mapMayBay.put(mb.getSoHieuMayBay(), mb);
         FileIOUtil.ghiVaoFile("maybay.json", new ArrayList<>(mapMayBay.values()));
@@ -386,6 +391,7 @@ public class QuanLyChung {
         return mapMayBay.get(soHieu);
     }
 
+    // ================ QUẢN LÝ TÀI KHOẢN =============
     public void themTaiKhoan(TaiKhoan tk) {
         if (mapTaiKhoan.containsKey(tk.getTenDangNhap())) {
             System.out.println("Tên đăng nhập đã tồn tại.");
@@ -413,8 +419,22 @@ public class QuanLyChung {
     }
 
     public void xoaTaiKhoan(String tenDangNhap) {
-        mapTaiKhoan.remove(tenDangNhap);
-        FileIOUtil.ghiVaoFile("taikhoan.json", new ArrayList<>(mapTaiKhoan.values()));
+        TaiKhoan tkCanXoa = mapTaiKhoan.get(tenDangNhap);
+
+        if (tkCanXoa != null) {
+            // Nếu tài khoản là USER, tìm và xóa hành khách tương ứng
+            if (tkCanXoa.getLoaiTaiKhoan() == TaiKhoan.LoaiTaiKhoan.USER) {
+                String cccd = tkCanXoa.getCccd();
+                if (cccd != null && mapHanhKhach.containsKey(cccd)) {
+                    mapHanhKhach.remove(cccd);
+                    // Ghi lại file hành khách sau khi xóa
+                    FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
+                }
+            }
+
+            mapTaiKhoan.remove(tenDangNhap);
+            FileIOUtil.ghiVaoFile("taikhoan.json", new ArrayList<>(mapTaiKhoan.values()));
+        }
     }
 
     public TaiKhoan timTaiKhoan(String tenDangNhap) {
@@ -426,6 +446,7 @@ public class QuanLyChung {
         return tk != null && tk.getMatKhau().equals(matKhau);
     }
 
+    // ============== TIỆN ÍCH =============
     public List<ChuyenBay> getDanhSachChuyenBay() {
         return new ArrayList<>(mapChuyenBay.values());
     }

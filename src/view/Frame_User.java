@@ -40,7 +40,8 @@ public class Frame_User extends javax.swing.JFrame {
 
         panelHeader.getjL_xinChao().setText("Xin chào, " + taiKhoanDangNhap.getHoTen());
 
-        pack();
+//        pack();
+        setSize(800, 700);
         this.setLocationRelativeTo(null);
     }
 
@@ -58,7 +59,7 @@ public class Frame_User extends javax.swing.JFrame {
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
             .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(headerLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -81,7 +82,7 @@ public class Frame_User extends javax.swing.JFrame {
         mainContentPanel.setLayout(mainContentPanelLayout);
         mainContentPanelLayout.setHorizontalGroup(
             mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
         );
         mainContentPanelLayout.setVerticalGroup(
             mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,14 +141,14 @@ public class Frame_User extends javax.swing.JFrame {
         panelHeader.getjB_doiMatKhau().addActionListener(e -> {
             // Tạo và hiển thị Frame đổi mật khẩu
             // Truyền vào đối tượng quanLy và taiKhoan hiện tại
-            ThayDoiMatKhauFrame doiMKFrame = new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap);
+            ThayDoiMatKhauFrame doiMKFrame = new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap, this);
             doiMKFrame.setVisible(true);
         });
 
         // Sự kiện cho nút Sửa thông tin
         panelHeader.getjB_suaThongTin().addActionListener(e -> {
             // Tạo và hiển thị Frame sửa thông tin
-            ThayDoiThongTinFrame doiTTFrame = new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap);
+            ThayDoiThongTinFrame doiTTFrame = new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap, this);
             doiTTFrame.setVisible(true);
         });
 
@@ -221,7 +222,7 @@ public class Frame_User extends javax.swing.JFrame {
                 String maVe = panelVeCuaToi.getJTable().getValueAt(selectedRow, 0).toString();
                 VeMayBay veCanSua = quanLy.timVe(maVe);
                 if (veCanSua != null) {
-                    SuaVeFrame suaVeFrame = new SuaVeFrame(quanLy, veCanSua, this);
+                    ThongTinVeFrame suaVeFrame = new ThongTinVeFrame(quanLy, veCanSua, this);
                     suaVeFrame.setVisible(true);
                 }
             }
@@ -232,6 +233,7 @@ public class Frame_User extends javax.swing.JFrame {
         String diemDi = panelTimKiem.getjT_diemDi().getText().trim();
         String diemDen = panelTimKiem.getjT_diemDen().getText().trim();
         java.util.Date date = panelTimKiem.getjDateChooser1().getDate();
+        int soVeCanMua = (int) panelTimKiem.getjSpinner_soVe().getValue();
 
         if (diemDi.isEmpty() || diemDen.isEmpty() || date == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ Điểm đi, Điểm đến và Ngày đi.", "Thiếu thông tin", JOptionPane.ERROR_MESSAGE);
@@ -244,30 +246,31 @@ public class Frame_User extends javax.swing.JFrame {
                 .filter(cb -> cb.getDiemDi().equalsIgnoreCase(diemDi))
                 .filter(cb -> cb.getDiemDen().equalsIgnoreCase(diemDen))
                 .filter(cb -> cb.getThoiGianDi().toLocalDate().equals(ngayDi))
+                .filter(cb -> (cb.tongSoCho() - cb.getSoVeDaBan()) >= soVeCanMua)
                 .collect(Collectors.toList());
-
-        if (ketQuaTimKiem.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy chuyến bay nào phù hợp.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        // Cập nhật thông tin tìm kiếm trên panel kết quả
-        panelKetQuaTimKiem.getjL_diaDiem().setText(diemDi + " -> " + diemDen);
-        panelKetQuaTimKiem.getjL_thoiGian().setText("Ngày: " + ngayDi.toString());
 
         // Hiển thị kết quả lên bảng
         DefaultTableModel model = (DefaultTableModel) panelKetQuaTimKiem.getJTable_KetQua().getModel();
         model.setRowCount(0); // Xóa dữ liệu cũ
 
-        for (ChuyenBay cb : ketQuaTimKiem) {
-            Object[] row = new Object[]{
-                cb.getSoHieuChuyenBay(),
-                quanLy.timMayBay(cb.getSoHieuMayBay()).getMaHang(),
-                cb.getThoiGianDi().toLocalTime(),
-                cb.getThoiGianDen().toLocalTime(),
-                String.format("%,.0f VNĐ", cb.getGiaPhoThong()),
-                String.format("%,.0f VNĐ", cb.getGiaThuongGia())
-            };
-            model.addRow(row);
+        // Cập nhật thông tin tìm kiếm trên panel kết quả
+        panelKetQuaTimKiem.getjL_diaDiem().setText(diemDi + " -> " + diemDen);
+        panelKetQuaTimKiem.getjL_thoiGian().setText("Ngày: " + ngayDi.toString());
+        if (ketQuaTimKiem.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy chuyến bay nào phù hợp.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            for (ChuyenBay cb : ketQuaTimKiem) {
+                Object[] row = new Object[]{
+                    cb.getSoHieuChuyenBay(),
+                    quanLy.timMayBay(cb.getSoHieuMayBay()).getMaHang(),
+                    cb.getThoiGianDi().toLocalTime(),
+                    cb.getThoiGianDen().toLocalTime(),
+                    cb.tongSoCho() - cb.getSoVeDaBan(),
+                    String.format("%,.0f VNĐ", cb.getGiaPhoThong()),
+                    String.format("%,.0f VNĐ", cb.getGiaThuongGia())
+                };
+                model.addRow(row);
+            }
         }
     }
 

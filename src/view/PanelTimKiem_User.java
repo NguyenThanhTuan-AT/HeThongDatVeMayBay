@@ -21,8 +21,8 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jL_diemDi = new javax.swing.JLabel();
         jT_diemDi = new javax.swing.JTextField();
         jL_diemDen = new javax.swing.JLabel();
@@ -30,97 +30,143 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         jL_ngayDi = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jL_soGhe = new javax.swing.JLabel();
-        jSpinner_soGhe = new javax.swing.JSpinner();
+        jSpinner_soVe = new javax.swing.JSpinner();
+        jPanel1 = new javax.swing.JPanel();
         jB_timKiem = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridBagLayout());
+        setLayout(new java.awt.BorderLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Tìm kiếm chuyến bay");
+        add(jLabel3, java.awt.BorderLayout.PAGE_START);
 
-        jL_diemDi.setText("Điểm đi");
+        jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        jL_diemDen.setText("Điểm đến");
+        jL_diemDi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_diemDi.setText("Điểm đi : ");
+        jL_diemDi.setPreferredSize(new java.awt.Dimension(41, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 22;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(37, 48, 0, 0);
+        jPanel4.add(jL_diemDi, gridBagConstraints);
 
+        jT_diemDi.setPreferredSize(new java.awt.Dimension(140, 30));
+        jT_diemDi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_diemDiActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 76;
+        gridBagConstraints.ipady = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(37, 0, 0, 0);
+        jPanel4.add(jT_diemDi, gridBagConstraints);
+
+        jL_diemDen.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_diemDen.setText("Điểm đến : ");
+        jL_diemDen.setPreferredSize(new java.awt.Dimension(60, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(37, 20, 0, 0);
+        jPanel4.add(jL_diemDen, gridBagConstraints);
+
+        jT_diemDen.setPreferredSize(new java.awt.Dimension(140, 30));
         jT_diemDen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jT_diemDenActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 76;
+        gridBagConstraints.ipady = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(37, 0, 0, 41);
+        jPanel4.add(jT_diemDen, gridBagConstraints);
 
-        jL_ngayDi.setText("Ngày đi");
+        jL_ngayDi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_ngayDi.setText("Ngày đi : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 23;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 48, 0, 0);
+        jPanel4.add(jL_ngayDi, gridBagConstraints);
 
-        jL_soGhe.setText("Số ghế");
+        jDateChooser1.setPreferredSize(new java.awt.Dimension(140, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 58;
+        gridBagConstraints.ipady = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        jPanel4.add(jDateChooser1, gridBagConstraints);
+
+        jL_soGhe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_soGhe.setText("Số lượng vé: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 100, 40, 0);
+        jPanel4.add(jL_soGhe, gridBagConstraints);
+
+        jSpinner_soVe.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jSpinner_soVe.setPreferredSize(new java.awt.Dimension(64, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 6, 40, 0);
+        jPanel4.add(jSpinner_soVe, gridBagConstraints);
+
+        add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jB_timKiem.setText("Tìm kiếm");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jL_diemDi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jT_diemDi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125)
-                .addComponent(jL_diemDen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jT_diemDen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jL_ngayDi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jL_soGhe, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jSpinner_soGhe, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addComponent(jB_timKiem))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jL_diemDi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jT_diemDi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jL_diemDen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jT_diemDen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jL_ngayDi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jL_soGhe, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner_soGhe, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jB_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
-        );
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 30;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 15, 0);
-        add(jPanel4, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 225, 6, 225);
+        jPanel1.add(jB_timKiem, gridBagConstraints);
+
+        add(jPanel1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jT_diemDenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_diemDenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jT_diemDenActionPerformed
+
+    private void jT_diemDiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_diemDiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jT_diemDiActionPerformed
 
     public JTextField getjT_diemDi() {
         return jT_diemDi;
@@ -134,8 +180,8 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         return jDateChooser1;
     }
 
-    public JSpinner getjSpinner_soGhe() {
-        return jSpinner_soGhe;
+    public JSpinner getjSpinner_soVe() {
+        return jSpinner_soVe;
     }
 
     public JButton getjB_timKiem() {
@@ -170,7 +216,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         getjT_diemDi().setText("");
         getjT_diemDen().setText("");
         getjDateChooser1().setDate(null);
-        getjSpinner_soGhe().setValue(0);
+        getjSpinner_soVe().setValue(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -181,8 +227,9 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
     private javax.swing.JLabel jL_ngayDi;
     private javax.swing.JLabel jL_soGhe;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JSpinner jSpinner_soGhe;
+    private javax.swing.JSpinner jSpinner_soVe;
     private javax.swing.JTextField jT_diemDen;
     private javax.swing.JTextField jT_diemDi;
     // End of variables declaration//GEN-END:variables

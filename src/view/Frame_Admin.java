@@ -1,13 +1,13 @@
 package view;
 
 import java.awt.CardLayout;
-import java.util.List;
 import javax.swing.JOptionPane;
 import model.ChuyenBay;
 import model.HangHangKhong;
 import model.MayBay;
 import model.QuanLyChung;
 import model.TaiKhoan;
+import model.VeMayBay;
 
 public class Frame_Admin extends javax.swing.JFrame {
 
@@ -19,6 +19,7 @@ public class Frame_Admin extends javax.swing.JFrame {
     private view.PanelThongKe_Admin panelThongKe;
     private view.PanelMayBay_Admin panelMayBay;
     private view.PanelVeMayBay_Admin panelVeMayBay;
+    private view.PanelHanhKhach_Admin panelHanhKhach;
     private QuanLyChung quanLy;
     private TaiKhoan taiKhoanDangNhap;
 
@@ -30,7 +31,8 @@ public class Frame_Admin extends javax.swing.JFrame {
         headerWrapperPanel.setBorder(null);
         mainContentPanel.setBorder(null);
         setupAllPanelsAndEvents();
-        pack();
+//        pack();
+        setSize(1000, 700);
         this.setLocationRelativeTo(null);
     }
 
@@ -51,7 +53,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             .addGroup(headerWrapperPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         headerWrapperPanelLayout.setVerticalGroup(
             headerWrapperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,37 +80,42 @@ public class Frame_Admin extends javax.swing.JFrame {
         mainContentPanel.setLayout(cardLayout);
 
         // Khởi tạo các panel chức năng
-        panelChuyenBay = new view.PanelChuyenBay_Admin();
-        panelHangHangKhong = new view.PanelHangHangKhong_Admin();
-        panelMayBay = new view.PanelMayBay_Admin();
-        panelTaiKhoan = new view.PanelTaiKhoan_Admin();
-        panelThongKe = new view.PanelThongKe_Admin();
-        panelVeMayBay = new view.PanelVeMayBay_Admin();
-        panelVeMayBay.setQuanLy(this.quanLy);
+        panelChuyenBay = new PanelChuyenBay_Admin();
+        panelHangHangKhong = new PanelHangHangKhong_Admin();
+        panelMayBay = new PanelMayBay_Admin();
+        panelTaiKhoan = new PanelTaiKhoan_Admin();
+        panelThongKe = new PanelThongKe_Admin();
+        panelVeMayBay = new PanelVeMayBay_Admin();
+        panelHanhKhach = new PanelHanhKhach_Admin();
+
         // Thêm các panel chức năng vào CardLayout
         mainContentPanel.add(panelChuyenBay, "quanLyChuyenBay");
         mainContentPanel.add(panelHangHangKhong, "quanLyHangHangKhong");
         mainContentPanel.add(panelMayBay, "quanLyMayBay");
         mainContentPanel.add(panelTaiKhoan, "quanLyTaiKhoan");
         mainContentPanel.add(panelThongKe, "thongKe");
+        mainContentPanel.add(panelHanhKhach, "quanLyHanhKhach");
+        mainContentPanel.add(panelVeMayBay, "quanLyVe");
 
-        // Hiển thị màn hình quản lý chuyến bay đầu tiên
-        cardLayout.show(mainContentPanel, "quanLyChuyenBay");
-        panelChuyenBay.loadSoHieuMayBay(quanLy);
-        panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
-        // Gắn các sự kiện cho các nút trên header và các panel con
+        // Gắn các sự kiện
         setupHeaderEvents();
         setupChuyenBayEvents();
         setupHangHangKhongEvents();
         setupMayBayEvents();
         setupTaiKhoanEvents();
         setupThongKeEvents();
+        setupHanhKhachEvents();
+        setupVeMayBayEvents();
+
+        // Hiển thị màn hình quản lý chuyến bay đầu tiên
+        cardLayout.show(mainContentPanel, "quanLyChuyenBay");
+        panelChuyenBay.loadDataToTable(quanLy); // Nạp dữ liệu lần đầu
     }
 
+    //Panel Header
     private void setupHeaderEvents() {
         panelHeader.getjB_qlChuyenBay().addActionListener(e -> {
-            panelChuyenBay.loadSoHieuMayBay(quanLy);
-            panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+            panelChuyenBay.loadDataToTable(quanLy);
             cardLayout.show(mainContentPanel, "quanLyChuyenBay");
         });
 
@@ -118,7 +125,6 @@ public class Frame_Admin extends javax.swing.JFrame {
         });
 
         panelHeader.getjB_qlMayBay().addActionListener(e -> {
-            panelMayBay.loadMaHang(quanLy);
             panelMayBay.loadDataToTable(quanLy);
             cardLayout.show(mainContentPanel, "quanLyMayBay");
         });
@@ -126,6 +132,16 @@ public class Frame_Admin extends javax.swing.JFrame {
         panelHeader.getjB_qlTaiKhoan().addActionListener(e -> {
             panelTaiKhoan.loadDataToTable(quanLy);
             cardLayout.show(mainContentPanel, "quanLyTaiKhoan");
+        });
+
+        panelHeader.getjB_qlHanhKhach().addActionListener(e -> {
+            panelHanhKhach.loadDataToTable(quanLy);
+            cardLayout.show(mainContentPanel, "quanLyHanhKhach");
+        });
+
+        panelHeader.getjB_qlVe().addActionListener(e -> {
+            panelVeMayBay.loadDataToTable(quanLy);
+            cardLayout.show(mainContentPanel, "quanLyVe");
         });
 
         panelHeader.getjB_thongKe().addActionListener(e -> {
@@ -138,28 +154,129 @@ public class Frame_Admin extends javax.swing.JFrame {
             new DangNhapFrame().setVisible(true);
         });
 
-        // Sự kpanelHeader_Admin1 Đổi mật khẩu
         panelHeader.getjB_doiMatKhau().addActionListener(e -> {
-            // Tạo và hiển thị Frame đổi mật khẩu
-            // Truyền vào đối tượng quanLy và taiKhoan hiện tại
-            ThayDoiMatKhauFrame doiMKFrame = new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap);
-            doiMKFrame.setVisible(true);
+            new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap, this).setVisible(true);
         });
 
-        // Sự kiện cho nút Sửa thông tin
         panelHeader.getjB_suaThongTin().addActionListener(e -> {
-            // Tạo và hiển thị Frame sửa thông tin
-            ThayDoiThongTinFrame doiTTFrame = new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap);
-            doiTTFrame.setVisible(true);
+            new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap, this).setVisible(true);
         });
     }
 
+    //Panel Hang
+    private void setupHangHangKhongEvents() {
+        panelHangHangKhong.getjB_them().addActionListener(e -> {
+            HangHangKhong hhk = panelHangHangKhong.getDataFromFields();
+            if (hhk != null) {
+                // KIỂM TRA THÊM: Mã hãng đã tồn tại hay chưa
+                if (quanLy.timHang(hhk.getMaHang()) != null) {
+                    JOptionPane.showMessageDialog(this, "Mã hãng '" + hhk.getMaHang() + "' đã tồn tại. Vui lòng nhập mã khác.", "Lỗi trùng lặp", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Chỉ thêm khi mã hãng chưa tồn tại
+                    quanLy.themHang(hhk);
+                    panelHangHangKhong.loadDataToTable(quanLy);
+                    panelMayBay.loadMaHang(quanLy);
+                    JOptionPane.showMessageDialog(this, "Thêm hãng thành công!");
+                    panelHangHangKhong.clearFields();
+                }
+            }
+        });
+        panelHangHangKhong.getjB_sua().addActionListener(e -> {
+            HangHangKhong hhk = panelHangHangKhong.getDataFromFields();
+            if (hhk != null) {
+                quanLy.suaHang(hhk);
+                panelHangHangKhong.loadDataToTable(quanLy);
+                JOptionPane.showMessageDialog(this, "Sửa hãng thành công!");
+                panelHangHangKhong.clearFields();
+            }
+        });
+        panelHangHangKhong.getjB_xoa().addActionListener(e -> {
+            String maHang = panelHangHangKhong.getjT_maHang().getText();
+            if (maHang != null && !maHang.isEmpty()) {
+                // Kiểm tra ràng buộc trước khi xóa
+                boolean hangCoMayBay = quanLy.getDanhSachMayBay().stream().anyMatch(mb -> mb.getMaHang().equals(maHang));
+
+                if (hangCoMayBay) {
+                    JOptionPane.showMessageDialog(this,
+                            "Không thể xóa hãng '" + maHang + "' vì vẫn còn máy bay thuộc hãng này.\n"
+                            + "Vui lòng xóa hoặc di chuyển các máy bay liên quan trước.",
+                            "Lỗi ràng buộc dữ liệu",
+                            JOptionPane.ERROR_MESSAGE);
+                    return; // Dừng hành động xóa
+                }
+
+                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa hãng '" + maHang + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    quanLy.xoaHang(maHang);
+                    panelHangHangKhong.loadDataToTable(quanLy);
+                    panelMayBay.loadMaHang(quanLy);
+                    JOptionPane.showMessageDialog(this, "Xóa hãng thành công!");
+                    panelHangHangKhong.clearFields();
+                }
+            }
+        });
+        panelHangHangKhong.getjB_lamMoi().addActionListener(e -> {
+            panelHangHangKhong.clearFields();
+        });
+    }
+
+    //Panel May bay
+    private void setupMayBayEvents() {
+        panelMayBay.getjB_them().addActionListener(e -> {
+            MayBay mb = panelMayBay.getDataFromFields();
+            if (mb != null) {
+                quanLy.themMayBay(mb);
+                panelMayBay.loadDataToTable(quanLy);
+                panelChuyenBay.loadSoHieuMayBay(quanLy);
+                JOptionPane.showMessageDialog(this, "Thêm máy bay thành công!");
+                panelMayBay.clearFields();
+            }
+        });
+        panelMayBay.getjB_sua().addActionListener(e -> {
+            MayBay mb = panelMayBay.getDataFromFields();
+            if (mb != null) {
+                quanLy.suaMayBay(mb);
+                panelMayBay.loadDataToTable(quanLy);
+                JOptionPane.showMessageDialog(this, "Sửa máy bay thành công!");
+                panelMayBay.clearFields();
+            }
+        });
+        panelMayBay.getjB_xoa().addActionListener(e -> {
+            String soHieu = panelMayBay.getjT_soHieuMB().getText();
+            if (soHieu != null && !soHieu.isEmpty()) {
+
+                boolean mayBayCoChuyenBay = quanLy.getDanhSachChuyenBay().stream().anyMatch(cb -> cb.getSoHieuMayBay().equals(soHieu));
+                if (mayBayCoChuyenBay) {
+                    JOptionPane.showMessageDialog(this,
+                            "Không thể xóa máy bay '" + soHieu + "' vì vẫn còn chuyến bay thuộc máy bay này.\n"
+                            + "Vui lòng xóa hoặc di chuyển các chuyến bay liên quan trước.",
+                            "Lỗi ràng buộc dữ liệu",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa máy bay '" + soHieu + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (choice == JOptionPane.YES_OPTION) {
+                    quanLy.xoaMayBay(soHieu);
+                    panelMayBay.loadDataToTable(quanLy);
+                    panelChuyenBay.loadSoHieuMayBay(quanLy);
+                    panelChuyenBay.loadSoHieuMayBay(quanLy); // Cập nhật combobox
+                    JOptionPane.showMessageDialog(this, "Xóa máy bay thành công!");
+                    panelMayBay.clearFields();
+                }
+            }
+        });
+        panelMayBay.getjB_lamMoi().addActionListener(e -> {
+            panelMayBay.clearFields();
+        });
+    }
+
+    //Panel Chuyến bay
     private void setupChuyenBayEvents() {
         panelChuyenBay.getjB_them().addActionListener(e -> {
             ChuyenBay cb = panelChuyenBay.getDataFromFields();
             if (cb != null) {
                 quanLy.themChuyenBay(cb);
-                panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+                panelChuyenBay.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Thêm chuyến bay thành công!");
                 panelChuyenBay.clearFields();
             }
@@ -168,7 +285,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             ChuyenBay cb = panelChuyenBay.getDataFromFields();
             if (cb != null) {
                 quanLy.suaChuyenBay(cb);
-                panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+                panelChuyenBay.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Sửa chuyến bay thành công!");
                 panelChuyenBay.clearFields();
             }
@@ -187,7 +304,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 // Chỉ thực hiện xóa nếu người dùng chọn "Yes"
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaChuyenBay(soHieu);
-                    panelChuyenBay.loadDataToTable(chuyenBayToArray(quanLy.getDanhSachChuyenBay()));
+                    panelChuyenBay.loadDataToTable(quanLy);
                     JOptionPane.showMessageDialog(this, "Xóa chuyến bay thành công!");
                     panelChuyenBay.clearFields();
                 }
@@ -198,78 +315,126 @@ public class Frame_Admin extends javax.swing.JFrame {
         });
     }
 
-    private void setupHangHangKhongEvents() {
-        panelHangHangKhong.getjB_them().addActionListener(e -> {
-            HangHangKhong hhk = panelHangHangKhong.getDataFromFields();
-            if (hhk != null) {
-                quanLy.themHang(hhk);
-                panelHangHangKhong.loadDataToTable(quanLy);
-                JOptionPane.showMessageDialog(this, "Thêm hãng hàng không thành công!");
-                panelHangHangKhong.clearFields();
+    //Panel Vé máy bay
+    private void setupVeMayBayEvents() {
+        // Sự kiện cho nút Sửa
+        panelVeMayBay.getjB_sua().addActionListener(e -> {
+            VeMayBay veSua = panelVeMayBay.getDataFromFields();
+            if (veSua == null) {
+                return;
+            }
+
+            try {
+                // Lấy giá mới từ JTextField
+                double giaMoi = Double.parseDouble(panelVeMayBay.getjT_giaVe().getText());
+
+                // Cập nhật thông tin vé (chủ yếu là hạng vé)
+                quanLy.suaVe(veSua);
+
+                // Cập nhật giá của Chuyến bay tương ứng
+                ChuyenBay cb = quanLy.timChuyenBay(veSua.getSoHieuChuyenBay());
+                if (cb != null) {
+                    if (veSua.getHangVe() == VeMayBay.HangVe.PHO_THONG) {
+                        cb.setGiaPhoThong(giaMoi);
+                    } else {
+                        cb.setGiaThuongGia(giaMoi);
+                    }
+                    quanLy.suaChuyenBay(cb); // Lưu thay đổi giá của chuyến bay
+                }
+
+                JOptionPane.showMessageDialog(this, "Cập nhật vé và giá chuyến bay thành công!");
+                panelVeMayBay.loadDataToTable(quanLy);
+                panelVeMayBay.clearFields();
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Giá vé phải là một con số.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         });
-        panelHangHangKhong.getjB_sua().addActionListener(e -> {
-            HangHangKhong hhk = panelHangHangKhong.getDataFromFields();
-            if (hhk != null) {
-                quanLy.suaHang(hhk);
-                panelHangHangKhong.loadDataToTable(quanLy);
-                JOptionPane.showMessageDialog(this, "Sửa hãng hàng không thành công!");
-                panelHangHangKhong.clearFields();
-            }
-        });
-        panelHangHangKhong.getjB_xoa().addActionListener(e -> {
-            String maHang = panelHangHangKhong.getjT_maHang().getText();
-            if (maHang != null && !maHang.isEmpty()) {
-                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa hãng '" + maHang + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        // Sự kiện cho nút Xóa
+        panelVeMayBay.getjB_xoa().addActionListener(e -> {
+            String maVe = panelVeMayBay.getjT_maVe().getText();
+            if (maVe != null && !maVe.isEmpty()) {
+                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa vé '" + maVe + "' không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
-                    quanLy.xoaHang(maHang);
-                    panelHangHangKhong.loadDataToTable(quanLy);
-                    JOptionPane.showMessageDialog(this, "Xóa hãng hàng không thành công!");
-                    panelHangHangKhong.clearFields();
+                    quanLy.xoaVe(maVe);
+                    JOptionPane.showMessageDialog(this, "Xóa vé thành công!");
+                    panelVeMayBay.loadDataToTable(quanLy);
+                    panelVeMayBay.clearFields();
                 }
             }
         });
-        panelHangHangKhong.getjB_lamMoi().addActionListener(e -> {
-            panelHangHangKhong.clearFields();
+
+        // Sự kiện cho nút Làm mới
+        panelVeMayBay.getjB_lamMoi().addActionListener(e -> {
+            panelVeMayBay.clearFields();
+        });
+
+        // Sự kiện cho nút Thêm (chỉ thông báo)
+        panelVeMayBay.getjB_them().addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Chức năng Thêm vé chỉ nên thực hiện khi có thông tin Hành khách. Vui lòng đặt vé từ giao diện User.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         });
     }
 
-    private void setupMayBayEvents() {
-        panelMayBay.getjB_them().addActionListener(e -> {
-            MayBay mb = panelMayBay.getDataFromFields();
-            if (mb != null) {
-                quanLy.themMayBay(mb);
-                panelMayBay.loadDataToTable(quanLy);
-                JOptionPane.showMessageDialog(this, "Thêm máy bay thành công!");
-                panelMayBay.clearFields();
-            }
-        });
-        panelMayBay.getjB_sua().addActionListener(e -> {
-            MayBay mb = panelMayBay.getDataFromFields();
-            if (mb != null) {
-                quanLy.suaMayBay(mb);
-                panelMayBay.loadDataToTable(quanLy);
-                JOptionPane.showMessageDialog(this, "Sửa máy bay thành công!");
-                panelMayBay.clearFields();
-            }
-        });
-        panelMayBay.getjB_xoa().addActionListener(e -> {
-            String soHieu = panelMayBay.getjT_soHieuMB().getText();
-            if (soHieu != null && !soHieu.isEmpty()) {
-                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa máy bay '" + soHieu + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (choice == JOptionPane.YES_OPTION) {
-                    quanLy.xoaMayBay(soHieu);
-                    panelMayBay.loadDataToTable(quanLy);
-                    JOptionPane.showMessageDialog(this, "Xóa máy bay thành công!");
-                    panelMayBay.clearFields();
-                }
-            }
-        });
-        panelMayBay.getjB_lamMoi().addActionListener(e -> {
-            panelMayBay.clearFields();
+    //Panel Hanh khach
+    private void setupHanhKhachEvents() {
+        // Sự kiện cho nút Thêm
+//        panelHanhKhach.getjB_them().addActionListener(e -> {
+//            HanhKhach hk = panelHanhKhach.getDataFromFields();
+//            if (hk != null) {
+//                if (quanLy.timHanhKhach(hk.getCccd()) != null) {
+//                    JOptionPane.showMessageDialog(this, "CCCD đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+//                } else {
+//                    quanLy.themHanhKhach(hk);
+//                    panelHanhKhach.loadDataToTable(quanLy); // Cập nhật lại bảng
+//                    JOptionPane.showMessageDialog(this, "Thêm hành khách thành công!");
+//                    panelHanhKhach.clearFields();
+//                }
+//            }
+//        });
+//
+//        // Sự kiện cho nút Sửa
+//        panelHanhKhach.getjB_sua().addActionListener(e -> {
+//            HanhKhach hk = panelHanhKhach.getDataFromFields();
+//            if (hk != null) {
+//                quanLy.suaHanhKhach(hk);
+//                panelHanhKhach.loadDataToTable(quanLy);
+//                JOptionPane.showMessageDialog(this, "Sửa thông tin hành khách thành công!");
+//                panelHanhKhach.clearFields();
+//            }
+//        });
+//
+//        // Sự kiện cho nút Xóa
+//        panelHanhKhach.getjB_xoa().addActionListener(e -> {
+//            String cccd = panelHanhKhach.getjT_soCCCD().getText();
+//            if (!cccd.isEmpty()) {
+//                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa hành khách này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+//                if (choice == JOptionPane.YES_OPTION) {
+//                    quanLy.xoaHanhKhach(cccd);
+//                    panelHanhKhach.loadDataToTable(quanLy);
+//                    JOptionPane.showMessageDialog(this, "Xóa hành khách thành công!");
+//                    panelHanhKhach.clearFields();
+//                }
+//            }
+//        });
+
+        // Sự kiện cho nút Làm mới
+        panelHanhKhach.getjB_lamMoi().addActionListener(e -> {
+            panelHanhKhach.loadDataToTable(quanLy);
+            panelHanhKhach.clearFields();
+            JOptionPane.showMessageDialog(this, "Đã làm mới danh sách hành khách!");
         });
     }
 
+    //Panel Thong ke
+    private void setupThongKeEvents() {
+        panelThongKe.getjB_thongKe().addActionListener(e -> {
+            panelThongKe.thongKeDoanhThu(quanLy);
+            JOptionPane.showMessageDialog(this, "Đã làm mới danh sách hành khách!");
+        });
+    }
+
+    //Panel Tai khoan
     private void setupTaiKhoanEvents() {
         panelTaiKhoan.getjB_them().addActionListener(e -> {
             TaiKhoan tk = panelTaiKhoan.getDataFromFields();
@@ -306,31 +471,24 @@ public class Frame_Admin extends javax.swing.JFrame {
         });
     }
 
-    private void setupThongKeEvents() {
-        panelThongKe.getjB_thongKe().addActionListener(e -> {
-            panelThongKe.thongKeDoanhThu(quanLy);
-        });
-    }
-
-    private Object[][] chuyenBayToArray(List<ChuyenBay> list) {
-        Object[][] data = new Object[list.size()][12];
-        for (int i = 0; i < list.size(); i++) {
-            ChuyenBay cb = list.get(i);
-            int soVeDaBan = cb.getSoVeDaBan();
-            int soVeConLai = cb.tongSoCho() - soVeDaBan;
-            data[i][0] = cb.getSoHieuChuyenBay();
-            data[i][1] = cb.getSoHieuMayBay();
-            data[i][2] = cb.getDiemDi();
-            data[i][3] = cb.getDiemDen();
-            data[i][4] = cb.getThoiGianDi();
-            data[i][5] = cb.getThoiGianDen();
-            data[i][6] = cb.getSoPhoThong();
-            data[i][7] = cb.getSoThuongGia();
-            data[i][8] = cb.getGiaPhoThong();
-            data[i][9] = cb.getGiaThuongGia();
-            data[i][10] = soVeDaBan;
-            data[i][11] = soVeConLai;
-        }
-        return data;
-    }
+//    private Object[][] chuyenBayToArray(List<ChuyenBay> list) {
+//        Object[][] data = new Object[list.size()][12];
+//        for (int i = 0; i < list.size(); i++) {
+//            ChuyenBay cb = list.get(i);
+//            int soVeDaBan = cb.getSoVeDaBan();
+//            int soVeConLai = cb.tongSoCho() - soVeDaBan;
+//            data[i][0] = cb.getSoHieuChuyenBay();
+//            data[i][1] = cb.getSoHieuMayBay();
+//            data[i][2] = cb.getDiemDi();
+//            data[i][3] = cb.getDiemDen();
+//            data[i][4] = cb.getThoiGianDi();
+//            data[i][5] = cb.getThoiGianDen();
+//            data[i][6] = cb.getSoPhoThong();
+//            data[i][7] = cb.getSoThuongGia();
+//            data[i][8] = cb.getGiaPhoThong();
+//            data[i][9] = cb.getGiaThuongGia();
+//            data[i][10] = soVeDaBan;
+//            data[i][11] = soVeConLai;
+//        }
+//        return data;
 }

@@ -6,37 +6,50 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.HangHangKhong;
 import model.QuanLyChung;
 
-public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
+public class PanelHangHangKhong_Admin extends BaseAdminPanel<HangHangKhong> {
+
+    private TableRowSorter<DefaultTableModel> sorter;
+    private DefaultTableModel tableModel;
 
     public PanelHangHangKhong_Admin() {
         initComponents();
+        this.tableModel = (DefaultTableModel) jTable_dsHangHangKhong.getModel();
+
+        sorter = new TableRowSorter<>(tableModel);
+        jTable_dsHangHangKhong.setRowSorter(sorter);
+
+        jT_timKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterTable();
+            }
+        });
+
         jTable_dsHangHangKhong.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int selectedRow = jTable_dsHangHangKhong.getSelectedRow();
                 if (selectedRow != -1) {
-                    fillFieldsFromTable(selectedRow);
-                }
-            }
-        });
-
-        jT_maHang.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jT_tenHang.requestFocusInWindow();
-            }
-        });
-        jT_tenHang.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (jB_them.isEnabled()) {
-                    jB_them.doClick();
-                } else {
-                    jB_sua.doClick();
+                    int modelRow = jTable_dsHangHangKhong.convertRowIndexToModel(selectedRow);
+                    fillFieldsFromTable(modelRow);
                 }
             }
         });
@@ -58,6 +71,9 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         jB_xoa = new javax.swing.JButton();
         jB_lamMoi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jL_timKiem = new javax.swing.JLabel();
+        jComboBox_tieuChi = new javax.swing.JComboBox<>();
+        jT_timKiem = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_dsHangHangKhong = new javax.swing.JTable();
 
@@ -67,19 +83,21 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
 
         jL_maHang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_maHang.setText(" Mã hãng : ");
-        jL_maHang.setPreferredSize(new java.awt.Dimension(59, 16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 15;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 207, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 149, 0, 0);
         jPanel2.add(jL_maHang, gridBagConstraints);
+
+        jT_maHang.setPreferredSize(new java.awt.Dimension(70, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 116;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -91,21 +109,24 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 12;
+        gridBagConstraints.ipadx = 15;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 207, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 149, 0, 0);
         jPanel2.add(jL_tenHang, gridBagConstraints);
+
+        jT_tenHang.setPreferredSize(new java.awt.Dimension(70, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 116;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jT_tenHang, gridBagConstraints);
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jB_them.setText("Thêm");
         jPanel3.add(jB_them);
@@ -115,11 +136,6 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
 
         jB_xoa.setText("Xoá");
         jB_xoa.setToolTipText("");
-        jB_xoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_xoaActionPerformed(evt);
-            }
-        });
         jPanel3.add(jB_xoa);
 
         jB_lamMoi.setText("Làm mới");
@@ -128,10 +144,10 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 355;
+        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.ipadx = 246;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 1, 0, 0);
         jPanel2.add(jPanel3, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
@@ -139,12 +155,44 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 11;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 23, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 24, 0, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
+
+        jL_timKiem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_timKiem.setText("Tìm kiếm theo : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 32;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 73, 0, 0);
+        jPanel2.add(jL_timKiem, gridBagConstraints);
+
+        jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Tên hãng", "Mã hãng" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel2.add(jComboBox_tieuChi, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.ipadx = 120;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel2.add(jT_timKiem, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -204,15 +252,86 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
             new String [] {
                 "Mã hãng", "Tên hãng", "Số lượng máy bay"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTable_dsHangHangKhong);
 
         add(jScrollPane3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jB_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_xoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_xoaActionPerformed
+    // Phương thức nạp dữ liệu vào bảng
+    @Override
+    public void loadDataToTable(QuanLyChung quanLy) {
+        if (sorter != null) {
+            sorter.setRowFilter(null);
+        }
+        tableModel.setRowCount(0);
+        for (HangHangKhong hhk : quanLy.getDanhSachHang()) {
+            tableModel.addRow(new Object[]{hhk.getMaHang(), hhk.getTenHang(), hhk.getDanhSachMayBay().size()});
+        }
+    }
+
+    // Phương thức lấy dữ liệu từ các trường nhập liệu
+    @Override
+    public HangHangKhong getDataFromFields() {
+        String maHang = jT_maHang.getText();
+        String tenHang = jT_tenHang.getText();
+        if (maHang.isEmpty() || tenHang.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        return new HangHangKhong(maHang, tenHang);
+    }
+
+    // Phương thức xóa các trường nhập liệu
+    @Override
+    public void clearFields() {
+        jT_maHang.setText("");
+        jT_tenHang.setText("");
+        jT_maHang.setEnabled(true);
+        jB_them.setEnabled(true);
+        jB_sua.setEnabled(false);
+        jB_xoa.setEnabled(false);
+    }
+
+    // Phương thức điền dữ liệu vào các trường khi chọn hàng trên bảng
+    @Override
+    public void fillFieldsFromTable(int modelRowIndex) {
+        jT_maHang.setText(tableModel.getValueAt(modelRowIndex, 0).toString());
+        jT_tenHang.setText(tableModel.getValueAt(modelRowIndex, 1).toString());
+        jT_maHang.setEnabled(false);
+        jB_them.setEnabled(false);
+        jB_sua.setEnabled(true);
+        jB_xoa.setEnabled(true);
+    }
+
+    private void filterTable() {
+        String text = jT_timKiem.getText();
+        String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
+        if (text.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            int columnIndex = -1;
+            if ("Mã hãng".equals(tieuChi)) {
+                columnIndex = 0;
+            } else if ("Tên hãng".equals(tieuChi)) {
+                columnIndex = 1;
+            }
+
+            if (columnIndex == -1) {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+            } else {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, columnIndex));
+            }
+        }
+    }
 
     public JButton getjB_lamMoi() {
         return jB_lamMoi;
@@ -242,61 +361,22 @@ public class PanelHangHangKhong_Admin extends javax.swing.JPanel {
         return jTable_dsHangHangKhong;
     }
 
-    // Phương thức nạp dữ liệu vào bảng
-    public void loadDataToTable(QuanLyChung quanLy) {
-        DefaultTableModel model = (DefaultTableModel) jTable_dsHangHangKhong.getModel();
-        model.setRowCount(0);
-        for (HangHangKhong hhk : quanLy.getDanhSachHang()) {
-            Object[] row = new Object[]{hhk.getMaHang(), hhk.getTenHang(), hhk.getDanhSachMayBay().size()};
-            model.addRow(row);
-        }
-    }
-
-    // Phương thức lấy dữ liệu từ các trường nhập liệu
-    public HangHangKhong getDataFromFields() {
-        String maHang = jT_maHang.getText();
-        String tenHang = jT_tenHang.getText();
-        if (maHang.isEmpty() || tenHang.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-        return new HangHangKhong(maHang, tenHang);
-    }
-
-    // Phương thức xóa các trường nhập liệu
-    public void clearFields() {
-        jT_maHang.setText("");
-        jT_tenHang.setText("");
-        jT_maHang.setEnabled(true);
-        jB_them.setEnabled(true);
-        jB_sua.setEnabled(false);
-        jB_xoa.setEnabled(false);
-    }
-
-    // Phương thức điền dữ liệu vào các trường khi chọn hàng trên bảng
-    public void fillFieldsFromTable(int rowIndex) {
-        DefaultTableModel model = (DefaultTableModel) jTable_dsHangHangKhong.getModel();
-        jT_maHang.setText(model.getValueAt(rowIndex, 0).toString());
-        jT_tenHang.setText(model.getValueAt(rowIndex, 1).toString());
-        jT_maHang.setEnabled(false);
-        jB_them.setEnabled(false);
-        jB_sua.setEnabled(true);
-        jB_xoa.setEnabled(true);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_lamMoi;
     private javax.swing.JButton jB_sua;
     private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_xoa;
+    private javax.swing.JComboBox<String> jComboBox_tieuChi;
     private javax.swing.JLabel jL_maHang;
     private javax.swing.JLabel jL_tenHang;
+    private javax.swing.JLabel jL_timKiem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jT_maHang;
     private javax.swing.JTextField jT_tenHang;
+    private javax.swing.JTextField jT_timKiem;
     private javax.swing.JTable jTable_dsHangHangKhong;
     // End of variables declaration//GEN-END:variables
 }

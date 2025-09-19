@@ -33,93 +33,73 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jLabel1" min="-2" pref="441" max="-2" attributes="0"/>
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jL_XacThucMK" min="-2" pref="110" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPasswordField_XacThucMK" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jL_tenDangNhap" min="-2" pref="110" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jT_tenDangNhap" min="-2" pref="230" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jL_mkHienTai" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                                      <Component id="jL_mkMoi" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jPasswordField_mkMoi" max="32767" attributes="0"/>
-                                      <Component id="jPasswordField_mkHienTai" pref="230" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jRadioButton_mkMoi" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton_xacThucMK" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton_mkHienTai" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                      <Component id="jB_Luu" min="-2" pref="91" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="jB_Huy" min="-2" pref="85" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+              <Component id="jL_tenDangNhap" min="-2" pref="109" max="-2" attributes="0"/>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <Component id="jT_tenDangNhap" min="-2" pref="230" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+              <Component id="jL_mkHienTai" min="-2" pref="109" max="-2" attributes="0"/>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <Component id="jPasswordField_mkHienTai" min="-2" pref="230" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+              <Component id="jL_mkMoi" min="-2" pref="109" max="-2" attributes="0"/>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <Component id="jPasswordField_mkMoi" min="-2" pref="230" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jRadioButton_matKhau" min="-2" pref="27" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+              <Component id="jL_XacThucMK" min="-2" pref="109" max="-2" attributes="0"/>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <Component id="jPasswordField_XacThucMK" min="-2" pref="230" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="103" pref="103" max="-2" attributes="0"/>
+              <Component id="jB_Luu" min="-2" pref="91" max="-2" attributes="0"/>
+              <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
+              <Component id="jB_Huy" min="-2" pref="85" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jL_tenDangNhap" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jT_tenDangNhap" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jL_tenDangNhap" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jT_tenDangNhap" min="-2" pref="30" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jL_mkHienTai" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jPasswordField_mkHienTai" min="-2" pref="30" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jL_mkMoi" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jPasswordField_mkMoi" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jRadioButton_matKhau" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jL_mkHienTai" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jRadioButton_mkHienTai" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jPasswordField_mkHienTai" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jL_XacThucMK" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jPasswordField_XacThucMK" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jPasswordField_mkMoi" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jL_mkMoi" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jRadioButton_mkMoi" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jB_Luu" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jB_Huy" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jPasswordField_XacThucMK" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jL_XacThucMK" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jRadioButton_xacThucMK" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jB_Luu" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jB_Huy" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -130,6 +110,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="0"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i M&#x1ead;t Kh&#x1ea9;u"/>
       </Properties>
     </Component>
@@ -200,11 +181,7 @@
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton_mkHienTai">
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton_mkMoi">
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton_xacThucMK">
+    <Component class="javax.swing.JRadioButton" name="jRadioButton_matKhau">
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordField_mkHienTai">
     </Component>
