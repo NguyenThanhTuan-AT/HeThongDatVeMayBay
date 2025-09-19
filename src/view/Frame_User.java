@@ -20,6 +20,7 @@ public class Frame_User extends javax.swing.JFrame {
     private view.PanelKetQuaTimKiem_User panelKetQuaTimKiem;
     private view.PanelThongTinDatVe_User panelThongTinDatVe;
     private view.PanelVeCuaToi_User panelVeCuaToi;
+    private ThongTinVeFrame chiTietVeFrame;
 
     // Các đối tượng logic
     private QuanLyChung quanLy;
@@ -193,10 +194,20 @@ public class Frame_User extends javax.swing.JFrame {
         // Sự kiện trên panel Vé của tôi
         panelVeCuaToi.getJTable().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (panelVeCuaToi.getJTable().getSelectedRow() != -1) {
-                    // Nếu có vé được chọn, bật các nút chức năng
-                    panelVeCuaToi.getjB_suaVe().setEnabled(true);
-                    panelVeCuaToi.getjB_xoaVe().setEnabled(true);
+                if (javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+
+                    int selectedRow = panelVeCuaToi.getJTable().getSelectedRow();
+
+                    // 1. Xử lý khi có 1 hàng được chọn (logic cũ để bật/tắt nút)
+                    if (selectedRow != -1) {
+                        panelVeCuaToi.getjB_xoaVe().setEnabled(true);
+
+                        // 2. Xử lý khi người dùng nháy đúp chuột
+                        if (evt.getClickCount() == 2) {
+                            String maVe = panelVeCuaToi.getJTable().getValueAt(selectedRow, 0).toString();
+                            hienThiChiTietVe(maVe);
+                        }
+                    }
                 }
             }
         });
@@ -216,17 +227,6 @@ public class Frame_User extends javax.swing.JFrame {
             }
         });
 
-        panelVeCuaToi.getjB_suaVe().addActionListener(e -> {
-            int selectedRow = panelVeCuaToi.getJTable().getSelectedRow();
-            if (selectedRow != -1) {
-                String maVe = panelVeCuaToi.getJTable().getValueAt(selectedRow, 0).toString();
-                VeMayBay veCanSua = quanLy.timVe(maVe);
-                if (veCanSua != null) {
-                    ThongTinVeFrame suaVeFrame = new ThongTinVeFrame(quanLy, veCanSua, this);
-                    suaVeFrame.setVisible(true);
-                }
-            }
-        });
     }
 
     private void timKiemChuyenBay() {
@@ -295,5 +295,19 @@ public class Frame_User extends javax.swing.JFrame {
 
     public void hienThiVeCuaToi() {
         panelVeCuaToi.loadDataToTable(quanLy, taiKhoanDangNhap.getCccd());
+    }
+
+    private void hienThiChiTietVe(String maVe) {
+        // Kiểm tra xem có cửa sổ nào đang mở và hiển thị không
+        if (chiTietVeFrame != null && chiTietVeFrame.isShowing()) {
+            chiTietVeFrame.toFront(); // Nếu có, đưa nó lên trên cùng
+        } else {
+            // Nếu không, tạo một cửa sổ mới
+            VeMayBay veCanXem = quanLy.timVe(maVe);
+            if (veCanXem != null) {
+                chiTietVeFrame = new ThongTinVeFrame(quanLy, veCanXem, this);
+                chiTietVeFrame.setVisible(true);
+            }
+        }
     }
 }

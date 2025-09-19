@@ -27,7 +27,6 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
         jTable_dsVe = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jB_suaVe = new javax.swing.JButton();
         jB_xoaVe = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
@@ -108,51 +107,20 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jB_suaVe.setText("Sửa vé ");
-        jB_suaVe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_suaVeActionPerformed(evt);
-            }
-        });
+        jB_xoaVe.setText("Xoá vé");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 23;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 174, 0, 0);
-        jPanel2.add(jB_suaVe, gridBagConstraints);
-
-        jB_xoaVe.setText("Xoá vé");
-        jB_xoaVe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_xoaVeActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 23;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 12, 0, 174);
+        gridBagConstraints.insets = new java.awt.Insets(5, 221, 0, 234);
         jPanel2.add(jB_xoaVe, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jB_xoaVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_xoaVeActionPerformed
-
-    }//GEN-LAST:event_jB_xoaVeActionPerformed
-
-    private void jB_suaVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_suaVeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_suaVeActionPerformed
-
     public JTable getJTable() {
         return jTable_dsVe;
-    }
-
-    public JButton getjB_suaVe() {
-        return jB_suaVe;
     }
 
     public JButton getjB_xoaVe() {
@@ -180,7 +148,6 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jB_suaVe;
     private javax.swing.JButton jB_xoaVe;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
