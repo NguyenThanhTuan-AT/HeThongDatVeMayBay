@@ -38,7 +38,7 @@ public class QuanLyChung {
         mapMayBay = listMayBay.stream().collect(Collectors.toMap(MayBay::getSoHieuMayBay, mb -> mb, (oldValue, newValue) -> oldValue, HashMap::new));
         mapTaiKhoan = listTaiKhoan.stream().collect(Collectors.toMap(TaiKhoan::getTenDangNhap, tk -> tk, (oldValue, newValue) -> oldValue, HashMap::new));
 
-        // CẢI TIẾN: Khởi tạo lastVeId để tạo mã vé không trùng lặp
+        // Khởi tạo lastVeId để tạo mã vé không trùng lặp
         this.lastVeId = mapVe.keySet().stream()
                 .mapToInt(maVe -> Integer.parseInt(maVe.replaceAll("[^0-9]", "")))
                 .max()

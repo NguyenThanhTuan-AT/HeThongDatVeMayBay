@@ -23,54 +23,119 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jLabel2" min="-2" pref="428" max="-2" attributes="0"/>
+          <Component id="jLabel2" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <EmptySpace min="97" pref="97" max="-2" attributes="0"/>
-              <Component id="jL_maVe1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-              <Component id="jT_maVe" min="-2" pref="180" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jL_soCCCD" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jL_diemDi" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jL_maVe1" alignment="1" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jL_tgDi" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jL_hoTen" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jL_maVe" min="-2" max="-2" attributes="0"/>
+                          <Component id="jL_maVe2" min="-2" pref="62" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jT_hoTen" min="-2" pref="180" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jT_tgDi" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="jT_maVe" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="jT_soCCCD" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="jT_diemDi" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="jT_soHieuCB" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="jComboBox_hangVe" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jL_giaVe" max="32767" attributes="0"/>
+                          <Component id="jL_tgDen" max="32767" attributes="0"/>
+                          <Component id="jL_diemDen" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Component id="jT_giaVe" min="-2" pref="180" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jT_diemDen" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="jT_tgDen" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="166" pref="166" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="jB_Luu" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="85" pref="85" max="-2" attributes="0"/>
-                  <Component id="jL_maVe2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Component id="jComboBox_hangVe" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
-                  <Component id="jL_maVe" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                  <Component id="jT_soHieuCB" min="-2" pref="180" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace min="-2" pref="308" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jL_maVe1" min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="jT_maVe" min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jL_hoTen" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jT_hoTen" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jL_maVe" min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="jT_soHieuCB" min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jL_soCCCD" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jT_soCCCD" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jL_maVe2" min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="jComboBox_hangVe" min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jL_diemDi" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jT_diemDi" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jL_diemDen" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jT_diemDen" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jL_tgDi" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jT_tgDi" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jL_tgDen" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jT_tgDen" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jT_maVe" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jL_maVe1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jL_giaVe" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jT_giaVe" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jL_maVe" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jT_soHieuCB" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jComboBox_hangVe" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jL_maVe2" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jB_Luu" min="-2" pref="35" max="-2" attributes="0"/>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,17 +152,20 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jL_maVe">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#x1ed1; hi&#x1ec7;u chuy&#x1ebf;n bay:"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="S&#x1ed1; hi&#x1ec7;u chuy&#x1ebf;n bay : "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jL_maVe1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="M&#xe3; v&#xe9;:"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="M&#xe3; v&#xe9; : "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jL_maVe2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="H&#x1ea1;ng v&#xe9;:"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="H&#x1ea1;ng v&#xe9; : "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jT_maVe">
@@ -109,9 +177,6 @@
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jT_soHieuCBActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox_hangVe">
       <Properties>
@@ -133,6 +198,83 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_LuuActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jL_hoTen">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="H&#x1ecd; t&#xea;n : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jT_hoTen">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jL_soCCCD">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="S&#x1ed1; CCCD : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jT_soCCCD">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jL_diemDi">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec3;m &#x111;i : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jT_diemDi">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jL_diemDen">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec3;m &#x111;&#x1ebf;n : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jT_diemDen">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jL_tgDi">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Th&#x1edd;i gian &#x111;i : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jT_tgDi">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jL_tgDen">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Th&#x1edd;i gian &#x111;&#x1ebf;n : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jT_tgDen">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jL_giaVe">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Gi&#xe1; v&#xe9; : "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jT_giaVe">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
