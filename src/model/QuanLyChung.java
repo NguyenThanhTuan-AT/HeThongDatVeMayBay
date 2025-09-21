@@ -80,14 +80,14 @@ public class QuanLyChung {
     // =============== QUẢN LÝ CHUYẾN BAY ===============
     public void themChuyenBay(ChuyenBay cb) {
         mapChuyenBay.put(cb.getSoHieuChuyenBay(), cb);
-        FileIOUtil.ghiVaoFile("chuyenbay.json", new ArrayList<>(mapChuyenBay.values()));
+//        FileIOUtil.ghiVaoFile("chuyenbay.json", new ArrayList<>(mapChuyenBay.values()));
     }
 
     public void suaChuyenBay(ChuyenBay cbMoi) {
         ChuyenBay cbCu = timChuyenBay(cbMoi.getSoHieuChuyenBay());
         if (cbCu != null) {
             cbCu.capNhatThongTin(cbMoi);
-            FileIOUtil.ghiVaoFile("chuyenbay.json", new ArrayList<>(mapChuyenBay.values()));
+//            FileIOUtil.ghiVaoFile("chuyenbay.json", new ArrayList<>(mapChuyenBay.values()));
         }
     }
 
@@ -100,7 +100,7 @@ public class QuanLyChung {
             }
 
             mapChuyenBay.remove(soHieu);
-            FileIOUtil.ghiVaoFile("chuyenbay.json", new ArrayList<>(mapChuyenBay.values()));
+//            FileIOUtil.ghiVaoFile("chuyenbay.json", new ArrayList<>(mapChuyenBay.values()));
         }
     }
 
@@ -155,7 +155,7 @@ public class QuanLyChung {
         VeMayBay veMoi = new VeMayBay(maVeMoi, soHieuChuyenBay, hangVe, cccd);
 
         mapVe.put(maVeMoi, veMoi);
-        FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
+//        FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
 
         ChuyenBay cb = timChuyenBay(soHieuChuyenBay);
         if (cb != null) {
@@ -187,8 +187,8 @@ public class QuanLyChung {
             mapVe.put(ve.getMaVe(), ve);
             cb.themVe(ve);
 
-            FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
-            FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
+//            FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
+//            FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
             System.out.println("Thêm vé thành công!");
         } else {
             System.out.println("Chuyến bay không còn chỗ trống cho hạng vé này.");
@@ -199,7 +199,7 @@ public class QuanLyChung {
         VeMayBay veCu = timVe(veMoi.getMaVe());
         if (veCu != null) {
             veCu.capNhatThongTin(veMoi);
-            FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
+//            FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
         }
     }
 
@@ -210,7 +210,7 @@ public class QuanLyChung {
             HanhKhach hk = timHanhKhach(veCanXoa.getCccdHanhKhach());
             if (hk != null) {
                 hk.xoaMaVe(maVe);
-                FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
+//                FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
             }
 
             ChuyenBay cb = timChuyenBay(veCanXoa.getSoHieuChuyenBay());
@@ -219,7 +219,7 @@ public class QuanLyChung {
             }
 
             mapVe.remove(maVe);
-            FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
+//            FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
         }
     }
 
@@ -272,14 +272,14 @@ public class QuanLyChung {
     // ================ QUẢN LÝ HÀNH KHÁCH =============
     public void themHanhKhach(HanhKhach hk) {
         mapHanhKhach.put(hk.getCccd(), hk);
-        FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
+//        FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
     }
 
     public void suaHanhKhach(HanhKhach hkMoi) {
         HanhKhach hkCu = timHanhKhach(hkMoi.getCccd());
         if (hkCu != null) {
             hkCu.setHoTen(hkMoi.getHoTen()); // Giả định chỉ sửa họ tên
-            FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
+//            FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
         }
     }
 
@@ -290,7 +290,7 @@ public class QuanLyChung {
             new ArrayList<>(hk.getDanhSachMaVe()).forEach(this::xoaVe);
         }
         mapHanhKhach.remove(cccd);
-        FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
+//        FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
     }
 
     public HanhKhach timHanhKhach(String cccd) {
@@ -348,20 +348,20 @@ public class QuanLyChung {
     // ================ QUẢN LÝ HÃNG HÀNG KHÔNG =============
     public void themHang(HangHangKhong hhk) {
         mapHang.put(hhk.getMaHang(), hhk);
-        FileIOUtil.ghiVaoFile("hang.json", new ArrayList<>(mapHang.values()));
+//        FileIOUtil.ghiVaoFile("hang.json", new ArrayList<>(mapHang.values()));
     }
 
     public void suaHang(HangHangKhong hhkMoi) {
         HangHangKhong hhkCu = timHang(hhkMoi.getMaHang());
         if (hhkCu != null) {
             hhkCu.capNhatThongTin(hhkMoi);
-            FileIOUtil.ghiVaoFile("hang.json", new ArrayList<>(mapHang.values()));
+//            FileIOUtil.ghiVaoFile("hang.json", new ArrayList<>(mapHang.values()));
         }
     }
 
     public void xoaHang(String maHang) {
         mapHang.remove(maHang);
-        FileIOUtil.ghiVaoFile("hang.json", new ArrayList<>(mapHang.values()));
+//        FileIOUtil.ghiVaoFile("hang.json", new ArrayList<>(mapHang.values()));
     }
 
     public HangHangKhong timHang(String maHang) {
@@ -371,20 +371,20 @@ public class QuanLyChung {
     // ================ QUẢN LÝ MÁY BAY =============
     public void themMayBay(MayBay mb) {
         mapMayBay.put(mb.getSoHieuMayBay(), mb);
-        FileIOUtil.ghiVaoFile("maybay.json", new ArrayList<>(mapMayBay.values()));
+//        FileIOUtil.ghiVaoFile("maybay.json", new ArrayList<>(mapMayBay.values()));
     }
 
     public void suaMayBay(MayBay mbMoi) {
         MayBay mbCu = timMayBay(mbMoi.getSoHieuMayBay());
         if (mbCu != null) {
             mbCu.capNhatThongTin(mbMoi);
-            FileIOUtil.ghiVaoFile("maybay.json", new ArrayList<>(mapMayBay.values()));
+//            FileIOUtil.ghiVaoFile("maybay.json", new ArrayList<>(mapMayBay.values()));
         }
     }
 
     public void xoaMayBay(String soHieu) {
         mapMayBay.remove(soHieu);
-        FileIOUtil.ghiVaoFile("maybay.json", new ArrayList<>(mapMayBay.values()));
+//        FileIOUtil.ghiVaoFile("maybay.json", new ArrayList<>(mapMayBay.values()));
     }
 
     public MayBay timMayBay(String soHieu) {
@@ -406,7 +406,7 @@ public class QuanLyChung {
             }
         }
 
-        FileIOUtil.ghiVaoFile("taikhoan.json", new ArrayList<>(mapTaiKhoan.values()));
+//        FileIOUtil.ghiVaoFile("taikhoan.json", new ArrayList<>(mapTaiKhoan.values()));
         System.out.println("Thêm tài khoản thành công!");
     }
 
@@ -414,7 +414,7 @@ public class QuanLyChung {
         TaiKhoan tkCu = timTaiKhoan(tkMoi.getTenDangNhap());
         if (tkCu != null) {
             tkCu.capNhatThongTin(tkMoi);
-            FileIOUtil.ghiVaoFile("taikhoan.json", new ArrayList<>(mapTaiKhoan.values()));
+//            FileIOUtil.ghiVaoFile("taikhoan.json", new ArrayList<>(mapTaiKhoan.values()));
         }
     }
 
@@ -428,12 +428,12 @@ public class QuanLyChung {
                 if (cccd != null && mapHanhKhach.containsKey(cccd)) {
                     mapHanhKhach.remove(cccd);
                     // Ghi lại file hành khách sau khi xóa
-                    FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
+//                    FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
                 }
             }
 
             mapTaiKhoan.remove(tenDangNhap);
-            FileIOUtil.ghiVaoFile("taikhoan.json", new ArrayList<>(mapTaiKhoan.values()));
+//            FileIOUtil.ghiVaoFile("taikhoan.json", new ArrayList<>(mapTaiKhoan.values()));
         }
     }
 
@@ -533,6 +533,15 @@ public class QuanLyChung {
             doanhThuMoiHang.put(hhk.getMaHang(), tongDoanhThu);
         }
         return doanhThuMoiHang;
+    }
+
+    public void luuToanBoDuLieuVaoFile() {
+        FileIOUtil.ghiVaoFile("chuyenbay.json", new ArrayList<>(mapChuyenBay.values()));
+        FileIOUtil.ghiVaoFile("ve.json", new ArrayList<>(mapVe.values()));
+        FileIOUtil.ghiVaoFile("hanhkhach.json", new ArrayList<>(mapHanhKhach.values()));
+        FileIOUtil.ghiVaoFile("hang.json", new ArrayList<>(mapHang.values()));
+        FileIOUtil.ghiVaoFile("maybay.json", new ArrayList<>(mapMayBay.values()));
+        FileIOUtil.ghiVaoFile("taikhoan.json", new ArrayList<>(mapTaiKhoan.values()));
     }
 
     @Override

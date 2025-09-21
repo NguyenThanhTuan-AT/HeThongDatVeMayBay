@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import model.ChuyenBay;
 import model.HanhKhach;
 import model.QuanLyChung;
 
@@ -86,7 +87,10 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
                 }
             }
         });
-
+        jComboBox_locChuyenBay.addActionListener(e -> {
+            currentPage = 1; // Reset về trang đầu tiên mỗi khi lọc
+            updateTableAndPagination();
+        });
         // Vô hiệu hóa các trường và nút không dùng đến
         jT_hoTen.setEditable(false);
         jT_soCCCD.setEditable(false);
@@ -117,6 +121,8 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jL_timKiem = new javax.swing.JLabel();
         jComboBox_tieuChi = new javax.swing.JComboBox<>();
         jT_timKiem = new javax.swing.JTextField();
+        jL_locTheoChuyenBay = new javax.swing.JLabel();
+        jComboBox_locChuyenBay = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_dsHanhKhach = new javax.swing.JTable();
         jPanel_South = new javax.swing.JPanel();
@@ -137,7 +143,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.ipady = 19;
+        gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 124, 0, 0);
         jPanel2.add(jL_hoTen, gridBagConstraints);
@@ -147,9 +153,9 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 11;
-        gridBagConstraints.ipadx = 150;
-        gridBagConstraints.ipady = 9;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.ipadx = 162;
+        gridBagConstraints.ipady = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel2.add(jT_hoTen, gridBagConstraints);
@@ -162,7 +168,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 9;
-        gridBagConstraints.ipady = 19;
+        gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 124, 0, 0);
         jPanel2.add(jL_soCCCD, gridBagConstraints);
@@ -172,11 +178,11 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 11;
-        gridBagConstraints.ipadx = 150;
-        gridBagConstraints.ipady = 9;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.ipadx = 162;
+        gridBagConstraints.ipady = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel2.add(jT_soCCCD, gridBagConstraints);
 
         jL_maVe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -186,7 +192,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 21;
-        gridBagConstraints.ipady = 19;
+        gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 124, 0, 0);
         jPanel2.add(jL_maVe, gridBagConstraints);
@@ -196,9 +202,9 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.ipadx = 140;
-        gridBagConstraints.ipady = 9;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.ipadx = 153;
+        gridBagConstraints.ipady = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jComboBox_maVe, gridBagConstraints);
@@ -220,7 +226,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 19;
+        gridBagConstraints.gridwidth = 14;
         gridBagConstraints.ipadx = 218;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 6, 0, 0);
@@ -231,12 +237,12 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 37;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 106, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 106, 0, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
 
         jL_timKiem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -246,30 +252,57 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 32;
-        gridBagConstraints.ipady = 19;
+        gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 106, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 74, 0, 0);
         jPanel2.add(jL_timKiem, gridBagConstraints);
 
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Họ tên", "CCCD" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 28;
-        gridBagConstraints.ipady = 13;
+        gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jComboBox_tieuChi, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.gridwidth = 10;
         gridBagConstraints.ipadx = 86;
-        gridBagConstraints.ipady = 13;
+        gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jT_timKiem, gridBagConstraints);
+
+        jL_locTheoChuyenBay.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_locTheoChuyenBay.setText("Lọc theo chuyến bay : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 74, 0, 0);
+        jPanel2.add(jL_locTheoChuyenBay, gridBagConstraints);
+
+        jComboBox_locChuyenBay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_locChuyenBay.setPreferredSize(new java.awt.Dimension(80, 22));
+        jComboBox_locChuyenBay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_locChuyenBayActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 52;
+        gridBagConstraints.ipady = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        jPanel2.add(jComboBox_locChuyenBay, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -345,6 +378,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jPanel_South.setLayout(new java.awt.GridBagLayout());
 
         jB_dau.setText("|<");
+        jB_dau.setPreferredSize(new java.awt.Dimension(85, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -389,6 +423,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jPanel_South.add(jB_sau, gridBagConstraints);
 
         jB_cuoi.setText(">|");
+        jB_cuoi.setPreferredSize(new java.awt.Dimension(85, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -402,15 +437,30 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox_locChuyenBayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_locChuyenBayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_locChuyenBayActionPerformed
+
     private void updateTableAndPagination() {
         if (this.quanLy == null) {
             return;
         }
 
+        String chuyenBayDuocChon = (String) jComboBox_locChuyenBay.getSelectedItem();
+        List<HanhKhach> danhSachGoc;
+
+        // Nếu người dùng chọn một chuyến bay cụ thể
+        if (chuyenBayDuocChon != null && !chuyenBayDuocChon.equals("Tất cả chuyến bay")) {
+            // Sử dụng phương thức đã có sẵn trong QuanLyChung
+            danhSachGoc = this.quanLy.locHanhKhachTheoChuyenBay(chuyenBayDuocChon);
+        } else {
+            // Nếu không, lấy toàn bộ danh sách hành khách như cũ
+            danhSachGoc = this.quanLy.getDanhSachHanhKhach();
+        }
+
         // Lọc dữ liệu
         String tuKhoa = jT_timKiem.getText().toLowerCase().trim();
         String tieuChi = (String) jComboBox_tieuChi.getSelectedItem();
-        List<HanhKhach> danhSachGoc = this.quanLy.getDanhSachHanhKhach();
 
         if (tuKhoa.isEmpty()) {
             filteredList = new ArrayList<>(danhSachGoc);
@@ -463,6 +513,9 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
     public void loadDataToTable(QuanLyChung quanLy) {
         this.quanLy = quanLy;
         this.currentPage = 1;
+        // Nạp dữ liệu cho JComboBox chuyến bay
+        loadChuyenBayComboBox(quanLy);
+
         if (jT_timKiem != null) {
             jT_timKiem.setText("");
         }
@@ -493,6 +546,23 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         return null;
     }
 
+    public void loadChuyenBayComboBox(QuanLyChung quanLy) {
+        // Lấy mô hình của JComboBox
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) jComboBox_locChuyenBay.getModel();
+        // Xóa các mục cũ
+        model.removeAllElements();
+        // Thêm một mục mặc định để có thể xem tất cả hành khách
+        model.addElement("Tất cả chuyến bay");
+        // Lấy danh sách số hiệu chuyến bay từ QuanLyChung và thêm vào model
+        quanLy.getDanhSachChuyenBay().stream()
+                .map(ChuyenBay::getSoHieuChuyenBay)
+                .sorted() // Sắp xếp theo Alphabet
+                .forEach(model::addElement);
+
+        // Đặt lại mục được chọn là mục mặc định
+        jComboBox_locChuyenBay.setSelectedIndex(0);
+    }
+
     public JButton getjB_lamMoi() {
         return jB_lamMoi;
     }
@@ -521,9 +591,11 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
     private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_truoc;
     private javax.swing.JButton jB_xoa;
+    private javax.swing.JComboBox<String> jComboBox_locChuyenBay;
     private javax.swing.JComboBox<String> jComboBox_maVe;
     private javax.swing.JComboBox<String> jComboBox_tieuChi;
     private javax.swing.JLabel jL_hoTen;
+    private javax.swing.JLabel jL_locTheoChuyenBay;
     private javax.swing.JLabel jL_maVe;
     private javax.swing.JLabel jL_soCCCD;
     private javax.swing.JLabel jL_timKiem;

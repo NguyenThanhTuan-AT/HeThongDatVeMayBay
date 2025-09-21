@@ -174,6 +174,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 } else {
                     // Chỉ thêm khi mã hãng chưa tồn tại
                     quanLy.themHang(hhk);
+                    quanLy.luuToanBoDuLieuVaoFile();
                     panelHangHangKhong.loadDataToTable(quanLy);
                     panelMayBay.loadMaHang(quanLy);
                     JOptionPane.showMessageDialog(this, "Thêm hãng thành công!");
@@ -185,6 +186,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             HangHangKhong hhk = panelHangHangKhong.getDataFromFields();
             if (hhk != null) {
                 quanLy.suaHang(hhk);
+                quanLy.luuToanBoDuLieuVaoFile();
                 panelHangHangKhong.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Sửa hãng thành công!");
                 panelHangHangKhong.clearFields();
@@ -208,6 +210,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa hãng '" + maHang + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaHang(maHang);
+                    quanLy.luuToanBoDuLieuVaoFile();
                     panelHangHangKhong.loadDataToTable(quanLy);
                     panelMayBay.loadMaHang(quanLy);
                     JOptionPane.showMessageDialog(this, "Xóa hãng thành công!");
@@ -226,6 +229,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             MayBay mb = panelMayBay.getDataFromFields();
             if (mb != null) {
                 quanLy.themMayBay(mb);
+                quanLy.luuToanBoDuLieuVaoFile();
                 panelMayBay.loadDataToTable(quanLy);
                 panelChuyenBay.loadSoHieuMayBay(quanLy);
                 JOptionPane.showMessageDialog(this, "Thêm máy bay thành công!");
@@ -236,6 +240,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             MayBay mb = panelMayBay.getDataFromFields();
             if (mb != null) {
                 quanLy.suaMayBay(mb);
+                quanLy.luuToanBoDuLieuVaoFile();
                 panelMayBay.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Sửa máy bay thành công!");
                 panelMayBay.clearFields();
@@ -257,6 +262,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa máy bay '" + soHieu + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaMayBay(soHieu);
+                    quanLy.luuToanBoDuLieuVaoFile();
                     panelMayBay.loadDataToTable(quanLy);
                     panelChuyenBay.loadSoHieuMayBay(quanLy);
                     panelChuyenBay.loadSoHieuMayBay(quanLy); // Cập nhật combobox
@@ -276,6 +282,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             ChuyenBay cb = panelChuyenBay.getDataFromFields();
             if (cb != null) {
                 quanLy.themChuyenBay(cb);
+                quanLy.luuToanBoDuLieuVaoFile();
                 panelChuyenBay.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Thêm chuyến bay thành công!");
                 panelChuyenBay.clearFields();
@@ -285,6 +292,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             ChuyenBay cb = panelChuyenBay.getDataFromFields();
             if (cb != null) {
                 quanLy.suaChuyenBay(cb);
+                quanLy.luuToanBoDuLieuVaoFile();
                 panelChuyenBay.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Sửa chuyến bay thành công!");
                 panelChuyenBay.clearFields();
@@ -304,6 +312,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 // Chỉ thực hiện xóa nếu người dùng chọn "Yes"
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaChuyenBay(soHieu);
+                    quanLy.luuToanBoDuLieuVaoFile();
                     panelChuyenBay.loadDataToTable(quanLy);
                     JOptionPane.showMessageDialog(this, "Xóa chuyến bay thành công!");
                     panelChuyenBay.clearFields();
@@ -330,7 +339,7 @@ public class Frame_Admin extends javax.swing.JFrame {
 
                 // Cập nhật thông tin vé (chủ yếu là hạng vé)
                 quanLy.suaVe(veSua);
-
+                quanLy.luuToanBoDuLieuVaoFile();
                 // Cập nhật giá của Chuyến bay tương ứng
                 ChuyenBay cb = quanLy.timChuyenBay(veSua.getSoHieuChuyenBay());
                 if (cb != null) {
@@ -340,6 +349,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                         cb.setGiaThuongGia(giaMoi);
                     }
                     quanLy.suaChuyenBay(cb); // Lưu thay đổi giá của chuyến bay
+                    quanLy.luuToanBoDuLieuVaoFile();
                 }
 
                 JOptionPane.showMessageDialog(this, "Cập nhật vé và giá chuyến bay thành công!");
@@ -358,6 +368,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa vé '" + maVe + "' không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaVe(maVe);
+                    quanLy.luuToanBoDuLieuVaoFile();
                     JOptionPane.showMessageDialog(this, "Xóa vé thành công!");
                     panelVeMayBay.loadDataToTable(quanLy);
                     panelVeMayBay.clearFields();
@@ -440,6 +451,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             TaiKhoan tk = panelTaiKhoan.getDataFromFields();
             if (tk != null) {
                 quanLy.themTaiKhoan(tk);
+                quanLy.luuToanBoDuLieuVaoFile();
                 panelTaiKhoan.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Thêm tài khoản thành công!");
                 panelTaiKhoan.clearFields();
@@ -449,6 +461,7 @@ public class Frame_Admin extends javax.swing.JFrame {
             TaiKhoan tk = panelTaiKhoan.getDataFromFields();
             if (tk != null) {
                 quanLy.suaTaiKhoan(tk);
+                quanLy.luuToanBoDuLieuVaoFile();
                 panelTaiKhoan.loadDataToTable(quanLy);
                 JOptionPane.showMessageDialog(this, "Sửa tài khoản thành công!");
                 panelTaiKhoan.clearFields();
@@ -460,6 +473,7 @@ public class Frame_Admin extends javax.swing.JFrame {
                 int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa tài khoản '" + tenDangNhap + "' không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (choice == JOptionPane.YES_OPTION) {
                     quanLy.xoaTaiKhoan(tenDangNhap);
+                    quanLy.luuToanBoDuLieuVaoFile();
                     panelTaiKhoan.loadDataToTable(quanLy);
                     JOptionPane.showMessageDialog(this, "Xóa tài khoản thành công!");
                     panelTaiKhoan.clearFields();
