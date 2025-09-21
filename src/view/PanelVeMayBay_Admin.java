@@ -355,6 +355,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         jPanel_South.setLayout(new java.awt.GridBagLayout());
 
         jB_dau.setText("|<");
+        jB_dau.setPreferredSize(new java.awt.Dimension(85, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -399,6 +400,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         jPanel_South.add(jB_sau, gridBagConstraints);
 
         jB_cuoi.setText(">|");
+        jB_cuoi.setPreferredSize(new java.awt.Dimension(85, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
