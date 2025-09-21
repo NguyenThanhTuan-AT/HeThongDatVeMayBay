@@ -375,64 +375,23 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
 
         add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
-        jPanel_South.setLayout(new java.awt.GridBagLayout());
-
         jB_dau.setText("|<");
         jB_dau.setPreferredSize(new java.awt.Dimension(85, 28));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = -2;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 150, 5, 0);
-        jPanel_South.add(jB_dau, gridBagConstraints);
+        jPanel_South.add(jB_dau);
 
         jB_truoc.setText("<");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 27;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
-        jPanel_South.add(jB_truoc, gridBagConstraints);
+        jPanel_South.add(jB_truoc);
 
         jL_trang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_trang.setText("Trang 1 / X");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 37;
-        gridBagConstraints.ipady = 14;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel_South.add(jL_trang, gridBagConstraints);
+        jPanel_South.add(jL_trang);
 
         jB_sau.setText(">");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 27;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
-        jPanel_South.add(jB_sau, gridBagConstraints);
+        jPanel_South.add(jB_sau);
 
         jB_cuoi.setText(">|");
         jB_cuoi.setPreferredSize(new java.awt.Dimension(85, 28));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = -2;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 141);
-        jPanel_South.add(jB_cuoi, gridBagConstraints);
+        jPanel_South.add(jB_cuoi);
 
         add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents

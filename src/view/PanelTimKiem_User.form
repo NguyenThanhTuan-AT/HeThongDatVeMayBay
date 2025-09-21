@@ -108,8 +108,9 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser_timKiemNgay">
           <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="EEEE, dd MMM yyyy"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[140, 30]"/>
             </Property>
