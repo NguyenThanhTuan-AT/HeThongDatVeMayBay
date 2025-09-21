@@ -22,6 +22,9 @@ public class Frame_Admin extends javax.swing.JFrame {
     private view.PanelHanhKhach_Admin panelHanhKhach;
     private QuanLyChung quanLy;
     private TaiKhoan taiKhoanDangNhap;
+    private ThayDoiMatKhauFrame thayDoiMatKhauFrame;
+    private ThayDoiThongTinFrame thayDoiThongTinFrame;
+    private DashboardThongKeVeFrame dashboardFrame;
 
     public Frame_Admin(QuanLyChung quanLy, TaiKhoan taiKhoan) {
         this.quanLy = quanLy;
@@ -155,11 +158,21 @@ public class Frame_Admin extends javax.swing.JFrame {
         });
 
         panelHeader.getjB_doiMatKhau().addActionListener(e -> {
-            new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap, this).setVisible(true);
+            if (thayDoiMatKhauFrame == null || !thayDoiMatKhauFrame.isShowing()) {
+                thayDoiMatKhauFrame = new ThayDoiMatKhauFrame(quanLy, taiKhoanDangNhap, this);
+                thayDoiMatKhauFrame.setVisible(true);
+            } else {
+                thayDoiMatKhauFrame.toFront();
+            }
         });
 
         panelHeader.getjB_suaThongTin().addActionListener(e -> {
-            new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap, this).setVisible(true);
+            if (thayDoiThongTinFrame == null || !thayDoiThongTinFrame.isShowing()) {
+                thayDoiThongTinFrame = new ThayDoiThongTinFrame(quanLy, taiKhoanDangNhap, this);
+                thayDoiThongTinFrame.setVisible(true);
+            } else {
+                thayDoiThongTinFrame.toFront();
+            }
         });
     }
 
@@ -321,6 +334,17 @@ public class Frame_Admin extends javax.swing.JFrame {
         });
         panelChuyenBay.getjB_lamMoi().addActionListener(e -> {
             panelChuyenBay.clearFields();
+        });
+        panelChuyenBay.getjB_xemVeConLai().addActionListener(e -> {
+            // KIỂM TRA: Nếu cửa sổ chưa được tạo HOẶC đã bị đóng
+            if (dashboardFrame == null || !dashboardFrame.isShowing()) {
+                // Thì mới tạo cửa sổ mới
+                dashboardFrame = new DashboardThongKeVeFrame(this, quanLy);
+                dashboardFrame.setVisible(true);
+            } else {
+                // Nếu cửa sổ đã tồn tại và đang hiển thị, chỉ cần đưa nó lên trên cùng
+                dashboardFrame.toFront();
+            }
         });
     }
 

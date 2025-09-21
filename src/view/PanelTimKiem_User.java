@@ -28,7 +28,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         jL_diemDen = new javax.swing.JLabel();
         jT_diemDen = new javax.swing.JTextField();
         jL_ngayDi = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser_timKiemNgay = new com.toedter.calendar.JDateChooser();
         jL_soGhe = new javax.swing.JLabel();
         jSpinner_soVe = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
@@ -109,7 +109,8 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(6, 48, 0, 0);
         jPanel4.add(jL_ngayDi, gridBagConstraints);
 
-        jDateChooser1.setPreferredSize(new java.awt.Dimension(140, 30));
+        jDateChooser_timKiemNgay.setDateFormatString("EEEE, dd MMM yyyy");
+        jDateChooser_timKiemNgay.setPreferredSize(new java.awt.Dimension(140, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -117,7 +118,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
-        jPanel4.add(jDateChooser1, gridBagConstraints);
+        jPanel4.add(jDateChooser_timKiemNgay, gridBagConstraints);
 
         jL_soGhe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_soGhe.setText("Số lượng vé: ");
@@ -177,7 +178,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
     }
 
     public JDateChooser getjDateChooser1() {
-        return jDateChooser1;
+        return jDateChooser_timKiemNgay;
     }
 
     public JSpinner getjSpinner_soVe() {
@@ -221,7 +222,7 @@ public class PanelTimKiem_User extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_timKiem;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser_timKiemNgay;
     private javax.swing.JLabel jL_diemDen;
     private javax.swing.JLabel jL_diemDi;
     private javax.swing.JLabel jL_ngayDi;

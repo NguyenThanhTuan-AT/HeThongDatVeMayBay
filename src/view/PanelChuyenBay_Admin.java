@@ -110,8 +110,8 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         jL_giaPT = new java.awt.Label();
         jL_giaTG = new java.awt.Label();
         jComboBox_soHieuCB = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jDateChooser_ngayDi = new com.toedter.calendar.JDateChooser();
+        jDateChooser_ngayDen = new com.toedter.calendar.JDateChooser();
         jT_soHieuCB = new javax.swing.JTextField();
         jT_diemDi = new javax.swing.JTextField();
         jT_diemDen = new javax.swing.JTextField();
@@ -128,6 +128,9 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         jL_timKiem = new javax.swing.JLabel();
         jComboBox_tieuChi = new javax.swing.JComboBox<>();
         jT_timKiem = new javax.swing.JTextField();
+        jL_thongKeVeConLaiTheoNgay = new javax.swing.JLabel();
+        jDateChooser_ngayThongKe = new com.toedter.calendar.JDateChooser();
+        jB_xemVeConLai = new javax.swing.JButton();
         jPanel_South = new javax.swing.JPanel();
         jB_dau = new javax.swing.JButton();
         jB_truoc = new javax.swing.JButton();
@@ -247,7 +250,10 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
 
         jComboBox_soHieuCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jDateChooser1.setPreferredSize(new java.awt.Dimension(88, 30));
+        jDateChooser_ngayDi.setDateFormatString("EEEE, dd MMM yyyy");
+        jDateChooser_ngayDi.setPreferredSize(new java.awt.Dimension(88, 30));
+
+        jDateChooser_ngayDen.setDateFormatString("EEEE, dd MMM yyyy");
 
         jT_soHieuCB.setPreferredSize(new java.awt.Dimension(64, 30));
 
@@ -290,7 +296,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
                                 .addGap(2, 2, 2)
                                 .addComponent(jL_thoiGianDen, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jDateChooser_ngayDen, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jT_soHieuCB, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
@@ -300,7 +306,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
                                 .addGap(2, 2, 2)
                                 .addComponent(jL_thoiGianDi, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jDateChooser_ngayDi, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -311,7 +317,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
                     .addComponent(jL_soHieuCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jL_diemDi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jT_diemDi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDateChooser_ngayDi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jL_thoiGianDi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +326,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
                     .addComponent(jL_diemDen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jT_diemDen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jL_thoiGianDen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser_ngayDen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jL_soGhePT, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,7 +342,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 15;
         gridBagConstraints.ipadx = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(jPanel2, gridBagConstraints);
@@ -358,7 +364,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 15;
         gridBagConstraints.ipadx = 572;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
@@ -369,11 +375,12 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 72, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 160, 0, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jL_timKiem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -381,99 +388,94 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 32;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 184, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 190, 0, 0);
         jPanel1.add(jL_timKiem, gridBagConstraints);
 
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Số hiệu chuyến bay", "Số hiệu máy bay", "Điểm đi", "Điểm đến" }));
-        jComboBox_tieuChi.setPreferredSize(new java.awt.Dimension(150, 22));
+        jComboBox_tieuChi.setPreferredSize(new java.awt.Dimension(150, 28));
         jComboBox_tieuChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_tieuChiActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = -65;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = -70;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         jPanel1.add(jComboBox_tieuChi, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.ipadx = 135;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         jPanel1.add(jT_timKiem, gridBagConstraints);
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        jL_thongKeVeConLaiTheoNgay.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jL_thongKeVeConLaiTheoNgay.setText("Thống kê vé còn lại theo ngày : ");
+        jL_thongKeVeConLaiTheoNgay.setPreferredSize(new java.awt.Dimension(175, 16));
+        jL_thongKeVeConLaiTheoNgay.setRequestFocusEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 168, 0, 0);
+        jPanel1.add(jL_thongKeVeConLaiTheoNgay, gridBagConstraints);
 
-        jPanel_South.setLayout(new java.awt.GridBagLayout());
+        jDateChooser_ngayThongKe.setDateFormatString("EEEE, dd MMM yyyy");
+        jDateChooser_ngayThongKe.setPreferredSize(new java.awt.Dimension(135, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 6, 0, 0);
+        jPanel1.add(jDateChooser_ngayThongKe, gridBagConstraints);
+
+        jB_xemVeConLai.setText("Xem");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipady = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 6, 0, 0);
+        jPanel1.add(jB_xemVeConLai, gridBagConstraints);
+
+        add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jB_dau.setText("|<");
         jB_dau.setMaximumSize(new java.awt.Dimension(23, 23));
         jB_dau.setMinimumSize(new java.awt.Dimension(23, 23));
         jB_dau.setPreferredSize(new java.awt.Dimension(85, 28));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = -2;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 150, 5, 0);
-        jPanel_South.add(jB_dau, gridBagConstraints);
+        jPanel_South.add(jB_dau);
 
         jB_truoc.setText("<");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 27;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
-        jPanel_South.add(jB_truoc, gridBagConstraints);
+        jPanel_South.add(jB_truoc);
 
         jL_trang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jL_trang.setText("Trang 1 / X");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 37;
-        gridBagConstraints.ipady = 14;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel_South.add(jL_trang, gridBagConstraints);
+        jPanel_South.add(jL_trang);
 
         jB_sau.setText(">");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 27;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 0);
-        jPanel_South.add(jB_sau, gridBagConstraints);
+        jPanel_South.add(jB_sau);
 
         jB_cuoi.setText(">|");
         jB_cuoi.setPreferredSize(new java.awt.Dimension(85, 28));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = -2;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 5, 141);
-        jPanel_South.add(jB_cuoi, gridBagConstraints);
+        jPanel_South.add(jB_cuoi);
 
         add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
@@ -691,13 +693,20 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
     }
 
     public com.toedter.calendar.JDateChooser getjDateChooser_tgDi() {
-        return jDateChooser1;
+        return jDateChooser_ngayDi;
     }
 
     public com.toedter.calendar.JDateChooser getjDateChooser_tgDen() {
-        return jDateChooser3;
+        return jDateChooser_ngayDen;
     }
 
+    public javax.swing.JButton getjB_xemVeConLai() {
+        return jB_xemVeConLai;
+    }
+
+    public com.toedter.calendar.JDateChooser getjDateChooser_ngayThongKe() {
+        return jDateChooser_ngayThongKe;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_cuoi;
     private javax.swing.JButton jB_dau;
@@ -706,11 +715,13 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
     private javax.swing.JButton jB_sua;
     private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_truoc;
+    private javax.swing.JButton jB_xemVeConLai;
     private javax.swing.JButton jB_xoa;
     private javax.swing.JComboBox<String> jComboBox_soHieuCB;
     private javax.swing.JComboBox<String> jComboBox_tieuChi;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
+    private com.toedter.calendar.JDateChooser jDateChooser_ngayDen;
+    private com.toedter.calendar.JDateChooser jDateChooser_ngayDi;
+    private com.toedter.calendar.JDateChooser jDateChooser_ngayThongKe;
     private java.awt.Label jL_diemDen;
     private java.awt.Label jL_diemDi;
     private java.awt.Label jL_giaPT;
@@ -721,6 +732,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
     private java.awt.Label jL_soHieuMB;
     private java.awt.Label jL_thoiGianDen;
     private java.awt.Label jL_thoiGianDi;
+    private javax.swing.JLabel jL_thongKeVeConLaiTheoNgay;
     private javax.swing.JLabel jL_timKiem;
     private javax.swing.JLabel jL_trang;
     private javax.swing.JLabel jLabel1;
