@@ -123,6 +123,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jT_timKiem = new javax.swing.JTextField();
         jL_locTheoChuyenBay = new javax.swing.JLabel();
         jComboBox_locChuyenBay = new javax.swing.JComboBox<>();
+        jB_xuatExcel = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_dsHanhKhach = new javax.swing.JTable();
         jPanel_South = new javax.swing.JPanel();
@@ -154,8 +155,8 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 9;
-        gridBagConstraints.ipadx = 162;
-        gridBagConstraints.ipady = 6;
+        gridBagConstraints.ipadx = 168;
+        gridBagConstraints.ipady = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         jPanel2.add(jT_hoTen, gridBagConstraints);
@@ -179,8 +180,8 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 9;
-        gridBagConstraints.ipadx = 162;
-        gridBagConstraints.ipady = 6;
+        gridBagConstraints.ipadx = 168;
+        gridBagConstraints.ipady = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel2.add(jT_soCCCD, gridBagConstraints);
@@ -203,8 +204,8 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.ipadx = 153;
-        gridBagConstraints.ipady = 6;
+        gridBagConstraints.ipadx = 158;
+        gridBagConstraints.ipady = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jComboBox_maVe, gridBagConstraints);
@@ -226,7 +227,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 14;
+        gridBagConstraints.gridwidth = 24;
         gridBagConstraints.ipadx = 218;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 6, 0, 0);
@@ -239,6 +240,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 37;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -298,11 +300,20 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 52;
+        gridBagConstraints.ipadx = 60;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jComboBox_locChuyenBay, gridBagConstraints);
+
+        jB_xuatExcel.setText("Xuất Excel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 17, 0, 0);
+        jPanel2.add(jB_xuatExcel, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -541,6 +552,14 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
     public JTable getjTable_dsHanhKhach() {
         return jTable_dsHanhKhach;
     }
+
+    public javax.swing.JButton getjB_xuatExcel() {
+        return jB_xuatExcel;
+    }
+
+    public List<model.HanhKhach> getFilteredList() {
+        return filteredList;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_cuoi;
     private javax.swing.JButton jB_dau;
@@ -550,6 +569,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
     private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_truoc;
     private javax.swing.JButton jB_xoa;
+    private javax.swing.JButton jB_xuatExcel;
     private javax.swing.JComboBox<String> jComboBox_locChuyenBay;
     private javax.swing.JComboBox<String> jComboBox_maVe;
     private javax.swing.JComboBox<String> jComboBox_tieuChi;

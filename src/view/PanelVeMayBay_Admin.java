@@ -112,6 +112,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         jL_timKiem = new javax.swing.JLabel();
         jComboBox_tieuChi = new javax.swing.JComboBox<>();
         jT_timKiem = new javax.swing.JTextField();
+        jB_xuatExcel = new javax.swing.JButton();
         jPanel_South = new javax.swing.JPanel();
         jB_dau = new javax.swing.JButton();
         jB_truoc = new javax.swing.JButton();
@@ -197,7 +198,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 96;
+        gridBagConstraints.ipadx = 101;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(jT_maVe, gridBagConstraints);
@@ -211,7 +212,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.ipadx = 33;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 145, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 163, 0, 0);
         jPanel2.add(jL_hangVe, gridBagConstraints);
 
         jComboBox_hangVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phổ thông", "Thương gia", " " }));
@@ -220,7 +221,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 65;
+        gridBagConstraints.ipadx = 70;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
@@ -235,7 +236,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.ipadx = 15;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 145, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 163, 0, 0);
         jPanel2.add(jL_chuyenBay, gridBagConstraints);
 
         jComboBox_soHieuCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -259,7 +260,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.ipadx = 42;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 148, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 166, 0, 0);
         jPanel2.add(jL_maVe, gridBagConstraints);
 
         jL_giaVe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -271,7 +272,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.ipadx = 43;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 145, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 163, 0, 0);
         jPanel2.add(jL_giaVe, gridBagConstraints);
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
@@ -291,10 +292,10 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.gridwidth = 21;
         gridBagConstraints.ipadx = 247;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(9, 0, 0, 2);
         jPanel2.add(jPanel3, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
@@ -303,9 +304,10 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 47, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(9, 65, 0, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
 
         jT_giaVe.setPreferredSize(new java.awt.Dimension(69, 22));
@@ -313,7 +315,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 96;
+        gridBagConstraints.ipadx = 101;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
@@ -327,7 +329,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.ipadx = 32;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 80, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 98, 0, 0);
         jPanel2.add(jL_timKiem, gridBagConstraints);
 
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã vé", "Số hiệu chuyến bay", "CCCD hành khách" }));
@@ -349,6 +351,15 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel2.add(jT_timKiem, gridBagConstraints);
+
+        jB_xuatExcel.setText("Xuất Excel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 49, 0, 0);
+        jPanel2.add(jB_xuatExcel, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -497,6 +508,13 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         return jTable_dsVeMayBay;
     }
 
+    public javax.swing.JButton getjB_xuatExcel() {
+        return jB_xuatExcel;
+    }
+
+    public List<model.VeMayBay> getFilteredList() {
+        return filteredList;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_cuoi;
     private javax.swing.JButton jB_dau;
@@ -506,6 +524,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
     private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_truoc;
     private javax.swing.JButton jB_xoa;
+    private javax.swing.JButton jB_xuatExcel;
     private javax.swing.JComboBox<String> jComboBox_hangVe;
     private javax.swing.JComboBox<String> jComboBox_soHieuCB;
     private javax.swing.JComboBox<String> jComboBox_tieuChi;

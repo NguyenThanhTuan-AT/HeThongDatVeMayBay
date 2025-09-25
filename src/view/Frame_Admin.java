@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.ChuyenBay;
 import model.HangHangKhong;
@@ -287,6 +288,39 @@ public class Frame_Admin extends javax.swing.JFrame {
         panelMayBay.getjB_lamMoi().addActionListener(e -> {
             panelMayBay.clearFields();
         });
+
+        panelMayBay.getjB_xuatExcel().addActionListener(e -> {
+            try {
+                javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+                fileChooser.setDialogTitle("Chọn nơi lưu file Excel");
+                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (*.xlsx)", "xlsx"));
+
+                int userSelection = fileChooser.showSaveDialog(this);
+
+                if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
+                    java.io.File fileToSave = fileChooser.getSelectedFile();
+                    String filePath = fileToSave.getAbsolutePath();
+
+                    if (!filePath.toLowerCase().endsWith(".xlsx")) {
+                        filePath += ".xlsx";
+                    }
+
+                    List<model.MayBay> danhSachHienTai = panelMayBay.getFilteredList();
+
+                    if (danhSachHienTai.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Không có dữ liệu để xuất.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+
+                    // Gọi phương thức xuất file cho MÁY BAY
+                    util.ExcelUtil.xuatFileExcelMayBay(danhSachHienTai, filePath);
+
+                    JOptionPane.showMessageDialog(this, "Xuất file Excel thành công!\nĐã lưu tại: " + filePath, "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xuất file: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        });
     }
 
     //Panel Chuyến bay
@@ -344,6 +378,45 @@ public class Frame_Admin extends javax.swing.JFrame {
             } else {
                 // Nếu cửa sổ đã tồn tại và đang hiển thị, chỉ cần đưa nó lên trên cùng
                 dashboardFrame.toFront();
+            }
+        });
+
+        panelChuyenBay.getjB_xuatExcel().addActionListener(e -> {
+            try {
+                // 1. Mở hộp thoại để người dùng chọn nơi lưu file
+                javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+                fileChooser.setDialogTitle("Chọn nơi lưu file Excel");
+                // Chỉ cho phép lưu file có đuôi .xlsx
+                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (*.xlsx)", "xlsx"));
+
+                int userSelection = fileChooser.showSaveDialog(this);
+
+                if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
+                    java.io.File fileToSave = fileChooser.getSelectedFile();
+                    String filePath = fileToSave.getAbsolutePath();
+
+                    // 2. Tự động thêm đuôi .xlsx nếu người dùng không nhập
+                    if (!filePath.toLowerCase().endsWith(".xlsx")) {
+                        filePath += ".xlsx";
+                    }
+
+                    // 3. Lấy danh sách chuyến bay đang hiển thị trên bảng (đã được lọc)
+                    List<ChuyenBay> danhSachHienTai = panelChuyenBay.getFilteredList();
+
+                    if (danhSachHienTai.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Không có dữ liệu chuyến bay để xuất.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+
+                    // 4. Gọi hàm xuất Excel từ lớp Util của bạn
+                    util.ExcelUtil.xuatFileExcelChuyenBay(danhSachHienTai, filePath);
+
+                    // 5. Thông báo thành công
+                    JOptionPane.showMessageDialog(this, "Xuất file Excel thành công!\nĐã lưu tại: " + filePath, "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace(); // In lỗi ra console để debug
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xuất file: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
@@ -409,6 +482,40 @@ public class Frame_Admin extends javax.swing.JFrame {
         panelVeMayBay.getjB_them().addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Chức năng Thêm vé chỉ nên thực hiện khi có thông tin Hành khách. Vui lòng đặt vé từ giao diện User.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         });
+        //Xuất file Excel
+        panelVeMayBay.getjB_xuatExcel().addActionListener(e -> {
+            try {
+                javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+                fileChooser.setDialogTitle("Chọn nơi lưu file Excel");
+                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (*.xlsx)", "xlsx"));
+
+                int userSelection = fileChooser.showSaveDialog(this);
+
+                if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
+                    java.io.File fileToSave = fileChooser.getSelectedFile();
+                    String filePath = fileToSave.getAbsolutePath();
+
+                    if (!filePath.toLowerCase().endsWith(".xlsx")) {
+                        filePath += ".xlsx";
+                    }
+
+                    List<model.VeMayBay> danhSachHienTai = panelVeMayBay.getFilteredList();
+
+                    if (danhSachHienTai.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Không có dữ liệu để xuất.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+
+                    // Gọi phương thức xuất file cho VÉ MÁY BAY
+                    // Lưu ý: chúng ta truyền cả đối tượng 'quanLy' vào
+                    util.ExcelUtil.xuatFileExcelVeMayBay(danhSachHienTai, quanLy, filePath);
+
+                    JOptionPane.showMessageDialog(this, "Xuất file Excel thành công!\nĐã lưu tại: " + filePath, "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xuất file: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        });
     }
 
     //Panel Hanh khach
@@ -459,6 +566,39 @@ public class Frame_Admin extends javax.swing.JFrame {
             panelHanhKhach.clearFields();
             JOptionPane.showMessageDialog(this, "Đã làm mới danh sách hành khách!");
         });
+        //Xuất file Excel
+        panelHanhKhach.getjB_xuatExcel().addActionListener(e -> {
+            try {
+                javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+                fileChooser.setDialogTitle("Chọn nơi lưu file Excel");
+                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (*.xlsx)", "xlsx"));
+
+                int userSelection = fileChooser.showSaveDialog(this);
+
+                if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
+                    java.io.File fileToSave = fileChooser.getSelectedFile();
+                    String filePath = fileToSave.getAbsolutePath();
+
+                    if (!filePath.toLowerCase().endsWith(".xlsx")) {
+                        filePath += ".xlsx";
+                    }
+
+                    List<model.HanhKhach> danhSachHienTai = panelHanhKhach.getFilteredList();
+
+                    if (danhSachHienTai.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Không có dữ liệu để xuất.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+
+                    // Gọi phương thức xuất file cho HÀNH KHÁCH
+                    util.ExcelUtil.xuatFileExcelHanhKhach(danhSachHienTai, filePath);
+
+                    JOptionPane.showMessageDialog(this, "Xuất file Excel thành công!\nĐã lưu tại: " + filePath, "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xuất file: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        });
     }
 
     //Panel Thong ke
@@ -506,6 +646,38 @@ public class Frame_Admin extends javax.swing.JFrame {
         });
         panelTaiKhoan.getjB_lamMoi().addActionListener(e -> {
             panelTaiKhoan.clearFields();
+        });
+        panelTaiKhoan.getjB_xuatExcel().addActionListener(e -> {
+            try {
+                javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+                fileChooser.setDialogTitle("Chọn nơi lưu file Excel");
+                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (*.xlsx)", "xlsx"));
+
+                int userSelection = fileChooser.showSaveDialog(this);
+
+                if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
+                    java.io.File fileToSave = fileChooser.getSelectedFile();
+                    String filePath = fileToSave.getAbsolutePath();
+
+                    if (!filePath.toLowerCase().endsWith(".xlsx")) {
+                        filePath += ".xlsx";
+                    }
+
+                    List<model.TaiKhoan> danhSachHienTai = panelTaiKhoan.getFilteredList();
+
+                    if (danhSachHienTai.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Không có dữ liệu để xuất.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+
+                    // Gọi phương thức xuất file cho TÀI KHOẢN
+                    util.ExcelUtil.xuatFileExcelTaiKhoan(danhSachHienTai, filePath);
+
+                    JOptionPane.showMessageDialog(this, "Xuất file Excel thành công!\nĐã lưu tại: " + filePath, "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xuất file: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         });
     }
 
