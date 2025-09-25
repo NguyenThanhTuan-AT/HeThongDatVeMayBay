@@ -125,6 +125,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         jL_timKiem = new javax.swing.JLabel();
         jComboBox_tieuChi = new javax.swing.JComboBox<>();
         jT_timKiem = new javax.swing.JTextField();
+        jB_xuatExcel = new javax.swing.JButton();
         jPanel_South = new javax.swing.JPanel();
         jB_dau = new javax.swing.JButton();
         jB_truoc = new javax.swing.JButton();
@@ -210,7 +211,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.ipadx = 117;
+        gridBagConstraints.ipadx = 118;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(jT_dangNhap, gridBagConstraints);
@@ -220,7 +221,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.ipadx = 117;
+        gridBagConstraints.ipadx = 118;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
@@ -298,7 +299,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 18;
+        gridBagConstraints.gridwidth = 19;
         gridBagConstraints.ipadx = 240;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 6, 0, 0);
@@ -310,6 +311,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 20;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -347,6 +349,14 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel2.add(jT_timKiem, gridBagConstraints);
 
+        jB_xuatExcel.setText("Xuất Excel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 17;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 13, 0, 0);
+        jPanel2.add(jB_xuatExcel, gridBagConstraints);
+
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         jB_dau.setText("|<");
@@ -369,38 +379,6 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
 
         add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
-
-    public JButton getjB_lamMoi() {
-        return jB_lamMoi;
-    }
-
-    public JButton getjB_sua() {
-        return jB_sua;
-    }
-
-    public JButton getjB_them() {
-        return jB_them;
-    }
-
-    public JButton getjB_xoa() {
-        return jB_xoa;
-    }
-
-    public JComboBox<String> getjComboBox1() {
-        return jComboBox_loaiTaiKhoan;
-    }
-
-    public JPasswordField getjPasswordField_matKhau() {
-        return jPasswordField_matKhau;
-    }
-
-    public JTextField getjT_dangNhap() {
-        return jT_dangNhap;
-    }
-
-    public JTable getjTable_dsTaiKhoan() {
-        return jTable_dsTaiKhoan;
-    }
 
     // Phương thức lấy dữ liệu từ các trường nhập liệu
     @Override
@@ -516,6 +494,46 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         }
     }
 
+    public JButton getjB_lamMoi() {
+        return jB_lamMoi;
+    }
+
+    public JButton getjB_sua() {
+        return jB_sua;
+    }
+
+    public JButton getjB_them() {
+        return jB_them;
+    }
+
+    public JButton getjB_xoa() {
+        return jB_xoa;
+    }
+
+    public JComboBox<String> getjComboBox1() {
+        return jComboBox_loaiTaiKhoan;
+    }
+
+    public JPasswordField getjPasswordField_matKhau() {
+        return jPasswordField_matKhau;
+    }
+
+    public JTextField getjT_dangNhap() {
+        return jT_dangNhap;
+    }
+
+    public JTable getjTable_dsTaiKhoan() {
+        return jTable_dsTaiKhoan;
+    }
+
+    public javax.swing.JButton getjB_xuatExcel() {
+        return jB_xuatExcel;
+    }
+
+    public List<model.TaiKhoan> getFilteredList() {
+        return filteredList;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_cuoi;
     private javax.swing.JButton jB_dau;
@@ -525,6 +543,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
     private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_truoc;
     private javax.swing.JButton jB_xoa;
+    private javax.swing.JButton jB_xuatExcel;
     private javax.swing.JComboBox<String> jComboBox_loaiTaiKhoan;
     private javax.swing.JComboBox<String> jComboBox_tieuChi;
     private javax.swing.JLabel jL_loaiTaiKhoan;

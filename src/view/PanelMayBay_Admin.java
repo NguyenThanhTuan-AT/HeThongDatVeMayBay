@@ -111,6 +111,7 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
         jL_timKiem = new javax.swing.JLabel();
         jComboBox_tieuChi = new javax.swing.JComboBox<>();
         jT_timKiem = new javax.swing.JTextField();
+        jB_xuatExcel = new javax.swing.JButton();
         jPanel_South = new javax.swing.JPanel();
         jB_dau = new javax.swing.JButton();
         jB_truoc = new javax.swing.JButton();
@@ -200,7 +201,7 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
         gridBagConstraints.ipadx = 18;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 100, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 94, 0, 0);
         jPanel2.add(jL_soHieuMB, gridBagConstraints);
 
         jT_soHieuMB.setPreferredSize(new java.awt.Dimension(70, 22));
@@ -223,7 +224,7 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
         gridBagConstraints.ipadx = 40;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 119, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 113, 0, 0);
         jPanel2.add(jL_maHang, gridBagConstraints);
 
         jComboBox_maHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -255,8 +256,8 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 16;
-        gridBagConstraints.ipadx = 258;
+        gridBagConstraints.gridwidth = 17;
+        gridBagConstraints.ipadx = 252;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         jPanel2.add(jPanel3, gridBagConstraints);
@@ -267,10 +268,11 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 11;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 43, 10, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 37, 0, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
 
         jL_timKiem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -281,7 +283,7 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 112, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 106, 0, 0);
         jPanel2.add(jL_timKiem, gridBagConstraints);
 
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Số hiệu máy bay", "Mã hãng" }));
@@ -303,6 +305,14 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jT_timKiem, gridBagConstraints);
+
+        jB_xuatExcel.setText("Xuất Excel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 15;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 16, 0, 0);
+        jPanel2.add(jB_xuatExcel, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -463,6 +473,13 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
         return jTable_dsMayBay;
     }
 
+    public javax.swing.JButton getjB_xuatExcel() {
+        return jB_xuatExcel;
+    }
+
+    public List<model.MayBay> getFilteredList() {
+        return filteredList;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_cuoi;
     private javax.swing.JButton jB_dau;
@@ -472,6 +489,7 @@ public class PanelMayBay_Admin extends BaseAdminPanel<MayBay> {
     private javax.swing.JButton jB_them;
     private javax.swing.JButton jB_truoc;
     private javax.swing.JButton jB_xoa;
+    private javax.swing.JButton jB_xuatExcel;
     private javax.swing.JComboBox<String> jComboBox_maHang;
     private javax.swing.JComboBox<String> jComboBox_tieuChi;
     private javax.swing.JLabel jL_maHang;

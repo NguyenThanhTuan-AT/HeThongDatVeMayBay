@@ -131,6 +131,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         jL_thongKeVeConLaiTheoNgay = new javax.swing.JLabel();
         jDateChooser_ngayThongKe = new com.toedter.calendar.JDateChooser();
         jB_xemVeConLai = new javax.swing.JButton();
+        jB_xuatExcel = new javax.swing.JButton();
         jPanel_South = new javax.swing.JPanel();
         jB_dau = new javax.swing.JButton();
         jB_truoc = new javax.swing.JButton();
@@ -342,9 +343,10 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.gridwidth = 16;
         gridBagConstraints.ipadx = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel1.add(jPanel2, gridBagConstraints);
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
@@ -364,7 +366,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.gridwidth = 16;
         gridBagConstraints.ipadx = 572;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
@@ -377,6 +379,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -396,16 +399,11 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
 
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Số hiệu chuyến bay", "Số hiệu máy bay", "Điểm đi", "Điểm đến" }));
         jComboBox_tieuChi.setPreferredSize(new java.awt.Dimension(150, 28));
-        jComboBox_tieuChi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_tieuChiActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = -70;
+        gridBagConstraints.ipadx = -84;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
@@ -455,6 +453,14 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints.insets = new java.awt.Insets(5, 6, 0, 0);
         jPanel1.add(jB_xemVeConLai, gridBagConstraints);
 
+        jB_xuatExcel.setText("Xuất Excel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 14;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 193, 0, 0);
+        jPanel1.add(jB_xuatExcel, gridBagConstraints);
+
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jB_dau.setText("|<");
@@ -479,10 +485,6 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
 
         add(jPanel_South, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox_tieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_tieuChiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_tieuChiActionPerformed
 
     private void updateTableAndPagination() {
         if (this.quanLy == null) {
@@ -704,6 +706,15 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         return jB_xemVeConLai;
     }
 
+    public javax.swing.JButton getjB_xuatExcel() {
+        return jB_xuatExcel;
+    }
+
+    // Getter này rất quan trọng để lấy danh sách dữ liệu đã được lọc
+    public List<ChuyenBay> getFilteredList() {
+        return filteredList;
+    }
+
     public com.toedter.calendar.JDateChooser getjDateChooser_ngayThongKe() {
         return jDateChooser_ngayThongKe;
     }
@@ -717,6 +728,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
     private javax.swing.JButton jB_truoc;
     private javax.swing.JButton jB_xemVeConLai;
     private javax.swing.JButton jB_xoa;
+    private javax.swing.JButton jB_xuatExcel;
     private javax.swing.JComboBox<String> jComboBox_soHieuCB;
     private javax.swing.JComboBox<String> jComboBox_tieuChi;
     private com.toedter.calendar.JDateChooser jDateChooser_ngayDen;
