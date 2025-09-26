@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import util.FileIOUtil;
 
 public class QuanLyChung {
@@ -554,5 +555,18 @@ public class QuanLyChung {
                 + ",\nMayBay=" + mapMayBay.values()
                 + ",\nTaiKhoan=" + mapTaiKhoan.values()
                 + '}';
+    }
+
+    public List<String> getDanhSachDiaDiem() {
+        // Sử dụng Stream API để xử lý
+        return this.mapChuyenBay.values().stream()
+                // Tạo một luồng chứa tất cả các điểm đi và điểm đến
+                .flatMap(cb -> Stream.of(cb.getDiemDi(), cb.getDiemDen()))
+                // Loại bỏ các tên bị trùng lặp
+                .distinct()
+                // Sắp xếp theo thứ tự alphabet
+                .sorted()
+                // Gom kết quả lại thành một danh sách
+                .collect(Collectors.toList());
     }
 }

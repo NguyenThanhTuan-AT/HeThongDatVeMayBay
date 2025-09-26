@@ -220,7 +220,6 @@ public class ExcelUtil {
         }
     }
 
-    // Thêm phương thức này vào file util/ExcelUtil.java
     public static void xuatFileExcelTaiKhoan(List<model.TaiKhoan> danhSach, String tenFile) {
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("Danh Sách Tài Khoản");

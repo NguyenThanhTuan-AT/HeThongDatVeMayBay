@@ -139,7 +139,7 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
             Object[] row = new Object[]{
                 ve.getMaVe(),
                 ve.getSoHieuChuyenBay(),
-                ve.getHangVe().toString(),
+                chuyenDoiTenHangVe(ve.getHangVe()),
                 cb != null ? cb.getThoiGianDi().toLocalDate() : "N/A",
                 String.format("%,.0f VNĐ", giaVe)
             };
@@ -147,6 +147,12 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
         }
     }
 
+    private String chuyenDoiTenHangVe(VeMayBay.HangVe hangVe) {
+        if (hangVe == VeMayBay.HangVe.THUONG_GIA) {
+            return "Thương gia";
+        }
+        return "Phổ thông";
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_xoaVe;
     private javax.swing.JLabel jLabel2;
