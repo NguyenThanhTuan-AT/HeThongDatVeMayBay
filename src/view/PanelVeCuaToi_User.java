@@ -140,7 +140,7 @@ public class PanelVeCuaToi_User extends javax.swing.JPanel {
                 ve.getMaVe(),
                 ve.getSoHieuChuyenBay(),
                 chuyenDoiTenHangVe(ve.getHangVe()),
-                cb != null ? cb.getThoiGianDi().toLocalDate() : "N/A",
+                cb != null ? cb.getThoiGianDi().format(util.DateTimeUtil.DATE_FORMATTER) : "N/A",
                 String.format("%,.0f VNĐ", giaVe)
             };
             tableModel.addRow(row);

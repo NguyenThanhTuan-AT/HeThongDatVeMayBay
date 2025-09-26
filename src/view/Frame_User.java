@@ -3,6 +3,8 @@ package view;
 import java.awt.CardLayout;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
@@ -221,6 +223,26 @@ public class Frame_User extends javax.swing.JFrame {
             }
         });
 
+        panelHeader.getJbHoTro().addActionListener(e -> {
+            // Sử dụng HTML để định dạng văn bản cho đẹp hơn (xuống dòng, in đậm...)
+            String hoTroMessage = "<html>"
+                    + "<b>Cần giúp đỡ? Vui lòng liên hệ với chúng tôi qua:</b><br><br>"
+                    + "<b>- Email:</b> hotro@doan-airline.com<br>"
+                    + "<b>- Hotline:</b> 1900 1234<br><br>"
+                    + "<hr>" // Thêm một đường kẻ ngang
+                    + "<b>Câu hỏi thường gặp (FAQ):</b><br><br>"
+                    + "<b>1. Làm thế nào để hủy vé?</b><br>"
+                    + "&nbsp;&nbsp;&nbsp;<i>- Vào mục 'Vé của tôi', chọn vé cần hủy và nhấn nút 'Xóa vé'.</i><br><br>"
+                    + "<b>2. Làm thế nào để đổi mật khẩu hoặc thông tin cá nhân?</b><br>"
+                    + "&nbsp;&nbsp;&nbsp;<i>- Nhấn vào tên của bạn ở góc trên và chọn chức năng tương ứng.</i>"
+                    + "</html>";
+
+            // Hiển thị cửa sổ thông báo
+            JOptionPane.showMessageDialog(this,
+                    hoTroMessage,
+                    "Thông tin Hỗ trợ",
+                    JOptionPane.INFORMATION_MESSAGE);
+        });
     }
 
     private void timKiemChuyenBay() {
@@ -229,23 +251,42 @@ public class Frame_User extends javax.swing.JFrame {
         java.util.Date date = panelTimKiem.getjDateChooser1().getDate();
         int soVeCanMua = (int) panelTimKiem.getjSpinner_soVe().getValue();
 
-        if (diemDi.isEmpty() || diemDen.isEmpty() || date == null) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ Điểm đi, Điểm đến và Ngày đi.", "Thiếu thông tin", JOptionPane.ERROR_MESSAGE);
+        if (diemDi.isEmpty() || diemDen.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ Điểm đi và Điểm đến.", "Thiếu thông tin", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int gioDi = (int) panelTimKiem.getjSpinner_gioDi().getValue();
-        LocalDate ngayDi = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        LocalDate ngayTimKiem;
+        String thongTinNgay;
+
+        // Nếu người dùng có chọn một ngày cụ thể
+        if (date != null) {
+            ngayTimKiem = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            thongTinNgay = "Ngày: " + ngayTimKiem.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } else {
+            // Nếu người dùng KHÔNG chọn ngày, mặc định tìm từ ngày hôm nay
+            ngayTimKiem = LocalDate.now();
+            thongTinNgay = "Tìm kiếm các chuyến bay gần nhất";
+        }
 
         // Lọc danh sách chuyến bay bằng Java Stream
         List<ChuyenBay> ketQuaTimKiem = quanLy.getDanhSachChuyenBay().stream()
                 .filter(cb -> cb.getDiemDi().equalsIgnoreCase(diemDi))
                 .filter(cb -> cb.getDiemDen().equalsIgnoreCase(diemDen))
-                // Lọc theo đúng ngày đã chọn
-                .filter(cb -> cb.getThoiGianDi().toLocalDate().equals(ngayDi))
-                // Lọc những chuyến có giờ cất cánh LỚN HƠN hoặc BẰNG giờ người dùng chọn
-                .filter(cb -> cb.getThoiGianDi().getHour() >= gioDi)
                 // Lọc những chuyến còn đủ vé
                 .filter(cb -> (cb.tongSoCho() - cb.getSoVeDaBan()) >= soVeCanMua)
+                // Lọc theo ngày:
+                //  - Nếu người dùng chọn ngày, chỉ tìm chuyến bay TRONG ngày đó.
+                //  - Nếu không, tìm chuyến bay TỪ ngày hôm nay TRỞ VỀ SAU.
+                .filter(cb -> {
+                    if (date != null) {
+                        return cb.getThoiGianDi().toLocalDate().equals(ngayTimKiem);
+                    } else {
+                        return !cb.getThoiGianDi().toLocalDate().isBefore(ngayTimKiem);
+                    }
+                })
+                // 4. SẮP XẾP KẾT QUẢ THEO THỜI GIAN ĐI SỚM NHẤT
+                .sorted(Comparator.comparing(ChuyenBay::getThoiGianDi))
                 .collect(Collectors.toList());
 
         // Hiển thị kết quả lên bảng
@@ -254,7 +295,8 @@ public class Frame_User extends javax.swing.JFrame {
 
         // Cập nhật thông tin tìm kiếm trên panel kết quả
         panelKetQuaTimKiem.getjL_diaDiem().setText(diemDi + " -> " + diemDen);
-        panelKetQuaTimKiem.getjL_thoiGian().setText("Ngày: " + ngayDi.toString());
+        panelKetQuaTimKiem.getjL_thoiGian().setText(thongTinNgay);
+
         if (ketQuaTimKiem.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Không tìm thấy chuyến bay nào phù hợp.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -262,8 +304,8 @@ public class Frame_User extends javax.swing.JFrame {
                 Object[] row = new Object[]{
                     cb.getSoHieuChuyenBay(),
                     quanLy.timMayBay(cb.getSoHieuMayBay()).getMaHang(),
-                    cb.getThoiGianDi().toLocalTime(),
-                    cb.getThoiGianDen().toLocalTime(),
+                    cb.getThoiGianDi().format(util.DateTimeUtil.TIME_FORMATTER),
+                    cb.getThoiGianDen().format(util.DateTimeUtil.TIME_FORMATTER),
                     cb.tongSoCho() - cb.getSoVeDaBan(),
                     String.format("%,.0f VNĐ", cb.getGiaPhoThong()),
                     String.format("%,.0f VNĐ", cb.getGiaThuongGia())
