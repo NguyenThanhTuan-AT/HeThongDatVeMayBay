@@ -272,6 +272,7 @@ public class PanelTaiKhoan_Admin extends BaseAdminPanel<TaiKhoan> {
         jPanel2.add(jL_matKhau, gridBagConstraints);
 
         jComboBox_loaiTaiKhoan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "USER", " " }));
+        jComboBox_loaiTaiKhoan.setPreferredSize(new java.awt.Dimension(78, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;

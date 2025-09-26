@@ -40,7 +40,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 20]"/>
+              <Dimension value="[50, 30]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -65,7 +65,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 20]"/>
+              <Dimension value="[50, 30]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -96,7 +96,7 @@
               </StringArray>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[77, 20]"/>
+              <Dimension value="[60, 30]"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -176,6 +176,9 @@
                 <StringItem index="2" value="CCCD"/>
               </StringArray>
             </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[72, 30]"/>
+            </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -187,6 +190,14 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="jT_timKiem">
+          <Properties>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[64, 30]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[64, 30]"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="3" gridY="7" gridWidth="10" gridHeight="1" fill="0" ipadX="86" ipadY="8" insetsTop="5" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
@@ -215,7 +226,7 @@
               </StringArray>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[80, 22]"/>
+              <Dimension value="[80, 30]"/>
             </Property>
           </Properties>
           <Events>

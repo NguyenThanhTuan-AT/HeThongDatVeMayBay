@@ -88,6 +88,9 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
                 }
             }
         });
+
+        jTable_dsVeMayBay.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        thietLapChieuRongCot();
     }
 
     @SuppressWarnings("unchecked")
@@ -259,6 +262,8 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         jT_soHieuCB.setPreferredSize(new java.awt.Dimension(64, 30));
 
         jT_diemDi.setPreferredSize(new java.awt.Dimension(64, 30));
+
+        jT_soGhePT.setAutoscrolls(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -527,7 +532,14 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
 
         tableModel.setRowCount(0);
         for (ChuyenBay cb : pagedList) {
-            tableModel.addRow(new Object[]{cb.getSoHieuChuyenBay(), cb.getSoHieuMayBay(), cb.getDiemDi(), cb.getDiemDen(), cb.getThoiGianDi(), cb.getThoiGianDen(), cb.getSoPhoThong(), cb.getSoThuongGia(), cb.getGiaPhoThong(), cb.getGiaThuongGia(), cb.getSoVeDaBan(), cb.tongSoCho() - cb.getSoVeDaBan()});
+            tableModel.addRow(new Object[]{cb.getSoHieuChuyenBay(),
+                cb.getSoHieuMayBay(), cb.getDiemDi(),
+                cb.getDiemDen(), cb.getThoiGianDi().format(util.DateTimeUtil.TIME_DATE_FORMATTER),
+                cb.getThoiGianDen().format(util.DateTimeUtil.TIME_DATE_FORMATTER),
+                cb.getSoPhoThong(),
+                cb.getSoThuongGia(), cb.getGiaPhoThong(),
+                cb.getGiaThuongGia(), cb.getSoVeDaBan(),
+                cb.tongSoCho() - cb.getSoVeDaBan()});
         }
 
         jL_trang.setText("Trang " + currentPage + " / " + totalPages);
@@ -639,6 +651,26 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         getjB_them().setEnabled(true);
         getjB_sua().setEnabled(false);
         getjB_xoa().setEnabled(false);
+    }
+
+    private void thietLapChieuRongCot() {
+        // Lấy mô hình quản lý cột của bảng
+        javax.swing.table.TableColumnModel columnModel = jTable_dsVeMayBay.getColumnModel();
+
+        // Thiết lập chiều rộng mong muốn (setPreferredWidth) cho từng cột
+        // (Bạn có thể tùy chỉnh các con số này cho phù hợp)
+        columnModel.getColumn(0).setPreferredWidth(100); // Số hiệu CB
+        columnModel.getColumn(1).setPreferredWidth(120); // Số hiệu MB
+        columnModel.getColumn(2).setPreferredWidth(150); // Điểm đi
+        columnModel.getColumn(3).setPreferredWidth(150); // Điểm đến
+        columnModel.getColumn(4).setPreferredWidth(180); // TG đi (cần rộng vì có cả ngày và giờ)
+        columnModel.getColumn(5).setPreferredWidth(180); // TG đến
+        columnModel.getColumn(6).setPreferredWidth(100); // Số ghế PT
+        columnModel.getColumn(7).setPreferredWidth(100); // Số ghế TG
+        columnModel.getColumn(8).setPreferredWidth(120); // Giá PT
+        columnModel.getColumn(9).setPreferredWidth(120); // Giá TG
+        columnModel.getColumn(10).setPreferredWidth(100); // Số vé đã bán
+        columnModel.getColumn(11).setPreferredWidth(100); // Số vé còn lại
     }
 
     public JButton getjB_them() {

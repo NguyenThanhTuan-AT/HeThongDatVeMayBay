@@ -150,7 +150,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jPanel2.add(jL_hoTen, gridBagConstraints);
 
         jT_hoTen.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jT_hoTen.setPreferredSize(new java.awt.Dimension(70, 20));
+        jT_hoTen.setPreferredSize(new java.awt.Dimension(50, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -175,7 +175,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jPanel2.add(jL_soCCCD, gridBagConstraints);
 
         jT_soCCCD.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jT_soCCCD.setPreferredSize(new java.awt.Dimension(70, 20));
+        jT_soCCCD.setPreferredSize(new java.awt.Dimension(50, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -199,7 +199,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jPanel2.add(jL_maVe, gridBagConstraints);
 
         jComboBox_maVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_maVe.setPreferredSize(new java.awt.Dimension(77, 20));
+        jComboBox_maVe.setPreferredSize(new java.awt.Dimension(60, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -260,6 +260,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jPanel2.add(jL_timKiem, gridBagConstraints);
 
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Họ tên", "CCCD" }));
+        jComboBox_tieuChi.setPreferredSize(new java.awt.Dimension(72, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 7;
@@ -268,6 +269,9 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         jPanel2.add(jComboBox_tieuChi, gridBagConstraints);
+
+        jT_timKiem.setMinimumSize(new java.awt.Dimension(64, 30));
+        jT_timKiem.setPreferredSize(new java.awt.Dimension(64, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
@@ -290,7 +294,7 @@ public class PanelHanhKhach_Admin extends BaseAdminPanel<HanhKhach> {
         jPanel2.add(jL_locTheoChuyenBay, gridBagConstraints);
 
         jComboBox_locChuyenBay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_locChuyenBay.setPreferredSize(new java.awt.Dimension(80, 22));
+        jComboBox_locChuyenBay.setPreferredSize(new java.awt.Dimension(80, 30));
         jComboBox_locChuyenBay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_locChuyenBayActionPerformed(evt);
