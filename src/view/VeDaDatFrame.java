@@ -1,6 +1,5 @@
 package view;
 
-import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
 import model.ChuyenBay;
 import model.HanhKhach;
@@ -29,18 +28,16 @@ public class VeDaDatFrame extends javax.swing.JFrame {
         }
 
         // --- Định dạng dữ liệu cho đẹp hơn ---
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         String hangVeDisplay = (ve.getHangVe() == VeMayBay.HangVe.THUONG_GIA) ? "Thương gia" : "Phổ thông";
 
         jL_tenHang.setText(tenHang.toUpperCase());
         jL_soHieuChuyenBay.setText(cb != null ? cb.getSoHieuChuyenBay() : "N/A");
-        jL_ngayBay.setText(cb != null ? cb.getThoiGianDi().format(dateFormatter) : "N/A");
+        jL_ngayBay.setText(cb != null ? cb.getThoiGianDi().format(util.DateTimeUtil.DATE_FORMATTER) : "N/A");
         jL_tenHanhKhach.setText(hk != null ? hk.getHoTen().toUpperCase() : "N/A");
         jL_CCCD.setText(hk != null ? hk.getCccd() : "N/A");
         jL_diemDi.setText(cb != null ? cb.getDiemDi() : "N/A");
         jL_diemDen.setText(cb != null ? cb.getDiemDen() : "N/A");
-        jL_gioDi.setText(cb != null ? cb.getThoiGianDi().format(timeFormatter) : "N/A");
+        jL_gioDi.setText(cb != null ? cb.getThoiGianDi().format(util.DateTimeUtil.TIME_FORMATTER) : "N/A");
         jL_hangVe.setText(hangVeDisplay.toUpperCase());
         jL_maVe.setText(ve.getMaVe());
 

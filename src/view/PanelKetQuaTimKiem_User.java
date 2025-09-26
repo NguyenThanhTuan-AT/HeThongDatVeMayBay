@@ -138,18 +138,18 @@ public class PanelKetQuaTimKiem_User extends javax.swing.JPanel {
         jL_diaDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jL_diaDiem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jL_thoiGian.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jL_thoiGian.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         jL_thoiGian.setText("Ngày: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jL_diaDiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jL_thoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jL_diaDiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jL_thoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +163,7 @@ public class PanelKetQuaTimKiem_User extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 352;
+        gridBagConstraints.ipadx = 171;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 0);
         jPanel2.add(jPanel1, gridBagConstraints);
