@@ -195,10 +195,10 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
 
         jT_maVe.setPreferredSize(new java.awt.Dimension(69, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 101;
+        gridBagConstraints.ipadx = 111;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(jT_maVe, gridBagConstraints);
@@ -208,20 +208,20 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 33;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 27;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 163, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 128, 0, 0);
         jPanel2.add(jL_hangVe, gridBagConstraints);
 
         jComboBox_hangVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phổ thông", "Thương gia", " " }));
         jComboBox_hangVe.setPreferredSize(new java.awt.Dimension(100, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 70;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
@@ -233,17 +233,17 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 15;
+        gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 163, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 128, 0, 0);
         jPanel2.add(jL_chuyenBay, gridBagConstraints);
 
         jComboBox_soHieuCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_soHieuCB.setMinimumSize(new java.awt.Dimension(200, 22));
-        jComboBox_soHieuCB.setPreferredSize(new java.awt.Dimension(165, 22));
+        jComboBox_soHieuCB.setPreferredSize(new java.awt.Dimension(180, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipady = 13;
@@ -256,11 +256,11 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 42;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 39;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 166, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 128, 0, 0);
         jPanel2.add(jL_maVe, gridBagConstraints);
 
         jL_giaVe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -269,10 +269,10 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 43;
+        gridBagConstraints.ipadx = 38;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 163, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 128, 0, 0);
         jPanel2.add(jL_giaVe, gridBagConstraints);
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
@@ -292,10 +292,10 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 21;
+        gridBagConstraints.gridwidth = 13;
         gridBagConstraints.ipadx = 247;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 0, 0, 2);
+        gridBagConstraints.insets = new java.awt.Insets(9, 0, 0, 0);
         jPanel2.add(jPanel3, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
@@ -304,6 +304,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -312,10 +313,10 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
 
         jT_giaVe.setPreferredSize(new java.awt.Dimension(69, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 101;
+        gridBagConstraints.ipadx = 111;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
@@ -329,7 +330,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.ipadx = 32;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 98, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 78, 0, 0);
         jPanel2.add(jL_timKiem, gridBagConstraints);
 
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã vé", "Số hiệu chuyến bay", "CCCD hành khách" }));
@@ -343,7 +344,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel2.add(jComboBox_tieuChi, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 6;
         gridBagConstraints.ipadx = 86;
@@ -354,11 +355,11 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
 
         jB_xuatExcel.setText("Xuất Excel");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridwidth = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 49, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 23, 0, 1);
         jPanel2.add(jB_xuatExcel, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
@@ -448,6 +449,7 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
     @Override
     public void loadDataToTable(QuanLyChung quanLy) {
         this.quanLy = quanLy;
+        loadComboBoxData(quanLy);
         this.currentPage = 1;
         if (jT_timKiem != null) {
             jT_timKiem.setText("");
@@ -461,7 +463,32 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
         int actualIndex = (currentPage - 1) * ITEMS_PER_PAGE + viewIndex;
         if (actualIndex < filteredList.size()) {
             VeMayBay ve = filteredList.get(actualIndex);
-            // Có thể điền thông tin vé ra các JTextField nếu bạn muốn
+            if (ve == null) {
+                return;
+            }
+            // 1. Điền các thông tin cơ bản của vé
+            jT_maVe.setText(ve.getMaVe());
+            jComboBox_hangVe.setSelectedItem(ve.getHangVe() == VeMayBay.HangVe.PHO_THONG ? "Phổ thông" : "Thương gia");
+
+            // 2. Điền thông tin chuyến bay
+            jComboBox_soHieuCB.setSelectedItem(ve.getSoHieuChuyenBay());
+
+            // 3. Tra cứu và điền giá vé tương ứng
+            ChuyenBay cb = quanLy.timChuyenBay(ve.getSoHieuChuyenBay());
+            if (cb != null) {
+                double giaVe = (ve.getHangVe() == VeMayBay.HangVe.THUONG_GIA)
+                        ? cb.getGiaThuongGia()
+                        : cb.getGiaPhoThong();
+                jT_giaVe.setText(String.valueOf(giaVe));
+            } else {
+                jT_giaVe.setText("0"); // Hoặc "Không tìm thấy"
+            }
+
+            // --- KÍCH HOẠT CÁC NÚT SỬA/XÓA ---
+            jT_maVe.setEnabled(false); // Không cho sửa mã vé
+            jB_them.setEnabled(false);
+            jB_sua.setEnabled(true);
+            jB_xoa.setEnabled(true);
         }
     }
 
@@ -470,6 +497,20 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
             return "Thương gia";
         }
         return "Phổ thông";
+    }
+
+    private void loadComboBoxData(QuanLyChung quanLy) {
+        // --- Nạp dữ liệu cho ComboBox Hạng Vé ---
+        jComboBox_hangVe.removeAllItems(); // Xóa các mục cũ
+        jComboBox_hangVe.addItem("Phổ thông");
+        jComboBox_hangVe.addItem("Thương gia");
+
+        // --- Nạp dữ liệu cho ComboBox Số Hiệu Chuyến Bay ---
+        jComboBox_soHieuCB.removeAllItems(); // Xóa các mục cũ
+        quanLy.getDanhSachChuyenBay().stream()
+                .map(cb -> cb.getSoHieuChuyenBay()) // Lấy ra số hiệu
+                .sorted() // Sắp xếp
+                .forEach(soHieu -> jComboBox_soHieuCB.addItem(soHieu)); // Thêm vào ComboBox
     }
 
     @Override

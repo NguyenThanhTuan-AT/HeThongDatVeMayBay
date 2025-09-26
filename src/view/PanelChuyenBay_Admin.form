@@ -353,6 +353,9 @@
             <Component class="javax.swing.JTextField" name="jT_diemDen">
             </Component>
             <Component class="javax.swing.JTextField" name="jT_soGhePT">
+              <Properties>
+                <Property name="autoscrolls" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jT_giaPT">
             </Component>
