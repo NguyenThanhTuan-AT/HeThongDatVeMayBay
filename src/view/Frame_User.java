@@ -20,7 +20,7 @@ public class Frame_User extends javax.swing.JFrame {
     private view.PanelKetQuaTimKiem_User panelKetQuaTimKiem;
     private view.PanelThongTinDatVe_User panelThongTinDatVe;
     private view.PanelVeCuaToi_User panelVeCuaToi;
-    private ThongTinVeFrame chiTietVeFrame;
+    private VeDaDatFrame veDaDatFrame;
 
     // Các đối tượng logic
     private QuanLyChung quanLy;
@@ -37,7 +37,7 @@ public class Frame_User extends javax.swing.JFrame {
         header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
         header.setBorder(null);
         mainContentPanel.setBorder(null);
-        setupAllPanelsAndEvents();
+        setupAllPanelsAndEvents(quanLy);
 
         panelHeader.getjL_xinChao().setText("Xin chào, " + taiKhoanDangNhap.getHoTen());
 
@@ -69,7 +69,7 @@ public class Frame_User extends javax.swing.JFrame {
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 115, Short.MAX_VALUE)
             .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(headerLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -87,7 +87,7 @@ public class Frame_User extends javax.swing.JFrame {
         );
         mainContentPanelLayout.setVerticalGroup(
             mainContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 425, Short.MAX_VALUE)
+            .addGap(0, 291, Short.MAX_VALUE)
         );
 
         getContentPane().add(mainContentPanel, java.awt.BorderLayout.CENTER);
@@ -95,18 +95,12 @@ public class Frame_User extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel header;
-    private javax.swing.JPanel mainContentPanel;
-    private view.PanelHeader_User panelHeader;
-    // End of variables declaration//GEN-END:variables
-
-    private void setupAllPanelsAndEvents() {
+    private void setupAllPanelsAndEvents(QuanLyChung quanLy) {
         cardLayout = new CardLayout();
         mainContentPanel.setLayout(cardLayout);
 
         // Khởi tạo các panel chức năng
-        panelTimKiem = new view.PanelTimKiem_User();
+        panelTimKiem = new view.PanelTimKiem_User(quanLy);
         panelKetQuaTimKiem = new view.PanelKetQuaTimKiem_User();
         panelThongTinDatVe = new view.PanelThongTinDatVe_User();
         panelVeCuaToi = new view.PanelVeCuaToi_User();
@@ -239,13 +233,18 @@ public class Frame_User extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ Điểm đi, Điểm đến và Ngày đi.", "Thiếu thông tin", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        int gioDi = (int) panelTimKiem.getjSpinner_gioDi().getValue();
         LocalDate ngayDi = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
         // Lọc danh sách chuyến bay bằng Java Stream
         List<ChuyenBay> ketQuaTimKiem = quanLy.getDanhSachChuyenBay().stream()
                 .filter(cb -> cb.getDiemDi().equalsIgnoreCase(diemDi))
                 .filter(cb -> cb.getDiemDen().equalsIgnoreCase(diemDen))
+                // Lọc theo đúng ngày đã chọn
                 .filter(cb -> cb.getThoiGianDi().toLocalDate().equals(ngayDi))
+                // Lọc những chuyến có giờ cất cánh LỚN HƠN hoặc BẰNG giờ người dùng chọn
+                .filter(cb -> cb.getThoiGianDi().getHour() >= gioDi)
+                // Lọc những chuyến còn đủ vé
                 .filter(cb -> (cb.tongSoCho() - cb.getSoVeDaBan()) >= soVeCanMua)
                 .collect(Collectors.toList());
 
@@ -298,16 +297,19 @@ public class Frame_User extends javax.swing.JFrame {
     }
 
     private void hienThiChiTietVe(String maVe) {
-        // Kiểm tra xem có cửa sổ nào đang mở và hiển thị không
-        if (chiTietVeFrame != null && chiTietVeFrame.isShowing()) {
-            chiTietVeFrame.toFront(); // Nếu có, đưa nó lên trên cùng
-        } else {
-            // Nếu không, tạo một cửa sổ mới
+        if (veDaDatFrame == null || !veDaDatFrame.isShowing()) {
             VeMayBay veCanXem = quanLy.timVe(maVe);
             if (veCanXem != null) {
-                chiTietVeFrame = new ThongTinVeFrame(quanLy, veCanXem, this);
-                chiTietVeFrame.setVisible(true);
+                veDaDatFrame = new VeDaDatFrame(this, quanLy, veCanXem);
+                veDaDatFrame.setVisible(true);
             }
+        } else {
+            veDaDatFrame.toFront();
         }
     }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel header;
+    private javax.swing.JPanel mainContentPanel;
+    private view.PanelHeader_User panelHeader;
+    // End of variables declaration//GEN-END:variables
 }

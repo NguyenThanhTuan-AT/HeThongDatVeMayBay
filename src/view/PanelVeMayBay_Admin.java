@@ -429,7 +429,13 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
             ChuyenBay cb = quanLy.timChuyenBay(ve.getSoHieuChuyenBay());
             HanhKhach hk = quanLy.timHanhKhach(ve.getCccdHanhKhach());
             double giaVe = (cb != null) ? (ve.getHangVe() == VeMayBay.HangVe.THUONG_GIA ? cb.getGiaThuongGia() : cb.getGiaPhoThong()) : 0;
-            tableModel.addRow(new Object[]{ve.getMaVe(), ve.getSoHieuChuyenBay(), ve.getHangVe(), String.format("%,.0f VNĐ", giaVe), ve.getCccdHanhKhach(), (hk != null ? hk.getHoTen() : "N/A")});
+            tableModel.addRow(new Object[]{
+                ve.getMaVe(),
+                ve.getSoHieuChuyenBay(),
+                chuyenDoiTenHangVe(ve.getHangVe()),
+                String.format("%,.0f VNĐ", giaVe),
+                ve.getCccdHanhKhach(),
+                (hk != null ? hk.getHoTen() : "N/A")});
         }
 
         jL_trang.setText("Trang " + currentPage + " / " + totalPages);
@@ -457,6 +463,13 @@ public class PanelVeMayBay_Admin extends BaseAdminPanel<VeMayBay> {
             VeMayBay ve = filteredList.get(actualIndex);
             // Có thể điền thông tin vé ra các JTextField nếu bạn muốn
         }
+    }
+
+    private String chuyenDoiTenHangVe(VeMayBay.HangVe hangVe) {
+        if (hangVe == VeMayBay.HangVe.THUONG_GIA) {
+            return "Thương gia";
+        }
+        return "Phổ thông";
     }
 
     @Override

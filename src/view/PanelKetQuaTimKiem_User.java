@@ -9,6 +9,8 @@ public class PanelKetQuaTimKiem_User extends javax.swing.JPanel {
 
     public PanelKetQuaTimKiem_User() {
         initComponents();
+
+        jTable_KetQua.setAutoCreateRowSorter(true);
     }
 
     @SuppressWarnings("unchecked")

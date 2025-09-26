@@ -265,7 +265,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jL_soGhePT, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,7 +308,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
                                 .addComponent(jL_thoiGianDi, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jDateChooser_ngayDi, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,9 +344,8 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 16;
-        gridBagConstraints.ipadx = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 6);
         jPanel1.add(jPanel2, gridBagConstraints);
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
@@ -367,9 +366,9 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 16;
-        gridBagConstraints.ipadx = 572;
+        gridBagConstraints.ipadx = 524;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 6);
         jPanel1.add(jPanel3, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
@@ -378,12 +377,11 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 160, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 45, 6, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jL_timKiem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -391,6 +389,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 32;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -400,16 +399,16 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         jComboBox_tieuChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Số hiệu chuyến bay", "Số hiệu máy bay", "Điểm đi", "Điểm đến" }));
         jComboBox_tieuChi.setPreferredSize(new java.awt.Dimension(150, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = -84;
+        gridBagConstraints.ipadx = -59;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         jPanel1.add(jComboBox_tieuChi, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 6;
         gridBagConstraints.ipadx = 135;
@@ -435,7 +434,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
         jDateChooser_ngayThongKe.setDateFormatString("EEEE, dd MMM yyyy");
         jDateChooser_ngayThongKe.setPreferredSize(new java.awt.Dimension(135, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 50;
@@ -446,7 +445,7 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
 
         jB_xemVeConLai.setText("Xem");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridx = 13;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipady = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -455,10 +454,10 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
 
         jB_xuatExcel.setText("Xuất Excel");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 14;
+        gridBagConstraints.gridx = 15;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 193, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 135, 0, 6);
         jPanel1.add(jB_xuatExcel, gridBagConstraints);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
