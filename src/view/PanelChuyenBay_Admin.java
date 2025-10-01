@@ -590,46 +590,45 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
     // PHƯƠNG THỨC LẤY DỮ LIỆU TỪ CÁC TRƯỜNG NHẬP LIỆU
 
     public ChuyenBay getDataFromFields() {
+        String soHieuCB = getjT_soHieuCB().getText();
+        String soHieuMB = (String) getjComboBox_soHieuMB().getSelectedItem();
+        String diemDi = getjT_diemDi().getText();
+        String diemDen = getjT_diemDen().getText();
+        java.util.Date tgDiDate = getjDateChooser_tgDi().getDate();
+        java.util.Date tgDenDate = getjDateChooser_tgDen().getDate();
+
+        if (soHieuCB.isEmpty() || soHieuMB == null || diemDi.isEmpty() || diemDen.isEmpty() || tgDiDate == null || tgDenDate == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ các thông tin bắt buộc.", "Thiếu thông tin", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+
+        LocalDateTime tgDi = tgDiDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime tgDen = tgDenDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
+
+        if (getjB_them().isEnabled() && tgDi.isBefore(LocalDateTime.now())) {
+            JOptionPane.showMessageDialog(this, "Lỗi: Không thể thêm chuyến bay trong quá khứ.", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        if (tgDen.isBefore(tgDi)) {
+            JOptionPane.showMessageDialog(this, "Lỗi logic: Thời gian đến không thể trước thời gian đi.", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
         try {
-            String soHieuCB = getjT_soHieuCB().getText();
-            String soHieuMB = (String) getjComboBox_soHieuMB().getSelectedItem();
-            String diemDi = getjT_diemDi().getText();
-            String diemDen = getjT_diemDen().getText();
-
-            Date tgDiDate = getjDateChooser_tgDi().getDate();
-            Date tgDenDate = getjDateChooser_tgDen().getDate();
-
-            // Kiểm tra các trường bắt buộc
-            if (soHieuCB.isEmpty() || soHieuMB == null || diemDi.isEmpty() || diemDen.isEmpty() || tgDiDate == null || tgDenDate == null) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ các thông tin bắt buộc.", "Thiếu thông tin", JOptionPane.WARNING_MESSAGE);
-                return null;
-            }
-
-            LocalDateTime tgDi = tgDiDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            LocalDateTime tgDen = tgDenDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-
-            // Tách riêng phần parse số để bắt lỗi chính xác
             int soGhePT = Integer.parseInt(getjT_soGhePT().getText());
             int soGheTG = Integer.parseInt(getjT_soGheTG().getText());
             double giaPT = Double.parseDouble(getjT_giaPT().getText());
             double giaTG = Double.parseDouble(getjT_giaTG().getText());
 
-            if (soGhePT <= 0 || soGheTG <= 0 || giaPT <= 0 || giaTG <= 0) {
-                JOptionPane.showMessageDialog(this, "Số ghế và giá vé phải là số dương.", "Lỗi dữ liệu", JOptionPane.ERROR_MESSAGE);
+            if (soGhePT < 0 || soGheTG < 0 || giaPT < 0 || giaTG < 0) {
+                JOptionPane.showMessageDialog(this, "Số ghế và giá vé không được là số âm.", "Lỗi dữ liệu", JOptionPane.ERROR_MESSAGE);
                 return null;
             }
 
-            if (tgDen.isBefore(tgDi)) {
-                JOptionPane.showMessageDialog(this, "Thời gian đến phải sau thời gian đi.", "Lỗi logic thời gian", JOptionPane.ERROR_MESSAGE);
-                return null;
-            }
             return new ChuyenBay(soHieuCB, soHieuMB, diemDi, diemDen, tgDi, tgDen, soGheTG, soGhePT, giaPT, giaTG);
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Số ghế và giá vé phải là các con số hợp lệ.", "Lỗi định dạng số", JOptionPane.ERROR_MESSAGE);
-            return null;
-        } catch (Exception e) { // Giữ lại để bắt các lỗi khác nếu có
-            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra. Vui lòng kiểm tra lại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -794,4 +793,46 @@ public class PanelChuyenBay_Admin extends BaseAdminPanel<ChuyenBay> {
     private javax.swing.JTextField jT_timKiem;
     private javax.swing.JTable jTable_dsVeMayBay;
     // End of variables declaration//GEN-END:variables
+
+    class PastFlightRenderer extends javax.swing.table.DefaultTableCellRenderer {
+
+        @Override
+        public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+
+            // Lấy component cha (ô cell)
+            java.awt.Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            // Tính toán chỉ số thực tế trong danh sách đã lọc
+            int modelRow = (currentPage - 1) * ITEMS_PER_PAGE + row;
+
+            // Lấy đối tượng ChuyenBay tương ứng
+            if (modelRow < filteredList.size()) {
+                ChuyenBay cb = filteredList.get(modelRow);
+
+                // Kiểm tra nếu chuyến bay đã cất cánh
+                if (cb.getThoiGianDi().isBefore(java.time.LocalDateTime.now())) {
+                    // Nếu đã chọn dòng thì nền màu xanh, chữ trắng
+                    if (isSelected) {
+                        c.setBackground(table.getSelectionBackground());
+                        c.setForeground(table.getSelectionForeground());
+                    } else {
+                        // Nếu không, nền màu đỏ nhạt, chữ xám đậm
+                        c.setBackground(new java.awt.Color(255, 204, 204)); // Màu đỏ nhạt
+                        c.setForeground(new java.awt.Color(102, 102, 102)); // Màu xám
+                    }
+                } else {
+                    // Nếu là chuyến bay trong tương lai, trả về màu mặc định
+                    if (isSelected) {
+                        c.setBackground(table.getSelectionBackground());
+                        c.setForeground(table.getSelectionForeground());
+                    } else {
+                        c.setBackground(table.getBackground());
+                        c.setForeground(table.getForeground());
+                    }
+                }
+            }
+            return c;
+        }
+    }
 }

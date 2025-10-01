@@ -1,6 +1,7 @@
 package view;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -35,6 +36,7 @@ public class PanelThongKe_Admin extends javax.swing.JPanel {
         jL_tongDoanTh = new javax.swing.JLabel();
         jT_tongDoanhThu = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jB_xuatExcel = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(500, 700));
         setLayout(new java.awt.BorderLayout());
@@ -118,7 +120,7 @@ public class PanelThongKe_Admin extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 2;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 114, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 82, 0, 0);
         jPanel2.add(jL_thang, gridBagConstraints);
 
         jComboBox_thang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -144,11 +146,6 @@ public class PanelThongKe_Admin extends javax.swing.JPanel {
         jPanel2.add(jL_nam, gridBagConstraints);
 
         jComboBox_nam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_nam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_namActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 0;
@@ -156,7 +153,6 @@ public class PanelThongKe_Admin extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 36;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 165);
         jPanel2.add(jComboBox_nam, gridBagConstraints);
 
         jL_hang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -183,11 +179,6 @@ public class PanelThongKe_Admin extends javax.swing.JPanel {
         jPanel2.add(jComboBox_hang, gridBagConstraints);
 
         jB_thongKe.setText("Thống kê");
-        jB_thongKe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_thongKeActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -208,7 +199,7 @@ public class PanelThongKe_Admin extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 148, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 116, 0, 0);
         jPanel2.add(jL_tongDoanTh, gridBagConstraints);
 
         jT_tongDoanhThu.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -231,47 +222,24 @@ public class PanelThongKe_Admin extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipady = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 42, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         jPanel2.add(jLabel1, gridBagConstraints);
+
+        jB_xuatExcel.setText("Xuất Excel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 19;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 42, 0, 6);
+        jPanel2.add(jB_xuatExcel, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox_namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_namActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_namActionPerformed
-
-    private void jB_thongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_thongKeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jB_thongKeActionPerformed
-
-    public JButton getjB_thongKe() {
-        return jB_thongKe;
-    }
-
-    public JComboBox<String> getjComboBox_hang() {
-        return jComboBox_hang;
-    }
-
-    public JComboBox<String> getjComboBox_nam() {
-        return jComboBox_nam;
-    }
-
-    public JComboBox<String> getjComboBox_thang() {
-        return jComboBox_thang;
-    }
-
-    public JTable getjTable() {
-        return jTable1;
-    }
-
-    public JTextField getjT_tongDoanhThu() {
-        return jT_tongDoanhThu;
-    }
-
-    // Phương thức nạp dữ liệu cho các JComboBox
+// Phương thức nạp dữ liệu cho các JComboBox
     public void loadComboBoxes(QuanLyChung quanLy) {
         getjComboBox_thang().removeAllItems();
         for (int i = 1; i <= 12; i++) {
@@ -298,30 +266,74 @@ public class PanelThongKe_Admin extends javax.swing.JPanel {
             int nam = Integer.parseInt(getjComboBox_nam().getSelectedItem().toString());
             String selectedHang = getjComboBox_hang().getSelectedItem().toString();
             DefaultTableModel model = (DefaultTableModel) getjTable().getModel();
-            model.setRowCount(0);
+            model.setRowCount(0); // Xóa dữ liệu cũ
+
+            double tongDoanhThu = 0;
 
             if (selectedHang.equals("Tất cả các hãng")) {
-                double tongDoanhThu = quanLy.thongKeDoanhThuTheoThang(thang, nam);
-                getjT_tongDoanhThu().setText(String.format("%,.0f VNĐ", tongDoanhThu));
+                // --- LOGIC CŨ: HIỂN THỊ TỔNG KẾT THEO HÃNG ---
+                model.setColumnIdentifiers(new String[]{"Hãng", "Doanh thu"}); // Đặt lại tên cột
 
                 Map<String, Double> doanhThuMoiHang = quanLy.thongKeDoanhThuTheoTungHang(thang, nam);
                 for (Map.Entry<String, Double> entry : doanhThuMoiHang.entrySet()) {
                     model.addRow(new Object[]{entry.getKey(), String.format("%,.0f VNĐ", entry.getValue())});
+                    tongDoanhThu += entry.getValue();
                 }
-            } else {
-                String maHang = selectedHang.split(" - ")[0];
-                double doanhThu = quanLy.thongKeDoanhThuTheoHang(maHang, thang, nam);
-                getjT_tongDoanhThu().setText(String.format("%,.0f VNĐ", doanhThu));
 
-                model.addRow(new Object[]{maHang, String.format("%,.0f VNĐ", doanhThu)});
+            } else {
+                // --- LOGIC MỚI: HIỂN THỊ CHI TIẾT THEO NGÀY ---
+                model.setColumnIdentifiers(new String[]{"Ngày", "Doanh thu"}); // Đặt lại tên cột
+
+                String maHang = selectedHang.split(" - ")[0];
+                Map<LocalDate, Double> doanhThuTheoNgay = quanLy.thongKeDoanhThuTheoNgay(maHang, thang, nam);
+
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                for (Map.Entry<LocalDate, Double> entry : doanhThuTheoNgay.entrySet()) {
+                    model.addRow(new Object[]{entry.getKey().format(dateFormatter), String.format("%,.0f VNĐ", entry.getValue())});
+                    tongDoanhThu += entry.getValue();
+                }
             }
+
+            // Cập nhật tổng doanh thu
+            getjT_tongDoanhThu().setText(String.format("%,.0f VNĐ", tongDoanhThu));
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn tháng, năm và hãng hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    public JButton getjB_thongKe() {
+        return jB_thongKe;
+    }
+
+    public JComboBox<String> getjComboBox_hang() {
+        return jComboBox_hang;
+    }
+
+    public JComboBox<String> getjComboBox_nam() {
+        return jComboBox_nam;
+    }
+
+    public JComboBox<String> getjComboBox_thang() {
+        return jComboBox_thang;
+    }
+
+    public JTable getjTable() {
+        return jTable1;
+    }
+
+    public JTextField getjT_tongDoanhThu() {
+        return jT_tongDoanhThu;
+    }
+
+    public javax.swing.JButton getjB_xuatExcel() {
+        return jB_xuatExcel;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_thongKe;
+    private javax.swing.JButton jB_xuatExcel;
     private javax.swing.JComboBox<String> jComboBox_hang;
     private javax.swing.JComboBox<String> jComboBox_nam;
     private javax.swing.JComboBox<String> jComboBox_thang;

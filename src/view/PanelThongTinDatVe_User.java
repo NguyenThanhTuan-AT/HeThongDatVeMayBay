@@ -255,8 +255,13 @@ public class PanelThongTinDatVe_User extends javax.swing.JPanel {
             String tenHang = quanLy.timHang(maHang).getTenHang();
             jT_hang.setText(tenHang);
 
-            jT_thoiGian.setText(cb.getThoiGianDi().toString() + " - " + cb.getThoiGianDen().toString());
+            String gioDi = cb.getThoiGianDi().format(util.DateTimeUtil.TIME_FORMATTER);
+            String gioDen = cb.getThoiGianDen().format(util.DateTimeUtil.TIME_FORMATTER);
+            String ngayDi = cb.getThoiGianDi().format(util.DateTimeUtil.DATE_FORMATTER);
 
+            String thoiGianDisplay = gioDi + " → " + gioDen + " (" + ngayDi + ")";
+
+            jT_thoiGian.setText(thoiGianDisplay);
             // Cập nhật giá vé mặc định là Phổ thông
             jComboBox_hangVe.setSelectedIndex(0);
             jT_gia.setText(String.format("%,.0f VNĐ", cb.getGiaPhoThong()));
