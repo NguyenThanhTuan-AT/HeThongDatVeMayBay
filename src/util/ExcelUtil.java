@@ -264,4 +264,53 @@ public class ExcelUtil {
             throw new RuntimeException("Có lỗi khi xuất file Excel: " + e.getMessage(), e);
         }
     }
+
+    public static void xuatFileExcelThongKe(javax.swing.table.TableModel tableModel, String tongDoanhThu, String tenFile) {
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Báo Cáo Doanh Thu");
+
+            // --- Tạo Tiêu đề ---
+            Row headerRow = sheet.createRow(0);
+            CellStyle headerCellStyle = workbook.createCellStyle();
+            org.apache.poi.ss.usermodel.Font headerFont = workbook.createFont();
+            headerFont.setBold(true);
+            headerCellStyle.setFont(headerFont);
+
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(tableModel.getColumnName(i)); // Lấy tên cột từ TableModel
+                cell.setCellStyle(headerCellStyle);
+            }
+
+            // --- Ghi dữ liệu từ TableModel ---
+            int rowNum = 1;
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                Row row = sheet.createRow(rowNum++);
+                for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                    Object value = tableModel.getValueAt(i, j);
+                    row.createCell(j).setCellValue(value != null ? value.toString() : "");
+                }
+            }
+
+            // --- Thêm dòng tổng kết ở cuối file ---
+            rowNum++; // Tạo một dòng trống
+            Row summaryRow = sheet.createRow(rowNum);
+            Cell totalLabelCell = summaryRow.createCell(0);
+            totalLabelCell.setCellValue("Tổng cộng:");
+            totalLabelCell.setCellStyle(headerCellStyle); // In đậm chữ "Tổng cộng"
+
+            summaryRow.createCell(1).setCellValue(tongDoanhThu);
+
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                sheet.autoSizeColumn(i);
+            }
+
+            // Ghi ra file
+            try (FileOutputStream fileOut = new FileOutputStream(tenFile)) {
+                workbook.write(fileOut);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Có lỗi khi xuất file Excel: " + e.getMessage(), e);
+        }
+    }
 }

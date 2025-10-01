@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import util.FileIOUtil;
@@ -534,6 +535,29 @@ public class QuanLyChung {
             doanhThuMoiHang.put(hhk.getMaHang(), tongDoanhThu);
         }
         return doanhThuMoiHang;
+    }
+
+    public Map<LocalDate, Double> thongKeDoanhThuTheoNgay(String maHang, int thang, int nam) {
+        Map<LocalDate, Double> doanhThuTheoNgay = new TreeMap<>();
+        // Lọc các chuyến bay của hãng trong đúng tháng và năm
+        List<ChuyenBay> chuyenBayPhuHop = locChuyenBayTheoHang(maHang).stream()
+                .filter(cb -> cb.getThoiGianDi().getMonthValue() == thang && cb.getThoiGianDi().getYear() == nam)
+                .collect(Collectors.toList());
+
+        // Tính tổng doanh thu cho mỗi ngày
+        for (ChuyenBay cb : chuyenBayPhuHop) {
+            LocalDate ngay = cb.getThoiGianDi().toLocalDate();
+            double doanhThuChuyenBay = cb.getDanhSachVe().stream()
+                    .mapToDouble(ve -> {
+                        return ve.getHangVe() == VeMayBay.HangVe.THUONG_GIA ? cb.getGiaThuongGia() : cb.getGiaPhoThong();
+                    })
+                    .sum();
+
+            // Cộng dồn doanh thu vào ngày tương ứng
+            doanhThuTheoNgay.merge(ngay, doanhThuChuyenBay, Double::sum);
+        }
+
+        return doanhThuTheoNgay;
     }
 
     public void luuToanBoDuLieuVaoFile() {

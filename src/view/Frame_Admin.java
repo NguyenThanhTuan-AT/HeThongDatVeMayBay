@@ -531,7 +531,27 @@ public class Frame_Admin extends javax.swing.JFrame {
     private void setupThongKeEvents() {
         panelThongKe.getjB_thongKe().addActionListener(e -> {
             panelThongKe.thongKeDoanhThu(quanLy);
-            JOptionPane.showMessageDialog(this, "Đã làm mới danh sách hành khách!");
+        });
+
+        panelThongKe.getjB_xuatExcel().addActionListener(e -> {
+            String filePath = layDuongDanLuuFileExcel();
+
+            if (filePath != null) {
+                try {
+                    javax.swing.table.TableModel model = panelThongKe.getjTable().getModel();
+                    String tongDoanhThu = panelThongKe.getjT_tongDoanhThu().getText();
+
+                    if (model.getRowCount() == 0) {
+                        JOptionPane.showMessageDialog(this, "Không có dữ liệu thống kê để xuất.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+                    util.ExcelUtil.xuatFileExcelThongKe(model, tongDoanhThu, filePath);
+
+                    JOptionPane.showMessageDialog(this, "Xuất file báo cáo thành công!\nĐã lưu tại: " + filePath, "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xuất file: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         });
     }
 
